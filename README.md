@@ -1,8 +1,39 @@
-# React + Vite
+# Anshin Pet - Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Repositório destinado para desenvolver o front-end do projeto Anshin Pet.
 
-Currently, two official plugins are available:
+### 🔨 Como rodar o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para rodar o projeto basta rodar o comando abaixo na pasta do projeto:
+
+```
+npm run dev
+```
+
+
+## 📦 Tecnologias usadas:
+
+* [Html](https://www.w3schools.com/html/)
+* [Css](https://www.w3schools.com/Css/)
+* [JavaScript](https://www.w3schools.com/js/)
+* [React JS](https://react.dev/)
+* [PrimeReact](https://primereact.org/)
+* [PrimeFlex](https://primeflex.org/)
+
+
+## 👷 Autores
+
+
+<a href="https://github.com/kengiiGMs">
+    
+  <img src="https://avatars.githubusercontent.com/u/80048095?v=4" width="90">
+
+</a>
+
+<a href="https://github.com/kengiiGMs">
+   
+  <img src="https://avatars.githubusercontent.com/u/89944667?v=4" width="90">
+   
+</a>
+
+
