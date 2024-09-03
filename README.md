@@ -2,13 +2,20 @@
 
 Repositório destinado para desenvolver o front-end do projeto Anshin Pet.
 
-### 🔨 Como rodar o projeto
+### 🔨 Como Executar o projeto
 
-Para rodar o projeto basta rodar o comando abaixo na pasta do projeto:
+1. Navegue até a pasta raiz do projeto.
+2. Execute o comando abaixo para instalar as dependências necessárias: 
+```
+npm install
+```
 
+3. Inicie o projeto com o comando abaixo:
 ```
 npm run dev
 ```
+
+<em>Isso iniciará o servidor de desenvolvimento e permitirá que você veja o projeto em execução.</em>
 
 
 ## 📦 Tecnologias usadas:
@@ -30,7 +37,7 @@ npm run dev
 
 </a>
 
-<a href="https://github.com/kengiiGMs">
+<a href="https://github.com/igoor1">
    
   <img src="https://avatars.githubusercontent.com/u/89944667?v=4" width="90">
    
