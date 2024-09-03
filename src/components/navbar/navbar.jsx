@@ -10,7 +10,7 @@ import Logo from '../../assets/logoWhite.svg'
 export default function Navbar() {
 
     const renderItems = (item) => (
-        <a className='flex align-items-center p-menuitem-link text-white hover:bg-yellow-300 bg-indigo-600' onClick={() => item.url && (window.location.href = item.url)} style={{ cursor: 'pointer' }}>
+        <a className='flex align-items-center p-menuitem-link text-white hover:bg-yellow-300 backgroundColorPrimary cursor-pointer' onClick={() => item.url && (window.location.href = item.url)}>
             <span className={item.icon} />
             <span className='mx-2'>{item.label}</span>
             {item.badge && <Badge className='ml-auto bg-yellow-500' value={item.badge} />}
@@ -49,7 +49,7 @@ export default function Navbar() {
 
     return (
         <div className='card'>
-            <Menubar model={items} start={start} end={end} className='bg-indigo-600' />
+            <Menubar model={items} start={start} end={end} className='backgroundColorPrimary' />
         </div>
     )
 

@@ -4,5 +4,18 @@ body {
 }
 
 :root {
-  --primaryColor: #5e2cd3
+  --primaryColor: #5e2cd3;
+  --yellowColor: #FFD951;
+}
+
+.backgroundColorPrimary {
+  background-color: var(--primaryColor) !important;
+}
+
+.textColorPrimary {
+  color: var(--primaryColor) !important;
+}
+
+.backgroundColorYellow {
+  background-color: var(--yellowColor) !important;
 }
