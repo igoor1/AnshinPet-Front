@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
-
+import Animal from './pages/animal';
+import CreateAnimal from "./pages/createAnimal";
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Tema
 import 'primereact/resources/primereact.min.css';           // PrimeReact
 import 'primeicons/primeicons.css';                         // Icons
-import 'primeflex/primeflex.css';
+import 'primeflex/primeflex.css';                           //PrimeFlex
 
 
 export default function App() {
@@ -13,7 +14,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route />
+        <Route path="/animal" element={<Animal />} />
+        <Route path="/createAnimal" element={<CreateAnimal />} />
       </Routes>
     </Router>
   )
