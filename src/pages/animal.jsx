@@ -12,6 +12,8 @@ import { DataView } from 'primereact/dataview';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from "primereact/dropdown";
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
 
 import { useEffect, useState, useRef } from "react";
 
@@ -68,12 +70,54 @@ export default function Animal() {
     /* List Animal */
     const [animais, setAnimais] = useState([]);
 
+    const searchAllAnimais = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/animais');
+            const data = await response.json();
+            setAnimais(data);
+        } catch (error) {
+            console.error('Erro ao buscar animais: ', error)
+        }
+    }
+
     useEffect(() => {
-        fetch('http://localhost:8080/animais')
-            .then(response => response.json())
-            .then(data => setAnimais(data))
-            .catch(error => console.error('Erro ao buscar animais: ', error))
+        searchAllAnimais();
     }, [])
+    /* List Animal */
+
+    /* List Animal from name*/
+    const [nome, setNome] = useState('');
+    const [timer, setTimer] = useState(null);
+
+    const searchAnimais = async () => {
+        if (nome) {
+            try {
+                const response = await fetch(`http://localhost:8080/animais/listar/${nome}`);
+                const data = await response.json();
+                setAnimais(data);
+            } catch (error) {
+                console.error("Erro ao buscar animais:", error);
+            }
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setNome(value);
+
+        if (timer) clearTimeout(timer);
+
+        const newTimer = setTimeout(() => {
+            if (value) {
+                searchAnimais(value);
+            } else {
+                searchAllAnimais();
+            }
+        }, 300)
+
+        setTimer(newTimer);
+    }
+    /* List Animal from name */
 
     const itemTemplate = (animal, index) => {
         return (
@@ -299,14 +343,35 @@ export default function Animal() {
     return (
         <>
             <Navbar />
+            <div className="col-12">
+                <div className="grid">
 
-            <Button icon='pi pi-plus' severity='success' aria-label='add' className='mt-2 ml-2' onClick={handleNavigation} />
-            {animais.length === 0 ? (
-                <div><p className="text-center font-bold" style={{ marginBottom: '20%' }}>Não há animais cadastrados</p></div>
-            ) : (
-                <DataView value={animais} itemTemplate={itemTemplate} className="mt-2" />
+                    <div className="col-6 m-auto inline-flex justify-content-center mt-2">
+                        <IconField iconPosition="left">
+                            <InputIcon className="pi pi-search"> </InputIcon>
+                            <InputText v-model="value1" placeholder="Pesquise pelo nome" value={nome}
+                                onChange={handleInputChange} className="w-full" />
+                        </IconField>
 
-            )}
+                    </div>
+
+                    <div className="col-3 m-auto flex justify-content-end mt-2">
+                        <Button icon='pi pi-plus' severity='success' aria-label='add' onClick={handleNavigation} />
+                    </div>
+
+
+                    <div className="col-10 m-auto">
+                        {animais.length === 0 ? (
+                            <div><p className="text-center font-bold" style={{ marginBottom: '20%' }}>Não há animais cadastrados</p></div>
+                        ) : (
+                            <DataView value={animais} itemTemplate={itemTemplate} className="mt-2" />
+
+                        )}
+                    </div>
+                </div>
+
+            </div>
+
 
             <Footer />
         </>
