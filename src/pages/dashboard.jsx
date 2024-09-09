@@ -1,40 +1,49 @@
 import Footer from "../components/footer/footer";
 import Navbar from "../components/navbar/navbar";
 
-
 import { Chart } from 'primereact/chart';
 import { useState, useEffect } from 'react';
 
-
-export default function Dashboard() {
+function useAnimaisChart() {
     const [animais, setAnimais] = useState({});
     const [animaisChartOptions, setAnimaisChartOptions] = useState({});
 
     const [adocao, setAdocao] = useState({});
     const [adocaoChartOptions, setAdocaoChartOptions] = useState({});
 
-
-    useEffect(() => {
-        const dataAnimais = {
-            labels: ['Cachorros', 'Gatos', 'Aves'],
+    const createChartData = (labels, data, backgroundColor, borderColor = [], hoverBackgroundColor = []) => {
+        return {
+            labels: labels,
             datasets: [
                 {
-                    label: 'Quantidade',
-                    data: [14, 7, 10],
-                    backgroundColor: [
-                        'rgba(252, 134, 15, 0.2)',
-                        'rgba(0, 245, 245, 0.2)',
-                        'rgba(132, 255, 31, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgb(255, 159, 64)',
-                        'rgb(75, 192, 192)',
-                        'rgb(145, 255, 0)'
-                    ],
+                    labels: 'Quantidade',
+                    data: data,
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor.length ? borderColor : undefined,
+                    hoverBackgroundColor: hoverBackgroundColor.length ? hoverBackgroundColor : undefined,
                     borderWidth: 1
                 }
             ]
-        };
+        }
+    }
+
+    useEffect(() => {
+        const documentStyle = getComputedStyle(document.documentElement);
+
+        setAnimais(createChartData(
+            ['Cachorros', 'Gatos', 'Aves'],
+            [14, 7, 10],
+            ['rgba(252, 134, 15, 0.2)', 'rgba(0, 245, 245, 0.2)', 'rgba(132, 255, 31, 0.2)'],
+            ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(145, 255, 0)']
+        ))
+
+        setAdocao(createChartData(
+            ['Para Adoção', 'Não Adoção'],
+            [26, 5],
+            [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--red-500'),],
+            [documentStyle.getPropertyValue('--indigo-400'), documentStyle.getPropertyValue('--blue-400'),]
+        ))
+
         const optionsAnimais = {
             scales: {
                 y: {
@@ -42,28 +51,7 @@ export default function Dashboard() {
                 }
             }
         };
-        setAnimais(dataAnimais);
-        setAnimaisChartOptions(optionsAnimais);
-    }, []);
 
-    useEffect(() => {
-        const documentStyle = getComputedStyle(document.documentElement);
-        const dataAdocao = {
-            labels: ['Para Adoção', 'Não Adoção'],
-            datasets: [
-                {
-                    data: [26, 5],
-                    backgroundColor: [
-                        documentStyle.getPropertyValue('--blue-500'),
-                        documentStyle.getPropertyValue('--red-500'),
-                    ],
-                    hoverBackgroundColor: [
-                        documentStyle.getPropertyValue('--indigo-400'),
-                        documentStyle.getPropertyValue('--blue-400'),
-                    ]
-                }
-            ]
-        }
         const optionsAdocao = {
             plugins: {
                 legend: {
@@ -74,9 +62,17 @@ export default function Dashboard() {
             }
         };
 
-        setAdocao(dataAdocao);
+        setAnimaisChartOptions(optionsAnimais);
+
         setAdocaoChartOptions(optionsAdocao);
+
     }, []);
+
+    return { animais, animaisChartOptions, adocao, adocaoChartOptions }
+}
+
+export default function Dashboard() {
+    const { animais, animaisChartOptions, adocao, adocaoChartOptions } = useAnimaisChart()
 
     return (
         <>
@@ -126,12 +122,12 @@ export default function Dashboard() {
                 <div className='grid'>
                     <div className='col-12 md:col-6 lg:3 p-3'>
                         <div className='card flex justify-content-center'>
-                            <Chart type='bar' data={animais} options={animaisChartOptions} className="w-25rem lg:w-30rem" />
+                            {animais?.datasets && <Chart type='bar' data={animais} options={animaisChartOptions} className="w-25rem lg:w-30rem" />}
                         </div>
                     </div>
                     <div className='col-12 md:col-6 lg:3 p-3'>
                         <div className='card flex justify-content-center'>
-                            <Chart type='pie' data={adocao} options={adocaoChartOptions} className='w-10rem lg:w-15rem' />
+                            {adocao?.datasets && <Chart type='pie' data={adocao} options={adocaoChartOptions} className='w-10rem lg:w-15rem' />}
                         </div>
                     </div>
                 </div>
