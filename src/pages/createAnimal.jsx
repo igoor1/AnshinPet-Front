@@ -93,7 +93,7 @@ export default function CreateAnimal() {
 
     /* BreadCrumb */
     const items = [{ label: 'Animais', url: '/animal' }, { label: 'Castrar Animal' }]
-    const home = { icon: 'pi pi-home', url: '/home' }
+    const home = { icon: 'pi pi-home', url: '/dashboard' }
     /* BreadCrumb */
 
     return (

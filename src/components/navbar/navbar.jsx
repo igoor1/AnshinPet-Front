@@ -22,7 +22,7 @@ export default function Navbar() {
         {
             label: 'Home',
             icon: 'pi pi-home',
-            url: '/home',
+            url: '/dashboard',
             template: renderItems
         },
         {
