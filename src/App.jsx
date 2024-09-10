@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Animal from './pages/animal';
 import CreateAnimal from "./pages/createAnimal";
 import Dashboard from "./pages/dashboard";
+import Doenca from "./pages/doenca/doenca";
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Tema
 import 'primereact/resources/primereact.min.css';           // PrimeReact
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/animal" element={<Animal />} />
         <Route path="/createAnimal" element={<CreateAnimal />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/doenca" element={<Doenca />} />
       </Routes>
     </Router>
   )
