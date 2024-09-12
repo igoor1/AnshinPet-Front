@@ -63,6 +63,10 @@ export default function Animal() {
         navigate('/createAnimal');
     };
 
+    const handleNavigationId = (id) => {
+        navigate(`/animal/${id}`);
+    };
+
     const searchAllAnimais = async () => {
         try {
             const response = await fetch('http://localhost:8080/animais');
@@ -158,8 +162,8 @@ export default function Animal() {
     };
 
     const handlePrepareDelete = async (id, button) => {
-        setanimalIdToDelete(id)
-        setButtonEl(button)
+        setanimalIdToDelete(id);
+        setButtonEl(button);
         setVisibleDeleteModal(true);
     };
 
@@ -204,7 +208,7 @@ export default function Animal() {
                         <div className='flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2'>
                             <Button onClick={(e) => handlePrepareDelete(animal.id, e.currentTarget)} icon='pi pi-times' className='p-button-rounded' />
                             <Button onClick={() => handlePrepareEdit(animal.id)} icon='pi pi-pencil' className='p-button-rounded' ></Button>
-                            <Button icon='pi pi-heart-fill' className='p-button-rounded' ></Button>
+                            <Button onClick={() => handleNavigationId(animal.id)} icon='pi pi-heart-fill' className='p-button-rounded' ></Button>
                         </div>
                     </div>
                 </div>
@@ -259,7 +263,6 @@ export default function Animal() {
                             <div><p className='text-center font-bold' style={{ marginBottom: '20%' }}>Não há animais cadastrados</p></div>
                         ) : (
                             <DataView value={animais} itemTemplate={itemTemplate} className='mt-2' />
-
                         )}
                     </div>
                 </div>
@@ -268,7 +271,14 @@ export default function Animal() {
 
             <Toast ref={toast} />
 
-            <ConfirmPopup target={buttonEl} visible={visibleDeleteModal} onHide={() => setVisibleDeleteModal(false)} accept={handleDeleteAnimal} reject={handleRejectDeleteAnimal} message='Você deseja excluir esse Animal?' />
+            <ConfirmPopup
+                target={buttonEl}
+                visible={visibleDeleteModal}
+                onHide={() => setVisibleDeleteModal(false)}
+                accept={handleDeleteAnimal}
+                reject={handleRejectDeleteAnimal}
+                message='Você deseja excluir esse Animal?'
+            />
             <Dialog header='Header' visible={visibleEdit} style={{ width: '50vw' }} onHide={() => { if (!visibleEdit) return; setVisibleEdit(false); }} >
                 <p className='m-0'>
                     <form onSubmit={handleEditAnimal} className='formgrid grid m-4'>
