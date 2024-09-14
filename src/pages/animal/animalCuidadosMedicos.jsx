@@ -1,6 +1,6 @@
-import Navbar from '../components/navbar/navbar';
-import Footer from '../components/footer/footer';
-import Logo from '../assets/imgDefault.png'
+import Navbar from '../../components/navbar/navbar';
+import Footer from '../../components/footer/footer';
+import Logo from '../../assets/imgDefault.png'
 
 import { useState, useEffect, useRef } from 'react'
 

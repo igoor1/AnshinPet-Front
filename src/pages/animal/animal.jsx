@@ -1,6 +1,6 @@
-import Navbar from "../components/navbar/navbar";
-import Footer from "../components/footer/footer";
-import Logo from '../assets/imgDefault.png'
+import Navbar from "../../components/navbar/navbar";
+import Footer from "../../components/footer/footer";
+import Logo from '../../assets/imgDefault.png'
 
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +70,7 @@ export default function Animal() {
     const [buttonEl, setButtonEl] = useState(null);
 
     const handleNavigation = () => {
-        navigate('/createAnimal');
+        navigate('/animal/createAnimal');
     };
 
     const handleNavigationId = (id) => {
