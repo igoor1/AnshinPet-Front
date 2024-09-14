@@ -19,3 +19,15 @@ body {
 .backgroundColorYellow {
   background-color: var(--yellowColor) !important;
 }
+
+
+/* Navbar */
+.p-submenu-list {
+  background-color: var(--primaryColor);
+}
+
+.p-tieredmenu {
+  background-color: var(--primaryColor);
+}
+
+/* Navbar */
