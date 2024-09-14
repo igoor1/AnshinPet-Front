@@ -46,7 +46,17 @@ const tipoList = [
 
 export default function Animal() {
 
-    const [animalEdit, setAnimalEdit] = useState({});
+    const [animalEdit, setAnimalEdit] = useState({
+        tipo: '',
+        sexo: '',
+        porte: '',
+        castrado: '',
+        adocao: '',
+        nome: '',
+        raca: '',
+        data: '',
+        cor: ''
+    });
     const [animais, setAnimais] = useState([]);
     const [nome, setNome] = useState('');
     const [timer, setTimer] = useState(null);
@@ -150,11 +160,13 @@ export default function Animal() {
             });
 
             if (response.ok) {
-                toast.current.show({ severity: 'info', summary: 'Operação Realizada !', detail: 'Animal Editado com sucesso', life: 3000 });
+                toast.current.show({ severity: 'success', summary: 'Operação Realizada !', detail: 'Animal Editado com sucesso', life: 3000 });
                 await searchAllAnimais();
 
             } else {
-                console.error('Erro ao atualizar animal:', response.statusText);
+                const errorData = await response.json();
+                const errorMensagem = errorData.title || 'Erro ao atualizar animal';
+                toast.current.show({ severity: 'error', summary: 'Erro !', detail: errorMensagem, life: 3000 });
             }
         } catch (error) {
             console.error('Erro na requisição:', error);
@@ -171,11 +183,13 @@ export default function Animal() {
         try {
             const response = await fetch(`http://localhost:8080/animais/${animalIdToDelete}`, { method: 'DELETE' });
             if (response.ok) {
-                toast.current.show({ severity: 'info', summary: 'Deletado !', detail: 'Animal Deletado com sucesso', life: 3000 });
+                toast.current.show({ severity: 'success', summary: 'Deletado !', detail: 'Animal Deletado com sucesso', life: 3000 });
                 await searchAllAnimais();
 
             } else {
-                toast.current.show({ severity: 'error', summary: 'Erro !', detail: 'Erro ao deletar animal', life: 3000 });
+                const errorData = await response.json();
+                const errorMensagem = errorData.title || 'Erro ao deletar animal';
+                toast.current.show({ severity: 'error', summary: 'Erro !', detail: errorMensagem, life: 3000 });
             }
         } catch (error) {
             toast.current.show({ severity: 'error', summary: 'Erro !', detail: 'Ocorreu um erro ao tentar deletar o animal', life: 3000 });
@@ -205,14 +219,14 @@ export default function Animal() {
                                 <Tag value={`Adoção: ${animal.adocao}`} severity={getColorTagAdocao(animal)}></Tag>
                             </div>
                         </div>
-                        <div className='flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2'>
+                        <div className='flex flex-row justify-content-center align-items-center gap-3'>
                             <Button onClick={(e) => handlePrepareDelete(animal.id, e.currentTarget)} icon='pi pi-times' className='p-button-rounded' />
                             <Button onClick={() => handlePrepareEdit(animal.id)} icon='pi pi-pencil' className='p-button-rounded' ></Button>
                             <Button onClick={() => handleNavigationId(animal.id)} icon='pi pi-heart-fill' className='p-button-rounded' ></Button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     };
 
@@ -279,58 +293,58 @@ export default function Animal() {
                 reject={handleRejectDeleteAnimal}
                 message='Você deseja excluir esse Animal?'
             />
-            <Dialog header='Header' visible={visibleEdit} style={{ width: '50vw' }} onHide={() => { if (!visibleEdit) return; setVisibleEdit(false); }} >
-                <p className='m-0'>
-                    <form onSubmit={handleEditAnimal} className='formgrid grid m-4'>
+            <Dialog header='Editar' visible={visibleEdit} style={{ width: '50vw' }} onHide={() => setVisibleEdit(false)} >
 
-                        <div className='field col-12 md:col-6'>
-                            <Dropdown name='tipo' value={animalEdit.tipo} onChange={(e) => handleDropdownOnChange(e, 'tipo')} options={tipoList}
-                                placeholder='Tipo' className='w-full' required />
-                        </div>
+                <form onSubmit={handleEditAnimal} className='formgrid grid m-4'>
 
-                        <div className='field col-12 md:col-6'>
-                            <Dropdown value={animalEdit.sexo} onChange={(e) => handleDropdownOnChange(e, 'sexo')} options={sexoList}
-                                placeholder='Selecione o Sexo' className='w-full' required />
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <Dropdown name='tipo' value={animalEdit.tipo} onChange={(e) => handleDropdownOnChange(e, 'tipo')} options={tipoList}
+                            placeholder='Tipo' className='w-full' required />
+                    </div>
 
-                        <div className='field col-12 md:col-6'>
-                            <Dropdown value={animalEdit.porte} onChange={(e) => handleDropdownOnChange(e, 'porte')} options={porteList}
-                                placeholder='Selecione o Porte' className='w-full' required />
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <Dropdown value={animalEdit.sexo} onChange={(e) => handleDropdownOnChange(e, 'sexo')} options={sexoList}
+                            placeholder='Selecione o Sexo' className='w-full' required />
+                    </div>
 
-                        <div className='field col-12 md:col-6'>
-                            <Dropdown value={animalEdit.castrado} onChange={(e) => handleDropdownOnChange(e, 'castrado')} options={castradoList}
-                                placeholder='Castrado ?' className='w-full' required />
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <Dropdown value={animalEdit.porte} onChange={(e) => handleDropdownOnChange(e, 'porte')} options={porteList}
+                            placeholder='Selecione o Porte' className='w-full' required />
+                    </div>
 
-                        <div className='field col-12 md:col-6'>
-                            <Dropdown value={animalEdit.adocao} onChange={(e) => handleDropdownOnChange(e, 'adocao')} options={adocaoList}
-                                placeholder='Para adoção ?' className='w-full' required />
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <Dropdown value={animalEdit.castrado} onChange={(e) => handleDropdownOnChange(e, 'castrado')} options={castradoList}
+                            placeholder='Castrado ?' className='w-full' required />
+                    </div>
 
-                        <div className='field col-12 md:col-6'>
-                            <InputText keyfilter={/^[a-zA-ZçÇéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕàÀ\s]*$/} placeholder='Nome' name='nome' value={animalEdit.nome} onChange={handleInputOnChange} required className='w-full' />
+                    <div className='field col-12 md:col-6'>
+                        <Dropdown value={animalEdit.adocao} onChange={(e) => handleDropdownOnChange(e, 'adocao')} options={adocaoList}
+                            placeholder='Para adoção ?' className='w-full' required />
+                    </div>
 
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <InputText keyfilter={/^[a-zA-ZçÇéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕàÀ\s]*$/} placeholder='Nome' name='nome' value={animalEdit.nome} onChange={handleInputOnChange} required className='w-full' />
 
-                        <div className='field col-12 md:col-6'>
-                            <InputText keyfilter={/^[a-zA-ZçÇéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕàÀ\s]*$/} placeholder='Raça' name='raca' value={animalEdit.raca} onChange={handleInputOnChange} required className='w-full' />
-                        </div>
+                    </div>
 
-                        <div className='field col-12 md:col-6'>
-                            <InputText type='date' placeholder='Data' name='data' value={animalEdit.data} onChange={handleInputOnChange} required className='w-full' />
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <InputText keyfilter={/^[a-zA-ZçÇéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕàÀ\s]*$/} placeholder='Raça' name='raca' value={animalEdit.raca} onChange={handleInputOnChange} required className='w-full' />
+                    </div>
 
-                        <div className='field col-12 md:col-6'>
-                            <InputText keyfilter={/^[a-zA-ZçÇéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕàÀ\s]*$/} placeholder='Cor' name='cor' value={animalEdit.cor} onChange={handleInputOnChange} required className='w-full' />
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <InputText type='date' placeholder='Data' name='data' value={animalEdit.data} onChange={handleInputOnChange} required className='w-full' />
+                    </div>
 
-                        <div className='field col-12 md:col-6'>
-                            <Button type='submit' label='Cadastrar' severity='help' text raised className='w-full' />
-                        </div>
+                    <div className='field col-12 md:col-6'>
+                        <InputText keyfilter={/^[a-zA-ZçÇéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕàÀ\s]*$/} placeholder='Cor' name='cor' value={animalEdit.cor} onChange={handleInputOnChange} required className='w-full' />
+                    </div>
 
-                    </form>
-                </p>
+                    <div className='field col-12 md:col-6'>
+                        <Button type='submit' label='Cadastrar' severity='help' text raised className='w-full' />
+                    </div>
+
+                </form>
+
             </Dialog>
         </>
     )
