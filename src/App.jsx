@@ -4,6 +4,7 @@ import { Animal } from './pages/animal/animal'
 import { CreateAnimal } from './pages/animal/createAnimal'
 
 import { Doenca } from './pages/doenca/doenca'
+import { Vacina } from './pages/vacina/vacina'
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Tema
 import 'primereact/resources/primereact.min.css';           // PrimeReact
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/animal" element={<Animal />} />
         <Route path="/animal/create" element={<CreateAnimal />} />
         <Route path="/doenca" element={<Doenca />} />
+        <Route path="/vacina" element={<Vacina />} />
       </Routes>
     </Router>
   )
