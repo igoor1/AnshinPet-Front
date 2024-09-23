@@ -1,6 +1,6 @@
 import Logo from '../../assets/logoFull.svg'
 
-export default function Footer() {
+export function Footer() {
     return (
         <>
             <div className='backgroundColorYellow px-4 md:px-6 lg:px-8 mt-2'>

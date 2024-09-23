@@ -7,7 +7,7 @@ import { useRef } from 'react';
 
 import Logo from '../../assets/logoWhite.svg'
 
-export default function Navbar() {
+export function Navbar() {
 
     const renderItemsLinksBar = (item) => (
         <a className='flex align-items-center p-menuitem-link text-white hover:bg-yellow-300 backgroundColorPrimary cursor-pointer' onClick={() => item.url && (window.location.href = item.url)}>

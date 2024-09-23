@@ -32,13 +32,13 @@ export function Animal() {
     const navigate = useNavigate();
     const [confirmVisible, setConfirmVisible] = useState(false);
     const [animalToDelete, setAnimalToDelete] = useState(null);
-
+    const [visible, setVisible] = useState(false);
 
     const showToast = (severity, summary, detail) => {
         toast.current.show({ severity, summary, detail });
     };
 
-    if (loading) return <Loading />;
+    if (loading) return <Loading height="100vh" />;
     if (error) return <Error message={error} route="/" />;
 
 
@@ -60,16 +60,18 @@ export function Animal() {
                 refreshAnimals();
             }
         }
-        setAnimalToDelete(false);
+        setAnimalToDelete(null);
         setConfirmVisible(false);
     };
 
     const handleEdit = (animalId) => {
         setEditingAnimalId(animalId);
+        setVisible(true);
     };
 
     const handleCloseEdit = () => {
         setEditingAnimalId(null);
+        setVisible(false);
     };
 
     const getColorTagAdocao = (animal) => {
@@ -157,6 +159,8 @@ export function Animal() {
                             onClose={handleCloseEdit}
                             onRefresh={refreshAnimals}
                             onShowToast={showToast}
+                            visible={visible}
+                            setVisible={setVisible}
                         />
                     )
                 }
