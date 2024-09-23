@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
-import Animal from './pages/animal/animal';
-import CreateAnimal from "./pages/animal/createAnimal";
-import Dashboard from "./pages/dashboard";
-import Doenca from "./pages/doenca/doenca";
-import AnimalCuidadosMedicos from "./pages/animal/animalCuidadosMedicos";
+import { Animal } from './pages/animal/animal'
+import { CreateAnimal } from './pages/animal/createAnimal'
+import { Medicals } from "./pages/animal/medicals"
+
+import { Doenca } from './pages/doenca/doenca'
+import { Vacina } from './pages/vacina/vacina'
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Tema
 import 'primereact/resources/primereact.min.css';           // PrimeReact
@@ -18,10 +19,10 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/animal" element={<Animal />} />
-        <Route path="/animal/:idAnimal" element={<AnimalCuidadosMedicos />} />
-        <Route path="/animal/createAnimal" element={<CreateAnimal />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/animal/create" element={<CreateAnimal />} />
+        <Route path="/animal/medicals/:animalId" element={<Medicals />} />
         <Route path="/doenca" element={<Doenca />} />
+        <Route path="/vacina" element={<Vacina />} />
       </Routes>
     </Router>
   )
