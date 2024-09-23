@@ -1,13 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 
 import { Toast } from "primereact/toast";
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { InputText } from "primereact/inputtext";
 
 import { useEditAnimal } from '../../hooks/animal/useEditAnimal';
 
-const EditAnimal = ({ animalId, onClose, onRefresh, onShowToast }) => {
+import { Loading } from '../../components/loading/loading';
+
+export const EditAnimal = ({ animalId, onClose, onRefresh, onShowToast, visible, setVisible }) => {
     const { animal, loading, error, updateAnimal } = useEditAnimal(animalId);
     const [formValues, setFormValues] = useState({});
     const toast = useRef(null);
+    const formRef = useRef(null);
 
     useEffect(() => {
         if (animal) {
@@ -27,117 +33,145 @@ const EditAnimal = ({ animalId, onClose, onRefresh, onShowToast }) => {
             onShowToast('success', 'Sucesso', 'Animal editado com sucesso!');
             setTimeout(onRefresh, 1500);
             setTimeout(onClose, 1500);
+            setVisible(false);
         } catch {
             onShowToast('error', 'Erro', 'Falha ao editar o animal.');
         }
     };
 
-    if (loading) return <p>Carregando...</p>;
+    const footerContent = (
+        <div>
+            <Button label="Cancelar" icon="pi pi-times" severity="danger" onClick={() => setVisible(false)} className="p-button-text" />
+            <Button label="Editar" icon="pi pi-check" severity="success" onClick={() => formRef.current.requestSubmit()} autoFocus />
+        </div>
+    );
+
+
     if (error) return <p>{error}</p>;
 
     return (
         <>
             <Toast ref={toast} />
-            <form onSubmit={handleSubmit}>
-                <h2>Editar Animal</h2>
-                <div>
-                    <label>Nome:</label>
-                    <input
-                        type="text"
-                        name="nome"
-                        value={formValues.nome || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Sexo:</label>
-                    <input
-                        type="text"
-                        name="sexo"
-                        value={formValues.sexo || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Tipo:</label>
-                    <input
-                        type="text"
-                        name="tipo"
-                        value={formValues.tipo || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Cor:</label>
-                    <input
-                        type="text"
-                        name="cor"
-                        value={formValues.cor || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Porte:</label>
-                    <input
-                        type="text"
-                        name="porte"
-                        value={formValues.porte || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+            <div className="card flex justify-content-center">
+                <Dialog header="Editar Animal" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>
+                    {loading ? (
+                        <Loading height="50vh" />
 
-                <div>
-                    <label>Castrado:</label>
-                    <input
-                        type="text"
-                        name="castrado"
-                        value={formValues.castrado || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                    ) : (
+                        <form ref={formRef} onSubmit={handleSubmit} >
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="nome">Nome</label>
+                                        <InputText id="nome" name="nome"
+                                            value={formValues.nome || ''}
+                                            onChange={handleChange}
+                                            required style={{ width: '100%' }} />
+                                    </div>
+                                </div>
+                            </div>
 
-                <div>
-                    <label>Adoção:</label>
-                    <input
-                        type="text"
-                        name="Adoção"
-                        value={formValues.adocao || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="sexo">Sexo</label>
+                                        <InputText id="sexo" name="sexo"
+                                            value={formValues.sexo || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
 
-                <div>
-                    <label>Raça:</label>
-                    <input
-                        type="text"
-                        name="raca"
-                        value={formValues.raca || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Idade:</label>
-                    <input
-                        type="date"
-                        name="data"
-                        value={formValues.data || ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Salvar</button>
-                <button type="button" onClick={onClose}>Cancelar</button>
-            </form>
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="tipo">Tipo</label>
+                                        <InputText id="tipo" name="tipo"
+                                            value={formValues.tipo || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="cor">Cor</label>
+                                        <InputText id="cor" name="cor"
+                                            value={formValues.cor || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="porte">Porte</label>
+                                        <InputText id="porte" name="porte"
+                                            value={formValues.porte || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="castrado">Castrado</label>
+                                        <InputText id="castrado" name="castrado"
+                                            value={formValues.castrado || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="adocao">Adoção</label>
+                                        <InputText id="adocao" name="adocao"
+                                            value={formValues.adocao || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="raca">Raça</label>
+                                        <InputText id="raca" name="raca"
+                                            value={formValues.raca || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="flex justify-content-center mt-2">
+                                    <div className="flex flex-column gap-2 w-full">
+                                        <label htmlFor="data">Data de Nascimento</label>
+                                        <InputText type="date" id="data" name="data"
+                                            value={formValues.data || ''}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    )}
+                </Dialog>
+            </div>
         </>
     );
 };
-
-export default EditAnimal;
