@@ -11,7 +11,21 @@ export const useFetchAnimals = () => {
         setError(null);
         try {
             const response = await api.get('/animais');
-            setAnimals(response.data);
+            const animaisData = response.data;
+
+            const animaisComFotos = await Promise.all(animaisData.map(async (animal) => {
+                try {
+                    const fotoResponse = await api.get(`/animais/${animal.id}/foto`);
+                    return {
+                        ...animal,
+                        foto: fotoResponse.data,
+                    };
+                } catch {
+                    return { ...animal, foto: null };
+                }
+            }));
+
+            setAnimals(animaisComFotos);
         } catch (err) {
             setError('Erro ao buscar animais');
             console.error(err);

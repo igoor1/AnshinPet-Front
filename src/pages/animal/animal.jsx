@@ -118,7 +118,16 @@ export function Animal() {
                             <div className="m-2 border border-gray-300 p-4" key={animal.id}>
                                 <div>
                                     <div className="flex gap-2">
-                                        <img src={Logo} alt="" width={150} />
+                                        {animal.foto ? (
+                                            <img
+                                                src={`http://localhost:8080/animais/${animal.id}/foto`} // URL para exibir a foto
+                                                alt={`Imagem de ${animal.nome}`}
+                                                width={150}
+                                                className="rounded"
+                                            />
+                                        ) : (
+                                            <img src={Logo} alt="Imagem padrão" width={150} className="rounded" />
+                                        )}
                                         <div>
                                             <p>Nome:{animal.nome}  <i className={getIconSexo(animal)}></i></p>
                                             <p>Tipo: {animal.tipo}</p>

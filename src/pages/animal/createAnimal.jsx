@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useCreateAnimal } from "../../hooks/animal/useCreateAnimal";
+import { useUploadImagem } from "../../hooks/animal/image/useUploadImagem";
 
 import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
@@ -24,6 +25,8 @@ export function CreateAnimal() {
         data: null,
     });
 
+    const [imagem, setImagem] = useState(null);
+
     const items = [{ label: 'Animal', url: '/animal' }, { label: 'Cadastrar Animal' }];
     const home = { icon: 'pi pi-home', url: '/dashboard' }
 
@@ -35,12 +38,18 @@ export function CreateAnimal() {
     };
 
     const { createAnimal, loading, error, success } = useCreateAnimal();
+    const { uploadImagem, loading: loadingImagem } = useUploadImagem();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            await createAnimal(animalData)
+            const animalId = await createAnimal(animalData);
+
+            if (imagem) {
+                await uploadImagem(imagem, animalId);
+            }
+
             setAnimalData({
                 nome: '',
                 tipo: '',
@@ -52,6 +61,9 @@ export function CreateAnimal() {
                 adocao: '',
                 data: '',
             })
+
+            setImagem(null);
+
 
             showToast('success', 'Sucesso', 'Animal cadastrado com sucesso!');
 
@@ -76,7 +88,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="nome">Nome</label>
                                     <InputText id="nome" name="nome"
-                                        value={animalData.nome}
+                                        value={animalData.nome || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, nome: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="Digite o nome"
@@ -87,7 +99,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="tipo">Tipo</label>
                                     <InputText id="tipo" name="tipo"
-                                        value={animalData.tipo}
+                                        value={animalData.tipo || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, tipo: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="Digite o tipo"
@@ -98,7 +110,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="raca">Raça</label>
                                     <InputText id="raca" name="raca"
-                                        value={animalData.raca}
+                                        value={animalData.raca || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, raca: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="Digite a raça"
@@ -110,7 +122,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="cor">Cor</label>
                                     <InputText id="cor" name="cor"
-                                        value={animalData.cor}
+                                        value={animalData.cor || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, cor: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="Digite a cor"
@@ -122,7 +134,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="sexo">Sexo</label>
                                     <InputText id="sexo" name="sexo"
-                                        value={animalData.sexo}
+                                        value={animalData.sexo || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, sexo: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="Digite o sexo"
@@ -137,7 +149,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="porte">Porte</label>
                                     <InputText id="porte" name="porte"
-                                        value={animalData.porte}
+                                        value={animalData.porte || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, porte: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="Digite o porte"
@@ -148,7 +160,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="castrado">Castrado</label>
                                     <InputText id="castrado" name="castrado"
-                                        value={animalData.castrado}
+                                        value={animalData.castrado || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, castrado: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="É castrado ?"
@@ -160,7 +172,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full">
                                     <label htmlFor="adocao">Adoção</label>
                                     <InputText id="adocao" name="adocao"
-                                        value={animalData.adocao}
+                                        value={animalData.adocao || ''}
                                         onChange={(e) => setAnimalData({ ...animalData, adocao: e.target.value })}
                                         required style={{ width: '100%' }}
                                         placeholder="Para adoção ?"
@@ -172,7 +184,7 @@ export function CreateAnimal() {
                                 <div className="flex flex-column gap-2 w-full ">
                                     <label htmlFor="data">Data de Nascimento</label>
                                     <InputText id="data" name="data"
-                                        value={animalData.data}
+                                        value={animalData.data || ''}
                                         type="date"
                                         onChange={(e) => setAnimalData({ ...animalData, data: e.target.value })}
                                         required style={{ width: '100%' }} placeholder="Digite a data de nascimento" />
@@ -180,7 +192,17 @@ export function CreateAnimal() {
                             </div>
 
                             <div className="flex justify-content-center mt-2">
-                                <div className="flex flex-column gap-2 w-full mt-4">
+                                <div className="flex flex-column gap-2 w-full ">
+                                    <label htmlFor="imagem">Imagem do Animal</label>
+                                    <InputText id="imagem" name="imagem"
+                                        type="file"
+                                        onChange={(e) => setImagem(e.target.files[0])}
+                                        required style={{ width: '100%' }} placeholder="Insira a imagem do animal" />
+                                </div>
+                            </div>
+
+                            <div className="flex justify-content-center mt-2">
+                                <div className="flex flex-column gap-2 w-full">
 
                                     <Button type="submit" label={loading ? <i className="pi pi-spin pi-spinner" style={{ fontSize: '1rem', width: '100%' }} ></i>
                                         : 'Cadastrar'} />
