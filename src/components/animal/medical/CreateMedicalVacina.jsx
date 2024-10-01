@@ -1,22 +1,27 @@
 import { useFetchVacinas } from "../../../hooks/vacina/useFetchVacinas";
 import { useCreateMedical } from "../../../hooks/animal/medicals/useCreateMedical";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-const CreateMedicalVacina = ({ onShowToast, animalId, onClose, onRefresh }) => {
+import { Dropdown } from 'primereact/dropdown';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { InputText } from "primereact/inputtext";
+
+const CreateMedicalVacina = ({ onShowToast, animalId, onClose, onRefresh, visibleCreateVacina }) => {
 
     const { vacinas } = useFetchVacinas();
     const { createVacina } = useCreateMedical();
 
-    const [selectedVacinaId, setSelectedVacinaId] = useState("");
+    const [selectedVacina, setSelectedVacina] = useState("");
     const [lote, setLote] = useState("");
     const [dataAplicacao, setDataAplicacao] = useState("");
-
+    const formRef = useRef(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         var vacina = {
             "vacina": {
-                "id": selectedVacinaId
+                "id": selectedVacina.id
             },
             "animal": {
                 "id": animalId
@@ -34,44 +39,56 @@ const CreateMedicalVacina = ({ onShowToast, animalId, onClose, onRefresh }) => {
         }
     };
 
+    const footerContent = (
+        <div>
+            <Button label="Cancelar" icon="pi pi-times" severity="danger" onClick={onClose} className="p-button-text" />
+            <Button label="Cadastrar" icon="pi pi-check" severity="success" onClick={() => formRef.current.requestSubmit()} autoFocus />
+        </div>
+    );
+
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <h2>Cadastrar Vacina</h2>
-                <div>
-                    <label htmlFor="vacinaSelect">Vacina:</label>
-                    <select id="vacinaSelect" value={selectedVacinaId} onChange={(e) => setSelectedVacinaId(e.target.value)}  >
-                        <option value="">Selecione uma Vacina</option>
-                        {vacinas.map((vacina) => (
-                            <option key={vacina.id} value={vacina.id}>
-                                {vacina.nome}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label>Lote:</label>
-                    <input
-                        type="text"
-                        name="lote"
-                        value={lote}
-                        onChange={(e) => setLote(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Data de Aplicação:</label>
-                    <input
-                        type="date"
-                        name="Data Aplicação"
-                        value={dataAplicacao}
-                        onChange={(e) => setDataAplicacao(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Salvar</button>
-                <button type="button" onClick={onClose}>Cancelar</button>
-            </form>
+            <Dialog header="Cadastrar Vacina" visible={visibleCreateVacina} style={{ width: '50vw' }} onHide={onClose} footer={footerContent}>
+                <form onSubmit={handleSubmit} ref={formRef}>
+                    <div>
+                        <label htmlFor="vacinaSelect">Vacina:</label>
+                        <Dropdown
+                            id="vacinaSelect"
+                            value={selectedVacina}
+                            options={vacinas}
+                            onChange={(e) => setSelectedVacina(e.value)}
+                            optionLabel="nome"
+                            placeholder="Selecione uma vacina"
+                            className="w-full"
+                        />
+                    </div>
+                    <div>
+                        <div className="flex justify-content-center mt-2">
+                            <div className="flex flex-column gap-2 w-full">
+                                <label htmlFor="lote">Lote</label>
+                                <InputText id="lote" name="lote"
+                                    value={lote || ''}
+                                    onChange={(e) => setLote(e.target.value)}
+                                    placeholder="Digite o lote"
+                                    required style={{ width: '100%' }} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="flex justify-content-center mt-2">
+                            <div className="flex flex-column gap-2 w-full">
+                                <label htmlFor="dataAplicacao">Data de Aplicação</label>
+                                <InputText id="dataAplicacao" name="dataAplicacao"
+                                    value={dataAplicacao || ''}
+                                    onChange={(e) => setDataAplicacao(e.target.value)}
+                                    type="date"
+                                    required style={{ width: '100%' }} />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </Dialog>
         </>
     )
 }
