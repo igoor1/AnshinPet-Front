@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { Animal } from './pages/animal/animal'
 import { CreateAnimal } from './pages/animal/createAnimal'
 import { Medicals } from "./pages/animal/medicals"
+import { Dashboard } from "./pages/dashboard/dashboard"
 
 import { Doenca } from './pages/doenca/doenca'
 import { Vacina } from './pages/vacina/vacina'
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/animal/medicals/:animalId" element={<Medicals />} />
         <Route path="/doenca" element={<Doenca />} />
         <Route path="/vacina" element={<Vacina />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   )
