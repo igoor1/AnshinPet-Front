@@ -1,10 +1,15 @@
 $primary: #5e2cd3;
 $secondary: #ffd951;
+$success: #22C55E;
 
 $font-family-base: Arial, Helvetica, sans-serif;
 
 :root {
     --primaryColor: #5e2cd3
+}
+
+.btn-success {
+    color: white !important;
 }
 
 a {
