@@ -1,0 +1,50 @@
+.areaAnimal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+}
+
+.itemAnimal {
+    border-radius: 20px;
+    padding: 10px;
+    margin: 5px;
+    flex: 0 1 350px;
+}
+
+.cardAnimal {
+    .headerAnimal {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .infoAnimal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: justify;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .card-header {
+        background-color: white;
+    }
+
+    .card-footer {
+        background-color: white;
+    }
+
+    .imagemAnimal {
+        max-width: 90px;
+        max-height: 90px;
+    }
+
+    .tipoAnimal {
+        color: gray;
+        font-size: 15px;
+        font-style: italic;
+    }
+}
