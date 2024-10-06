@@ -8,12 +8,47 @@ const AnimalCard = ({ animal }) => {
 
     const getColorAdocao = (animal) => {
         switch (animal.adocao) {
-            case 'Sim':
+            case 'S':
                 return 'success';
-            case 'Não':
+            case 'N':
                 return 'danger';
             default:
                 return 'warning'
+        }
+    }
+
+    const getAdocao = (animal) => {
+        switch (animal.adocao) {
+            case 'S':
+                return 'Sim';
+            case 'N':
+                return 'Não'
+            default:
+                return 'erro';
+        }
+    }
+
+    const getTipo = (animal) => {
+        switch (animal.tipo) {
+            case 'C':
+                return 'Cachorro';
+            case 'G':
+                return 'Gato';
+            case 'A':
+                return 'Ave';
+            default:
+                return 'Erro';
+        }
+    }
+
+    const getCastrado = (animal) => {
+        switch (animal.castrado) {
+            case 'S':
+                return 'Sim';
+            case 'N':
+                return 'Não';
+            default:
+                return 'Erro';
         }
     }
 
@@ -25,15 +60,15 @@ const AnimalCard = ({ animal }) => {
                     <div className='headerAnimal'>
                         <div>
                             <Image src={ImgDefaultAnimal} alt="Imagem padrão (animal)" className='imagemAnimal' />
-                            <p style={{ margin: 'auto' }}> {animal.nome} <span className='tipoAnimal'>({animal.tipo})</span></p>
-                            <Badge bg={getColorAdocao(animal)}>Adoção: {animal.adocao}</Badge>
+                            <p style={{ margin: 'auto' }}> {animal.nome} <span className='tipoAnimal'>({getTipo(animal)})</span></p>
+                            <Badge bg={getColorAdocao(animal)}>Adoção: {getAdocao(animal)}</Badge>
                         </div>
                         <div className='infoAnimal'>
                             <p >
                                 Raça: {animal.raca}
                             </p>
                             <p >
-                                Castrado: {animal.castrado}
+                                Castrado: {getCastrado(animal)}
                             </p>
                             <p >
                                 Cor: {animal.cor}
