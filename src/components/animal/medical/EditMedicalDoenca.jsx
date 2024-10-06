@@ -1,20 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
-
-import { Toast } from "primereact/toast";
+import { Dropdown } from 'primereact/dropdown';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { InputText } from "primereact/inputtext";
 
 import { useEditMedicalDoenca } from '../../../hooks/animal/medicals/useEditMedicalDoenca';
 import { useFetchDoencas } from "../../../hooks/doenca/useFetchDoencas";
 
-const EditMedicalDoenca = ({ doencaId, onClose, onRefresh, onShowToast, animalId }) => {
+const EditMedicalDoenca = ({ doencaId, onClose, onRefresh, onShowToast, animalId, visibleEditDoenca }) => {
     const { doenca, loading, error, updatedDoenca } = useEditMedicalDoenca(doencaId);
     const { doencas } = useFetchDoencas();
 
-    const [selectedDoencaId, setSelectedDoencaId] = useState("");
+    const [selectedDoencaId, setSelectedDoencaId] = useState(null);
     const [descricao, setDescricao] = useState("");
     const [status, setStatus] = useState("");
 
-    const toast = useRef(null);
-
+    const formRef = useRef(null);
 
     useEffect(() => {
         if (doenca) {
@@ -24,12 +25,10 @@ const EditMedicalDoenca = ({ doencaId, onClose, onRefresh, onShowToast, animalId
         }
     }, [doenca]);
 
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        var doenca = {
+        var doencaData = {
             "doenca": {
                 "id": selectedDoencaId
             },
@@ -38,10 +37,10 @@ const EditMedicalDoenca = ({ doencaId, onClose, onRefresh, onShowToast, animalId
             },
             "descricao": descricao,
             "status": status
-        }
+        };
 
         try {
-            await updatedDoenca(doenca);
+            await updatedDoenca(doencaData);
             onShowToast('success', 'Sucesso', 'Doença editada com sucesso!');
             setTimeout(onRefresh, 1500);
             setTimeout(onClose, 1500);
@@ -50,55 +49,58 @@ const EditMedicalDoenca = ({ doencaId, onClose, onRefresh, onShowToast, animalId
         }
     };
 
-    if (loading) return <p>Carregando...</p>;
-    if (error) return <p>{error}</p>;
+    const footerContent = (
+        <div>
+            <Button label="Cancelar" icon="pi pi-times" severity="danger" onClick={onClose} className="p-button-text" />
+            <Button label="Cadastrar" icon="pi pi-check" severity="success" onClick={() => formRef.current.requestSubmit()} autoFocus />
+        </div>
+    );
 
     return (
         <>
-            <Toast ref={toast} />
-            <form onSubmit={handleSubmit}>
-                <h2>Editar Doença</h2>
-                <div>
-                    <label htmlFor="doencaSelect">Doença:</label>
-                    <select
-                        id="doencaSelect"
-                        value={selectedDoencaId}
-                        onChange={(e) => setSelectedDoencaId(e.target.value)}
-                        required
-                    >
-                        {doencas.map((doencaItem) => (
-                            <option
-                                key={doencaItem.id}
-                                value={doencaItem.id}
-                            >
-                                {doencaItem.nome}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label>Descrição:</label>
-                    <input
-                        type="text"
-                        name="Descricao"
-                        value={descricao}
-                        onChange={(e) => setDescricao(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Status:</label>
-                    <input
-                        type="text"
-                        name="Status"
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Salvar</button>
-                <button type="button" onClick={onClose}>Cancelar</button>
-            </form>
+            <Dialog header="Editar Doença" visible={visibleEditDoenca} style={{ width: '50vw' }} onHide={onClose} footer={footerContent}>
+                <form onSubmit={handleSubmit} ref={formRef}>
+                    <div>
+                        <label htmlFor="doencaDropdown">Doença:</label>
+                        <Dropdown
+                            id="doencaDropdown"
+                            value={selectedDoencaId}
+                            options={doencas}
+                            onChange={(e) => setSelectedDoencaId(e.value)}
+                            optionLabel="nome"
+                            optionValue="id"
+                            placeholder="Selecione uma doença"
+                            className="w-full"
+                        />
+                    </div>
+
+                    <div>
+                        <div className="flex justify-content-center mt-2">
+                            <div className="flex flex-column gap-2 w-full">
+                                <label htmlFor="descricao">Descrição</label>
+                                <InputText id="descricao" name="descricao"
+                                    value={descricao || ''}
+                                    onChange={(e) => setDescricao(e.target.value)}
+                                    placeholder="Digite a descrição"
+                                    required style={{ width: '100%' }} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="flex justify-content-center mt-2">
+                            <div className="flex flex-column gap-2 w-full">
+                                <label htmlFor="status">Status</label>
+                                <InputText id="status" name="status"
+                                    value={status || ''}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                    placeholder="Digite o status"
+                                    required style={{ width: '100%' }} />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </Dialog>
         </>
     );
 };
