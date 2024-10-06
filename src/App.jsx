@@ -4,7 +4,7 @@ import Animal from './pages/animal/animal'
 
 import './scss/styles.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import 'sweetalert2/src/sweetalert2.scss'
 
 export default function App() {
 
