@@ -66,7 +66,7 @@ const Animal = () => {
                         <p>Nenhum animal encontrado.</p>
                     ) : (
                         filteredAnimals.map((animal) => (
-                            <AnimalCard animal={animal} key={animal.id} />
+                            <AnimalCard animal={animal} key={animal.id} refreshAnimals={refreshAnimals} />
                         ))
                     )}
                 </div>

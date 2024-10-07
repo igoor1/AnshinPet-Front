@@ -1,10 +1,12 @@
 import { Button, Image, Badge, Card } from 'react-bootstrap';
 
 import ImgDefaultAnimal from "../../../assets/imgDefault.png";
+import { ModalDelete } from '../modal/modalDelete';
 
 import './animalCard.scss';
 
-const AnimalCard = ({ animal }) => {
+const AnimalCard = ({ animal, refreshAnimals }) => {
+    const { openModalDelete } = ModalDelete(refreshAnimals);
 
     const getColorAdocao = (animal) => {
         switch (animal.adocao) {
@@ -79,7 +81,7 @@ const AnimalCard = ({ animal }) => {
                 </Card.Header>
                 <Card.Footer className="text-muted">
                     <Button variant="primary" className='m-1'><i className="bi bi-heart"></i></Button>
-                    <Button variant="danger" className='m-1'><i className="bi bi-trash"></i></Button>
+                    <Button variant="danger" className='m-1' onClick={() => openModalDelete(animal.id, animal.nome)}><i className="bi bi-trash"></i></Button>
                     <Button variant="success" className='m-1'><i className="bi bi-pencil"></i></Button>
                 </Card.Footer>
             </Card>
