@@ -1,22 +1,26 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Stack, Form, InputGroup, Button } from 'react-bootstrap';
+import './animal.scss';
 
 import Footer from "../../components/footer/footer";
 import NavbarHeader from "../../components/navbarheader/navbarheader";
 import AnimalCard from '../../components/animal/card/animalCard';
-
-import './animal.scss';
+import { ModalCreate } from '../../components/animal/modal/modalCreate';
 
 import { useFetchAnimals } from '../../hooks/animal/useFetchAnimals';
 import { useSearchAnimals } from '../../hooks/animal/useSearchAnimals';
 import Loading from '../../components/loading/loading';
+
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-
-
 const Animal = () => {
+    useEffect(() => {
+        document.title = 'Animal | Anshin Pet';
+    }, []);
+
     const { animals, loading, error, refreshAnimals } = useFetchAnimals();
     const { searchTerm, filteredAnimals, handleSearch } = useSearchAnimals(animals);
+    const { openModalCreate } = ModalCreate(refreshAnimals);
 
     if (loading) return <Loading />
 
@@ -47,12 +51,12 @@ const Animal = () => {
                     </div>
 
                     <div className="p-2 ms-auto">
-                        <Button variant="success btnCadastrarAnimal" onClick={() => openForm()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                        <Button variant="success btnCadastrarAnimal" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                     </div>
 
 
                     <div className="floating">
-                        <Button variant="success" onClick={() => openForm()}><i className="bi bi-plus"></i></Button>
+                        <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i></Button>
                     </div>
 
                 </Stack>
