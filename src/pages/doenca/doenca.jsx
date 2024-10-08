@@ -33,6 +33,19 @@ const Doenca = () => {
         })
     }
 
+    const getGravidade = (doenca) => {
+        switch (doenca.gravidade) {
+            case 'B':
+                return 'Baixa';
+            case 'M':
+                return 'Média';
+            case 'A':
+                return 'Alta';
+            default:
+                return 'Erro'
+        }
+    }
+
     return (
         <div className="divMain">
             <NavbarHeader />
@@ -70,7 +83,9 @@ const Doenca = () => {
                                 <tr key={doenca.id} className="text-center trDoencas">
                                     <td>{doenca.id}</td>
                                     <td>{doenca.nome}</td>
-                                    <td>{doenca.gravidade}</td>
+                                    <td>
+                                        {getGravidade(doenca)}
+                                    </td>
                                     <td>
                                         <Button variant="danger" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
                                         <Button variant="success" className='m-1'><i className="bi bi-pencil"></i></Button></td>
