@@ -37,7 +37,7 @@ const Animal = () => {
         <div className='divMain'>
 
             <NavbarHeader />
-            <div className="container" style={{ flex: '1' }}>
+            <div className="container containerMain">
                 <Stack direction="horizontal" gap={3}>
 
                     <div className="p-2">

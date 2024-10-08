@@ -12,7 +12,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/animal" element={<Animal />} />
+        <Route path="/animais" element={<Animal />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
