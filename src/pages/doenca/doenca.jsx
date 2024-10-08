@@ -6,6 +6,7 @@ import NavbarHeader from "../../components/navbarheader/navbarheader";
 import Loading from "../../components/loading/loading";
 
 import { useFetchDoencas } from "../../hooks/doenca/useFetchDoencas";
+import { ModalCreate } from "../../components/doenca/modal/modalCreate";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
@@ -17,6 +18,7 @@ const Doenca = () => {
     }, []);
 
     const { doencas, loading, error, refreshDoencas } = useFetchDoencas();
+    const { openModalCreate } = ModalCreate(refreshDoencas);
 
     if (loading) return <Loading />
 
@@ -44,7 +46,7 @@ const Doenca = () => {
                 </div>
 
                 <div className="p-2 ms-auto">
-                    <Button variant="success"><i className="bi bi-plus"></i> Cadastrar</Button>
+                    <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                 </div>
 
             </div>
@@ -77,7 +79,7 @@ const Doenca = () => {
                 </Table>
             </div>
             <Footer />
-        </div>
+        </div >
     )
 }
 
