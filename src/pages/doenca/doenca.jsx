@@ -8,6 +8,7 @@ import Loading from "../../components/loading/loading";
 import { useFetchDoencas } from "../../hooks/doenca/useFetchDoencas";
 import { ModalCreate } from "../../components/doenca/modal/modalCreate";
 import { ModalDelete } from "../../components/doenca/modal/modalDelete";
+import { ModalEdit } from "../../components/doenca/modal/modalEdit";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
@@ -21,6 +22,7 @@ const Doenca = () => {
     const { doencas, loading, error, refreshDoencas } = useFetchDoencas();
     const { openModalCreate } = ModalCreate(refreshDoencas);
     const { openModalDelete } = ModalDelete(refreshDoencas);
+    const { openModalEdit } = ModalEdit(refreshDoencas);
 
     if (loading) return <Loading />
 
@@ -88,7 +90,7 @@ const Doenca = () => {
                                     </td>
                                     <td>
                                         <Button variant="danger" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
-                                        <Button variant="success" className='m-1'><i className="bi bi-pencil"></i></Button></td>
+                                        <Button variant="success" className='m-1' onClick={() => openModalEdit(doenca)}><i className="bi bi-pencil"></i></Button></td>
                                 </tr>
                             ))
                         )}
