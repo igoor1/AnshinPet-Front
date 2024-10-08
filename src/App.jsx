@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 import Animal from './pages/animal/animal'
+import Doenca from "./pages/doenca/doenca";
+
 import NotFound from "./pages/notFound/notFound";
 
 import './scss/styles.scss';
@@ -13,6 +15,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/animais" element={<Animal />} />
+        <Route path="/doencas" element={<Doenca />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
