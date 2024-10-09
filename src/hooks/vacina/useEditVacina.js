@@ -1,37 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { api } from '../../services/api';
 
 export const useEditVacina = (vacinaId) => {
-    const [vacina, setVacina] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false)
 
-    useEffect(() => {
-        const fetchVacina = async () => {
-            if (!vacinaId) return;
+    const updateVacina = async (vacinaId, updatedVacina) => {
+        setLoading(true);
+        setError(null);
+        setSuccess(false);
 
-            try {
-                const response = await api.get(`/vacinas/${vacinaId}`);
-                setVacina(response.data);
-            } catch (err) {
-                setError('Erro ao buscar vacina');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchVacina();
-    }, [vacinaId]);
-
-    const updateVacina = async (updatedVacina) => {
         try {
             await api.put(`/vacinas/${vacinaId}`, updatedVacina);
-            setVacina(updatedVacina);
+            setSuccess(true);
         } catch (err) {
-            setError('Erro ao atualizar doença');
-            throw err;
+            const errorMensagem = err.response?.data?.title || 'Erro ao editar vacina';
+            setError(errorMensagem);
+            console.error(err);
+        } finally {
+            setLoading(false)
         }
     };
 
-    return { vacina, loading, error, updateVacina };
+    return { updateVacina, loading, error, success };
 };

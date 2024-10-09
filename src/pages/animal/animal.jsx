@@ -1,181 +1,80 @@
-import { Toast } from "primereact/toast";
-import { InputText } from "primereact/inputtext";
-import { Button } from 'primereact/button';
-import { Divider } from 'primereact/divider';
-import { Tag } from 'primereact/tag';
-import { ConfirmDialog } from 'primereact/confirmdialog';
+import { useEffect } from 'react';
+import { Stack, Form, InputGroup, Button } from 'react-bootstrap';
+import './animal.scss';
 
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Footer from "../../components/footer/footer";
+import NavbarHeader from "../../components/navbarheader/navbarheader";
+import AnimalCard from '../../components/animal/card/animalCard';
+import { ModalCreate } from '../../components/animal/modal/modalCreate';
 
-import { useFetchAnimals } from "../../hooks/animal/useFetchAnimals";
-import { useDeleteAnimal } from "../../hooks/animal/useDeleteAnimal";
-import { useSearchAnimals } from "../../hooks/animal/useSearchAnimals";
+import { useFetchAnimals } from '../../hooks/animal/useFetchAnimals';
+import { useSearchAnimals } from '../../hooks/animal/useSearchAnimals';
+import Loading from '../../components/loading/loading';
 
-import { Loading } from "../../components/loading/loading";
-import { Error } from "../../components/error/error";
-import { EditAnimal } from "../../components/animal/EditAnimal";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-import { Navbar } from "../../components/navbar/navbar";
-import { Footer } from "../../components/footer/footer";
+const Animal = () => {
+    useEffect(() => {
+        document.title = 'Animal | Anshin Pet';
+    }, []);
 
-import Logo from "../../assets/ImgDefault.png";
-
-
-export function Animal() {
     const { animals, loading, error, refreshAnimals } = useFetchAnimals();
-    const { deleteAnimal, loading: deleting, error: deleteError } = useDeleteAnimal();
     const { searchTerm, filteredAnimals, handleSearch } = useSearchAnimals(animals);
-    const [editingAnimalId, setEditingAnimalId] = useState(null);
+    const { openModalCreate } = ModalCreate(refreshAnimals);
 
-    const toast = useRef(null);
-    const navigate = useNavigate();
-    const [confirmVisible, setConfirmVisible] = useState(false);
-    const [animalToDelete, setAnimalToDelete] = useState(null);
-    const [visible, setVisible] = useState(false);
+    if (loading) return <Loading />
 
-    const showToast = (severity, summary, detail) => {
-        toast.current.show({ severity, summary, detail });
-    };
-
-    if (loading) return <Loading height="100vh" />;
-    if (error) return <Error message={error} route="/" />;
-
-
-    const confirmDelete = (animalId) => {
-        setAnimalToDelete(animalId);
-        setConfirmVisible(true);
-    };
-
-    const handleDelete = async () => {
-        if (animalToDelete) {
-            const errorMessage = await deleteAnimal(animalToDelete);
-
-            if (errorMessage) {
-                showToast('error', 'Erro', errorMessage);
-            } else {
-                setTimeout(() => {
-                    showToast('success', 'Sucesso', 'Animal deletado!');
-                }, 100);
-                refreshAnimals();
-            }
-        }
-        setAnimalToDelete(null);
-        setConfirmVisible(false);
-    };
-
-    const handleEdit = (animalId) => {
-        setEditingAnimalId(animalId);
-        setVisible(true);
-    };
-
-    const handleCloseEdit = () => {
-        setEditingAnimalId(null);
-        setVisible(false);
-    };
-
-    const getColorTagAdocao = (animal) => {
-        switch (animal.adocao) {
-            case 'Sim':
-                return 'success';
-            case 'Não':
-                return 'danger';
-            default:
-                return null;
-        }
-    };
-    const getIconSexo = (animal) => {
-        switch (animal.sexo) {
-            case 'Macho':
-                return 'pi pi-mars';
-            case 'Fêmea':
-                return 'pi pi-venus';
-            default:
-                return 'pi pi-times';
-        }
-    };
+    if (error) {
+        Swal.fire({
+            title: 'Erro !',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'fechar'
+        })
+    }
 
     return (
-        <div>
+        <div className='divMain'>
 
-            <Navbar />
+            <NavbarHeader />
+            <div className="container containerMain">
+                <Stack direction="horizontal" gap={3}>
 
-            <div className="col-10 m-auto">
+                    <div className="p-2">
+                        <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
+                            Busque pelo nome
+                        </Form.Label>
+                        <InputGroup className="mb-2 AreaInputSearch">
+                            <InputGroup.Text><i className="bi bi-search"></i></InputGroup.Text>
+                            <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} />
+                        </InputGroup>
+                    </div>
 
-                <Toast ref={toast} />
+                    <div className="p-2 ms-auto">
+                        <Button variant="success btnCadastrarAnimal" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                    </div>
 
-                <h1>Animais Cadastrados</h1>
-                <div className="flex justify-content-between">
-                    <InputText value={searchTerm} onChange={(e) => handleSearch(e.target.value)} placeholder="Busque o animal por nome" />
 
-                    <Button label="Cadastrar" severity="success" onClick={() => navigate("/animal/create")} outlined />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-content-center">
+                    <div className="floating">
+                        <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i></Button>
+                    </div>
+
+                </Stack>
+
+                <div className='areaAnimal'>
                     {filteredAnimals.length === 0 ? (
-                        <p >Nenhum animal encontrado.</p>
+                        <p>Nenhum animal encontrado.</p>
                     ) : (
-                        filteredAnimals.map(animal => (
-                            <div className="m-2 border border-gray-300 p-4" key={animal.id}>
-                                <div>
-                                    <div className="flex gap-2">
-                                        {animal.foto ? (
-                                            <img
-                                                src={`http://localhost:8080/animais/${animal.id}/foto`} // URL para exibir a foto
-                                                alt={`Imagem de ${animal.nome}`}
-                                                width={150}
-                                                className="rounded"
-                                            />
-                                        ) : (
-                                            <img src={Logo} alt="Imagem padrão" width={150} className="rounded" />
-                                        )}
-                                        <div>
-                                            <p>Nome:{animal.nome}  <i className={getIconSexo(animal)}></i></p>
-                                            <p>Tipo: {animal.tipo}</p>
-                                            <p>Data de Nascimento: {animal.data}</p>
-                                            <Tag value={`Adoção: ${animal.adocao}`} severity={getColorTagAdocao(animal)}></Tag>
-                                        </div>
-                                    </div>
-
-                                    <Divider />
-                                    <div className="flex flex-row flex-wrap">
-                                        <Button label="Deletar" severity="danger" icon="pi pi-trash" className="m-2" onClick={() => confirmDelete(animal.id)} />
-                                        <Button label="Editar" severity="info" icon="pi pi-pencil" className="m-2" onClick={() => handleEdit(animal.id)} />
-                                        <Button label="Médicos" security="help" icon="pi pi-heart" className="m-2" onClick={() => navigate(`/animal/medicals/${animal.id}`)} />
-                                    </div>
-                                </div>
-                            </div>
+                        filteredAnimals.map((animal) => (
+                            <AnimalCard animal={animal} key={animal.id} refreshAnimals={refreshAnimals} />
                         ))
                     )}
                 </div>
 
-                <ConfirmDialog
-                    visible={confirmVisible}
-                    onHide={() => setConfirmVisible(false)}
-                    message="Tem certeza que deseja deletar este animal?"
-                    header="Deletar !"
-                    icon="pi pi-exclamation-triangle"
-                    acceptLabel="Sim"
-                    rejectLabel="Não"
-                    accept={handleDelete}
-                    acceptClassName="p-button-success"
-                    rejectClassName="p-button-danger"
-                />
-
-                {
-                    editingAnimalId && (
-                        <EditAnimal
-                            animalId={editingAnimalId}
-                            onClose={handleCloseEdit}
-                            onRefresh={refreshAnimals}
-                            onShowToast={showToast}
-                            visible={visible}
-                            setVisible={setVisible}
-                        />
-                    )
-                }
-            </div >
-
+            </div>
             <Footer />
         </div>
-    );
+    )
 }
+
+export default Animal

@@ -1,130 +1,93 @@
-import { Toast } from "primereact/toast";
-import { Button } from 'primereact/button';
-import { Divider } from 'primereact/divider';
-import { BreadCrumb } from 'primereact/breadcrumb';
-import { ConfirmDialog } from 'primereact/confirmdialog';
+import { useEffect } from "react";
+import { Table, Button, Form, InputGroup } from "react-bootstrap";
 
-import { useRef, useState } from "react";
+import Footer from "../../components/footer/footer"
+import NavbarHeader from "../../components/navbarheader/navbarheader"
+import Loading from "../../components/loading/loading";
 
 import { useFetchVacinas } from "../../hooks/vacina/useFetchVacinas";
-import { useDeleteVacina } from "../../hooks/vacina/useDeleteVacina";
+import { ModalCreate } from "../../components/vacina/modal/modalCreate";
+import { ModalDelete } from "../../components/vacina/modal/modalDelete";
+import { ModalEdit } from "../../components/vacina/modal/modalEdit";
 
-import CreateVacina from "../../components/vacina/CreateVacina";
-import EditVacina from "../../components/vacina/EditVacina";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-import { Loading } from "../../components/loading/loading";
-import { Error } from "../../components/error/error";
+import './vacina.scss'
 
-import { Navbar } from "../../components/navbar/navbar";
-import { Footer } from "../../components/footer/footer";
 
-export function Vacina() {
+const Vacina = () => {
+    useEffect(() => {
+        document.title = 'Vacinas | Anshin Pet';
+    }, []);
+
     const { vacinas, loading, error, refreshVacinas } = useFetchVacinas();
-    const { deleteVacina, loading: deleting, error: deleteError } = useDeleteVacina();
-    const [visibleCreate, setVisibleCreate] = useState(false);
-    const [visibleEdit, setVisibleEdit] = useState(false);
-    const [editingVacinaId, setEditingVacinaId] = useState(null);
-    const [confirmVisible, setConfirmVisible] = useState(false);
-    const [vacinaToDelete, setVacinaToDelete] = useState(null);
+    const { openModalCreate } = ModalCreate(refreshVacinas);
+    const { openModalDelete } = ModalDelete(refreshVacinas);
+    const { openModalEdit } = ModalEdit(refreshVacinas);
 
+    if (loading) return <Loading />
 
-    const toast = useRef(null);
-
-    const showToast = (severity, summary, detail) => {
-        toast.current.show({ severity, summary, detail });
-    };
-
-    if (loading) return <Loading height="100vh" />;
-    if (error) return <Error message={error} />;
-
-    const handleDelete = async (vacinaId) => {
-        if (vacinaToDelete) {
-            const errorMessage = await deleteVacina(vacinaToDelete);
-
-            if (errorMessage) {
-                showToast('error', 'Erro', errorMessage);
-            } else {
-                setTimeout(() => {
-                    showToast('success', 'Sucesso', 'Vacina deletada!');
-                }, 100);
-                refreshVacinas();
-            }
-        }
-    };
-
-    const confirmDelete = (vacinaId) => {
-        setVacinaToDelete(vacinaId);
-        setConfirmVisible(true);
-    };
-
-    const handleEdit = (vacinaId) => {
-        setEditingVacinaId(vacinaId);
-        setVisibleEdit(true);
-    };
-
-    const items = [{ label: 'Cuiados Médicos' }, { label: 'Vacinas' }];
-    const home = { icon: 'pi pi-home', url: '/dashboard' }
+    if (error) {
+        Swal.fire({
+            title: 'Erro !',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'fechar'
+        })
+    }
 
     return (
-        <div>
-            <Navbar />
-            <BreadCrumb model={items} home={home} />
-            <div className="col-10 m-auto">
-                <Toast ref={toast} />
-                <Button label="Cadastrar" severity="success" icon="pi pi-plus" className="my-3" onClick={() => setVisibleCreate(true)} />
-                <h1 className="my-4">Lista de Vacinas</h1>
-
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
-                    {vacinas.map(vacina => (
-                        <div className="m-2 border border-gray-300 p-4 border-1" key={vacina.id}>
-                            <div>
-                                <p>Nome: {vacina.nome}</p>
-                                <p>Fabricante: {vacina.fabricante}</p>
-                                <Divider />
-                                <div className="flex flex-row flex-wrap">
-                                    <Button label="Deletar" severity="danger" icon="pi pi-trash" className="m-2" onClick={() => confirmDelete(vacina.id)} />
-                                    <Button label="Editar" severity="info" icon="pi pi-pencil" className="m-2" onClick={() => handleEdit(vacina.id)} />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+        <div className="divMain">
+            <NavbarHeader />
+            <div className="container d-flex">
+                <div className="p-2">
+                    <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
+                        Busque pelo nome
+                    </Form.Label>
+                    <InputGroup className="mb-2 AreaInputSearch">
+                        <InputGroup.Text><i className="bi bi-search"></i></InputGroup.Text>
+                        <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" />
+                    </InputGroup>
                 </div>
 
-                <ConfirmDialog
-                    visible={confirmVisible}
-                    onHide={() => setConfirmVisible(false)}
-                    message="Tem certeza que deseja deletar essa vacina?"
-                    header="Deletar !"
-                    icon="pi pi-exclamation-triangle"
-                    acceptLabel="Sim"
-                    rejectLabel="Não"
-                    accept={handleDelete}
-                    acceptClassName="p-button-success"
-                    rejectClassName="p-button-danger"
-                />
+                <div className="p-2 ms-auto">
+                    <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                </div>
 
-                {visibleCreate && (
-                    <CreateVacina
-                        onClose={() => setVisibleCreate(false)}
-                        onRefresh={refreshVacinas}
-                        onShowToast={showToast}
-                        visibleCreate={visibleCreate}
-                    />
-                )}
-
-                {
-                    editingVacinaId && (
-                        <EditVacina
-                            vacinaId={editingVacinaId}
-                            onClose={() => setVisibleEdit(false)}
-                            onRefresh={refreshVacinas}
-                            onShowToast={showToast}
-                            visibleEdit={visibleEdit}
-                        />
-                    )
-                }
             </div>
+
+            <div className="container containerMain mt-4">
+                <Table responsive>
+                    <thead>
+                        <tr className="text-center">
+                            <th>#</th>
+                            <th >Nome</th>
+                            <th>Fabricante</th>
+                            <th >Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {vacinas.length === 0 ? (
+                            <p>Nenhuma vacina encontrada</p>
+                        ) : (
+                            vacinas.map((vacina) => (
+                                <tr key={vacina.id} className="text-center trVacinas">
+                                    <td>{vacina.id}</td>
+                                    <td>{vacina.nome}</td>
+                                    <td>{vacina.fabricante}</td>
+                                    <td>
+                                        <Button variant="danger" className='m-1' onClick={() => openModalDelete(vacina.id, vacina.nome)}><i className="bi bi-trash"></i></Button>
+                                        <Button variant="success" className='m-1' onClick={() => openModalEdit(vacina)}><i className="bi bi-pencil"></i></Button></td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </Table>
+            </div>
+
             <Footer />
         </div>
-    );
+    )
 }
+
+export default Vacina

@@ -1,37 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { api } from '../../services/api';
 
-export const useEditDoenca = (doencaId) => {
-    const [doenca, setDoenca] = useState(null);
+export const useEditDoenca = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false)
 
-    useEffect(() => {
-        const fetchDoenca = async () => {
-            if (!doencaId) return;
+    const updateDoenca = async (doencaId, updatedDoenca) => {
+        setLoading(true);
+        setError(null);
+        setSuccess(false);
 
-            try {
-                const response = await api.get(`/doencas/${doencaId}`);
-                setDoenca(response.data);
-            } catch (err) {
-                setError('Erro ao buscar doenca');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchDoenca();
-    }, [doencaId]);
-
-    const updateDoenca = async (updatedDoenca) => {
         try {
             await api.put(`/doencas/${doencaId}`, updatedDoenca);
-            setDoenca(updatedDoenca);
+            setSuccess(true);
         } catch (err) {
-            setError('Erro ao atualizar doença');
-            throw err;
+            const errorMensagem = err.response?.data?.title || 'Erro ao editar doença';
+            setError(errorMensagem);
+            console.error(err);
+        } finally {
+            setLoading(false)
         }
     };
 
-    return { doenca, loading, error, updateDoenca };
+    return { updateDoenca, loading, error, success };
 };

@@ -1,0 +1,11 @@
+.spinerContainer {
+    flex: 1;
+    align-content: center;
+    place-self: center;
+
+    .spinner-border {
+        width: 5rem;
+        height: 5rem;
+        border-width: 0.3rem;
+    }
+}

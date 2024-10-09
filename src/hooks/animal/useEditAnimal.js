@@ -1,37 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { api } from '../../services/api';
 
-export const useEditAnimal = (animalId) => {
-    const [animal, setAnimal] = useState(null);
+export const useEditAnimal = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false)
 
-    useEffect(() => {
-        const fetchAnimal = async () => {
-            if (!animalId) return;
+    const updateAnimal = async (animalId, updatedAnimal) => {
+        setLoading(true);
+        setError(null);
+        setSuccess(false);
 
-            try {
-                const response = await api.get(`/animais/${animalId}`);
-                setAnimal(response.data);
-            } catch (err) {
-                setError('Erro ao buscar animal');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchAnimal();
-    }, [animalId]);
-
-    const updateAnimal = async (updatedAnimal) => {
         try {
             await api.put(`/animais/${animalId}`, updatedAnimal);
-            setAnimal(updatedAnimal); // Atualiza o estado local com os dados editados
+            setSuccess(true);
         } catch (err) {
-            setError('Erro ao atualizar animal');
-            throw err; // Para que possamos capturar o erro em outro lugar
+            const errorMensagem = err.response?.data?.title || 'Erro ao editar animal';
+            setError(errorMensagem);
+            console.error(err);
+        } finally {
+            setLoading(false)
         }
     };
 
-    return { animal, loading, error, updateAnimal };
+    return { updateAnimal, loading, error, success };
 };

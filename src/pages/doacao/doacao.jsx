@@ -1,185 +1,74 @@
-import { useRef, useState, useEffect } from "react";
-import { Toast } from "primereact/toast";
+import { useEffect } from "react";
+import { Button, Breadcrumb } from "react-bootstrap";
+import Footer from "../../components/footer/footer"
+import NavbarHeader from "../../components/navbarheader/navbarheader"
 
-import { Footer } from "../../components/footer/footer";
-import { Navbar } from "../../components/navbar/navbar";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-import { Fieldset } from 'primereact/fieldset';
-import { SelectButton } from 'primereact/selectbutton';
-import { Button } from 'primereact/button';
-import { ConfirmDialog } from 'primereact/confirmdialog';
-import { Divider } from "primereact/divider";
-
-import CreateDoacao from "../../components/doacao/CreateDoacao";
-import EditDoacao from "../../components/doacao/EditDoacao";
+import DoacaoCard from "../../components/doacao/card/doacaoCard";
 
 import { useFetchDoacoes } from "../../hooks/doacao/useFetchDoacoes";
-import { useDeleteDoacao } from "../../hooks/doacao/useDeleteDoacao";
-import { useFetchDoacaoForType } from "../../hooks/doacao/useFetchDoacaoForType";
+import { ModalCreateDinheiro } from "../../components/doacao/modal/modalCreateDinheiro";
+import { ModalCreateRacao } from "../../components/doacao/modal/modalCreateRacao";
 
-export function Doacao() {
-    const { doacoes, loading, error, refreshDoacoes } = useFetchDoacoes();
-    const { searchTerm, filteredDoacoes, handleSearch } = useFetchDoacaoForType(doacoes);
+import './doacao.scss';
+import Loading from "../../components/loading/loading";
 
-    const { deleteDoacao, loading: deleting, error: deleteError } = useDeleteDoacao();
-
-    const [confirmVisible, setConfirmVisible] = useState(false);
-    const [doacaoToDelete, setDoacaoToDelete] = useState(null);
-
-    const [confirmVisibleEdit, setConfirmVisibleEdit] = useState(false);
-    const [doacaoToEdit, setDoacaoToEdit] = useState(null);
-
-    const [visibleCreateDoacao, setVisibleCreateDoacao] = useState(false);
-
-    const [tipoFiltro, setTipoFiltro] = useState('');
-
-    const [selectedTipo, setSelectedTipo] = useState(null);
-
-
+const Doacao = () => {
     useEffect(() => {
-        handleSearch(tipoFiltro);
-    }, [tipoFiltro]);
+        document.title = 'Doações | Anshin Pet';
+    }, []);
 
+    const { doacoes, error, loading, refreshDoacoes } = useFetchDoacoes();
+    const { openModalCreateDinheiro } = ModalCreateDinheiro(refreshDoacoes);
+    const { openModalCreateRacao } = ModalCreateRacao(refreshDoacoes);
 
-    const items = [
-        { name: 'Mostrar tudo', value: '' },
-        { name: 'Dinheiro', value: 'D' },
-        { name: 'Ração', value: 'R' }
-    ]
+    if (loading) return <Loading />
 
-    const toast = useRef(null);
-
-    const showToast = (severity, summary, detail) => {
-        toast.current.show({ severity, summary, detail });
-    };
-
-    const [value, setValue] = useState(null);
-
-    const getTipo = (doacao) => {
-        switch (doacao.tipo) {
-            case 'D':
-                return 'Dinheiro';
-            case 'R':
-                return 'Ração';
-            default:
-                return 'Erro';
-        }
-    };
-
-
-    const confirmDelete = (doacaoId) => {
-        setDoacaoToDelete(doacaoId);
-        setConfirmVisible(true);
-    };
-
-    const confirmEdit = (doacaoId) => {
-        setDoacaoToEdit(doacaoId);
-        setConfirmVisibleEdit(true);
-    };
-
-    const handleDelete = async () => {
-        if (doacaoToDelete) {
-            const errorMessage = await deleteDoacao(doacaoToDelete);
-
-            if (errorMessage) {
-                showToast('error', 'Erro', errorMessage);
-            } else {
-                setTimeout(() => {
-                    showToast('success', 'Sucesso', 'Doação deletada!');
-                }, 100);
-                refreshDoacoes();
-            }
-        }
-        setDoacaoToDelete(null);
-        setConfirmVisible(false);
-    };
-
-    const handleFilterChange = (e) => {
-        const selectedValue = e.value;
-        setSelectedTipo(selectedValue);
-        setTipoFiltro(selectedValue);
-    };
+    if (error) {
+        Swal.fire({
+            title: 'Erro !',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'fechar'
+        })
+    }
 
     return (
-        <>
-            <Navbar />
-            <div className="col-10 m-auto">
-                <Button label="Cadastrar" severity="success" icon="pi pi-plus" className="my-3" onClick={() => setVisibleCreateDoacao(true)} />
+        <div className="divMain">
+            <NavbarHeader />
+            <Breadcrumb className='mt-3 px-4'>
+                <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>Doações</Breadcrumb.Item>
+            </Breadcrumb>
+            <div className="container containerMain">
+                <div className="container d-flex">
+                    <div className="p-2">
+                        <Button variant="success" onClick={() => openModalCreateDinheiro()}><i className="bi bi-plus"></i>Cadastrar Doação (Dinheiro)</Button>
+                    </div>
 
-                <Toast ref={toast} />
+                    <div className="p-2">
+                        <Button variant="success" onClick={() => openModalCreateRacao()}><i className="bi bi-plus"></i> Cadastrar Doação (Ração)</Button>
+                    </div>
 
-
-                <div className="card flex justify-content-start mb-2">
-                    <SelectButton
-                        value={selectedTipo}
-                        onChange={handleFilterChange}
-                        optionLabel="name"
-                        options={items}
-                    />
                 </div>
-                {filteredDoacoes.lenght === 0 ? (<p>Nenhuma Doação encontrada.</p>) : (
-                    filteredDoacoes.map(doacao => (
-                        <div className="card mb-2" key={doacao.id}>
-                            <Fieldset legend={getTipo(doacao)}>
-                                <p>
-                                    Quantidade: {doacao.quantidade}
-                                </p>
-                                <p>
-                                    Data: {doacao.data}
-                                </p>
-                                <p>
-                                    Descrição: {doacao.descricao}
-                                </p>
-
-                                <Divider />
-
-                                <div className="flex flex-row flex-wrap">
-                                    <Button label="Deletar" severity="danger" icon="pi pi-trash" className="m-2" onClick={() => confirmDelete(doacao.id)} />
-                                    <Button label="Editar" severity="yellow" icon="pi pi-pencil" className="m-2" onClick={() => confirmEdit(doacao.id)} />
-                                </div>
-                            </Fieldset>
-                        </div>
-                    )))}
+                <div className="container containerMain mt-4">
 
 
-                <ConfirmDialog
-                    visible={confirmVisible}
-                    onHide={() => setConfirmVisible(false)}
-                    message="Tem certeza que deseja deletar essa doação?"
-                    header="Deletar !"
-                    icon="pi pi-exclamation-triangle"
-                    acceptLabel="Sim"
-                    rejectLabel="Não"
-                    accept={handleDelete}
-                    acceptClassName="p-button-success"
-                    rejectClassName="p-button-danger"
-                />
-
-                {
-                    visibleCreateDoacao && (
-                        <CreateDoacao
-                            onClose={() => setVisibleCreateDoacao(false)}
-                            onShowToast={showToast}
-                            visibleCreate={visibleCreateDoacao}
-                            onRefresh={refreshDoacoes}
-                        />
-                    )
-                }
-
-                {
-                    doacaoToEdit && (
-                        <EditDoacao
-                            doacaoId={doacaoToEdit}
-                            onClose={() => setConfirmVisibleEdit(false)}
-                            onShowToast={showToast}
-                            visibleEdit={confirmVisibleEdit}
-                            onRefresh={refreshDoacoes}
-                        />
-                    )
-                }
-
+                    <div className='areaDoacao'>
+                        {doacoes.length === 0 ? (
+                            <p>Nenhuma doação encontrada.</p>
+                        ) : (
+                            doacoes.map((doacao) => (
+                                <DoacaoCard doacao={doacao} key={doacao.id} refreshDoacoes={refreshDoacoes} />
+                            ))
+                        )}
+                    </div>
+                </div>
             </div>
             <Footer />
-        </>
+        </div>
     )
 }
+
+export default Doacao

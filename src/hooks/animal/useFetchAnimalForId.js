@@ -8,6 +8,9 @@ export const useFetchAnimalForId = (animalId) => {
 
 
     const fetchAnimalForId = async () => {
+        setLoading(true);
+        setError(null);
+
         try {
             const response = await api.get(`/animais/${animalId}`);
             setAnimal(response.data);
