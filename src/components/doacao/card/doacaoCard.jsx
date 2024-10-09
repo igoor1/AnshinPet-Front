@@ -3,10 +3,14 @@ import { Button, Card } from 'react-bootstrap';
 import './doacaoCard.scss';
 
 import { ModalDelete } from '../modal/modalDelete';
+import { ModalEditDinheiro } from '../modal/modalEditDinheiro';
+import { ModalEditRacao } from '../modal/modalEditRacao';
 
 
 const DoacaoCard = ({ refreshDoacoes, doacao }) => {
     const { openModalDelete } = ModalDelete(refreshDoacoes);
+    const { openModalEditDinheiro } = ModalEditDinheiro(refreshDoacoes)
+    const { openModalEditRacao } = ModalEditRacao(refreshDoacoes);
 
     const getTipo = (doacao) => {
         switch (doacao.tipo) {
@@ -29,6 +33,17 @@ const DoacaoCard = ({ refreshDoacoes, doacao }) => {
                 return 'Erro'
         }
     }
+
+    const getModalEdit = (doacao) => {
+        switch (doacao.tipo) {
+            case 'D':
+                return openModalEditDinheiro(doacao)
+
+            case 'R':
+                return openModalEditRacao(doacao)
+        }
+    }
+
 
 
     return (
@@ -54,11 +69,11 @@ const DoacaoCard = ({ refreshDoacoes, doacao }) => {
                 </Card.Body>
                 <Card.Footer className="text-muted">
                     <Button variant="danger" className='m-1' onClick={() => openModalDelete(doacao.id)}><i className="bi bi-trash"></i></Button>
-                    <Button variant="success" className='m-1'><i className="bi bi-pencil"></i></Button>
+                    <Button variant="success" className='m-1' onClick={() => getModalEdit(doacao)}><i className="bi bi-pencil"></i></Button>
                 </Card.Footer>
             </Card>
         </div>
     )
-}
 
+}
 export default DoacaoCard
