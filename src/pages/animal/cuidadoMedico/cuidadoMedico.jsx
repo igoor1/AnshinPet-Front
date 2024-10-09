@@ -13,6 +13,9 @@ import ImgDefaultAnimal from "../../../assets/imgDefault.png";
 
 import { useFetchAnimalForId } from '../../../hooks/animal/useFetchAnimalForId';
 import { useFetchMedicals } from '../../../hooks/animal/medicals/useFetchMedicals';
+import { ModalCreateDoenca } from '../../../components/animal/cuidadosMedicos/modal/modalCreateDoenca';
+
+
 import Loading from '../../../components/loading/loading';
 
 const CuidadoMedico = () => {
@@ -25,6 +28,8 @@ const CuidadoMedico = () => {
 
     const { animal, error, loading } = useFetchAnimalForId(animalId)
     const { doencas, vacinas, error: errorCuidados, loading: loadingCuidados, refreshMedicals } = useFetchMedicals(animalId);
+    const { openModalCreateDoenca } = ModalCreateDoenca(animalId, refreshMedicals)
+
 
     if (loading || loadingCuidados) return <Loading />
 
@@ -116,7 +121,7 @@ const CuidadoMedico = () => {
                 </Card>
 
                 <div className="container containerButtonCuidadosMedicos">
-                    <Button variant="success"><i className="bi bi-plus"></i>Cadastrar Doença</Button>
+                    <Button variant="success" onClick={() => openModalCreateDoenca()}><i className="bi bi-plus"></i>Cadastrar Doença</Button>
 
                     <Button variant="success" ><i className="bi bi-plus"></i>Cadastrar Vacina</Button>
                 </div>
@@ -139,7 +144,9 @@ const CuidadoMedico = () => {
                                     </thead>
                                     <tbody>
                                         {doencas.length === 0 ? (
-                                            <p>Nenhuma doença encontrada</p>
+                                            <tr>
+                                                <td colSpan="5" style={{ textAlign: 'center', margin: '20px' }}>Nenhuma doença encontrada</td>
+                                            </tr>
                                         ) : (
                                             doencas.map((doenca) => (
                                                 <tr key={doenca.id} className="text-center trCuidadosMedicos">
@@ -175,7 +182,9 @@ const CuidadoMedico = () => {
                                     </thead>
                                     <tbody>
                                         {vacinas.length === 0 ? (
-                                            <p>Nenhuma vacina encontrada</p>
+                                            <tr>
+                                                <td colSpan="5" style={{ textAlign: 'center', margin: '20px' }}>Nenhuma vacina encontrada</td>
+                                            </tr>
                                         ) : (
                                             vacinas.map((vacina) => (
                                                 <tr key={vacina.id} className="text-center trCuidadosMedicos">
