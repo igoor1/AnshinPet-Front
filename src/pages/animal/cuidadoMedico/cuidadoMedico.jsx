@@ -13,8 +13,11 @@ import ImgDefaultAnimal from "../../../assets/imgDefault.png";
 
 import { useFetchAnimalForId } from '../../../hooks/animal/useFetchAnimalForId';
 import { useFetchMedicals } from '../../../hooks/animal/medicals/useFetchMedicals';
+
 import { ModalCreateDoenca } from '../../../components/animal/cuidadosMedicos/modal/modalCreateDoenca';
 import { ModalDeleteDoenca } from '../../../components/animal/cuidadosMedicos/modal/modalDeleteDoenca';
+
+import { ModalCreateVacina } from '../../../components/animal/cuidadosMedicos/modal/modalCreateVacina';
 
 import Loading from '../../../components/loading/loading';
 
@@ -30,6 +33,8 @@ const CuidadoMedico = () => {
     const { doencas, vacinas, error: errorCuidados, loading: loadingCuidados, refreshMedicals } = useFetchMedicals(animalId);
     const { openModalCreateDoenca } = ModalCreateDoenca(animalId, refreshMedicals)
     const { openModalDeleteDoenca } = ModalDeleteDoenca(refreshMedicals);
+
+    const { openModalCreateVacina } = ModalCreateVacina(animalId, refreshMedicals)
 
 
     if (loading || loadingCuidados) return <Loading />
@@ -124,7 +129,7 @@ const CuidadoMedico = () => {
                 <div className="container containerButtonCuidadosMedicos">
                     <Button variant="success" onClick={() => openModalCreateDoenca()}><i className="bi bi-plus"></i>Cadastrar Doença</Button>
 
-                    <Button variant="success" ><i className="bi bi-plus"></i>Cadastrar Vacina</Button>
+                    <Button variant="success" onClick={() => openModalCreateVacina()}><i className="bi bi-plus"></i>Cadastrar Vacina</Button>
                 </div>
 
                 <div className="container mt-3">
