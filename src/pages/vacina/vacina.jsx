@@ -3,13 +3,15 @@ import { Table, Button, Form, InputGroup } from "react-bootstrap";
 
 import Footer from "../../components/footer/footer"
 import NavbarHeader from "../../components/navbarheader/navbarheader"
+import Loading from "../../components/loading/loading";
 
 import { useFetchVacinas } from "../../hooks/vacina/useFetchVacinas";
+import { ModalCreate } from "../../components/vacina/modal/modalCreate";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 import './vacina.scss'
-import Loading from "../../components/loading/loading";
+
 
 const Vacina = () => {
     useEffect(() => {
@@ -17,6 +19,7 @@ const Vacina = () => {
     }, []);
 
     const { vacinas, loading, error, refreshVacinas } = useFetchVacinas();
+    const { openModalCreate } = ModalCreate(refreshVacinas);
 
     if (loading) return <Loading />
 
@@ -44,7 +47,7 @@ const Vacina = () => {
                 </div>
 
                 <div className="p-2 ms-auto">
-                    <Button variant="success"><i className="bi bi-plus"></i> Cadastrar</Button>
+                    <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                 </div>
 
             </div>
