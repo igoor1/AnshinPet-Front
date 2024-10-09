@@ -89,6 +89,17 @@ const CuidadoMedico = () => {
         }
     }
 
+    const getStatus = (doenca) => {
+        switch (doenca.status) {
+            case 'C':
+                return 'Curado'
+            case 'T':
+                return 'Em Tratamento'
+            default:
+                return 'Erro'
+        }
+    }
+
     return (
 
         <div className="divMain">
@@ -161,7 +172,7 @@ const CuidadoMedico = () => {
                                                     <td>{doenca.id}</td>
                                                     <td>{doenca.doenca.nome}</td>
                                                     <td>
-                                                        {doenca.status}
+                                                        {getStatus(doenca)}
                                                     </td>
                                                     <td>{doenca.descricao}</td>
                                                     <td>
