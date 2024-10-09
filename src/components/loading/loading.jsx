@@ -1,10 +1,19 @@
-import { ProgressSpinner } from 'primereact/progressspinner';
+import { Spinner, Container } from "react-bootstrap";
+import NavbarHeader from "../navbarheader/navbarheader";
+import Footer from "../footer/footer";
+import './loading.scss'
 
-export function Loading(props) {
+const Loading = () => {
     return (
-        <div className='flex justify-content-center align-items-center' style={{ height: props.height, flexDirection: 'column', gap: '1rem' }}>
-            <ProgressSpinner />
-            <p className='text-center font-bold'>Carregando</p>
+        <div className="divMain">
+
+            <NavbarHeader />
+            <div className="spinerContainer">
+                <Spinner animation="border" variant="primary" />
+            </div>
+            <Footer />
         </div>
     )
 }
+
+export default Loading;

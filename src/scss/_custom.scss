@@ -1,0 +1,27 @@
+$primary: #5e2cd3;
+$secondary: #ffd951;
+$success: #22C55E;
+
+$font-family-base: Arial, Helvetica, sans-serif;
+
+:root {
+    --primaryColor: #5e2cd3
+}
+
+.btn-success {
+    color: white !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.divMain {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.containerMain {
+    flex: 1;
+}

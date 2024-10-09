@@ -12,9 +12,8 @@ export const useCreateAnimal = () => {
         setSuccess(false);
 
         try {
-            const response = await api.post('/animais', newAnimal);
+            await api.post('/animais', newAnimal);
             setSuccess(true);
-            return response.data.id;
         } catch (err) {
             setError('Erro ao cadastrar animal');
             console.error(err);

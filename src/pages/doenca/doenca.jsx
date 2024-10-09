@@ -1,134 +1,105 @@
-import { Toast } from "primereact/toast";
-import { Button } from 'primereact/button';
-import { Divider } from 'primereact/divider';
-import { BreadCrumb } from 'primereact/breadcrumb';
-import { ConfirmDialog } from 'primereact/confirmdialog';
+import { useEffect } from "react";
+import { Table, Button, Form, InputGroup } from "react-bootstrap";
 
-import { useRef, useState } from "react";
+import Footer from "../../components/footer/footer";
+import NavbarHeader from "../../components/navbarheader/navbarheader";
+import Loading from "../../components/loading/loading";
 
 import { useFetchDoencas } from "../../hooks/doenca/useFetchDoencas";
-import { useDeleteDoenca } from "../../hooks/doenca/useDeleteDoenca";
+import { ModalCreate } from "../../components/doenca/modal/modalCreate";
+import { ModalDelete } from "../../components/doenca/modal/modalDelete";
+import { ModalEdit } from "../../components/doenca/modal/modalEdit";
 
-import CreateDoenca from "../../components/doenca/CreateDoenca";
-import EditDoenca from "../../components/doenca/EditDoenca";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
+import "./doenca.scss"
 
-import { Loading } from "../../components/loading/loading";
-import { Error } from "../../components/error/error";
+const Doenca = () => {
+    useEffect(() => {
+        document.title = 'Doenças | Anshin Pet';
+    }, []);
 
-import { Navbar } from "../../components/navbar/navbar";
-import { Footer } from "../../components/footer/footer";
-
-export function Doenca() {
     const { doencas, loading, error, refreshDoencas } = useFetchDoencas();
-    const { deleteDoenca, loading: deleting, error: deleteError } = useDeleteDoenca();
-    const [visibleCreate, setVisibleCreate] = useState(false);
-    const [editingDoencaId, setEditingDoencaId] = useState(null);
-    const [confirmVisible, setConfirmVisible] = useState(false);
-    const [doencaToDelete, setDoencaToDelete] = useState(null);
+    const { openModalCreate } = ModalCreate(refreshDoencas);
+    const { openModalDelete } = ModalDelete(refreshDoencas);
+    const { openModalEdit } = ModalEdit(refreshDoencas);
 
-    const [visibleEdit, setVisibleEdit] = useState(false);
+    if (loading) return <Loading />
 
+    if (error) {
+        Swal.fire({
+            title: 'Erro !',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'fechar'
+        })
+    }
 
-    const toast = useRef(null);
-
-    const showToast = (severity, summary, detail) => {
-        toast.current.show({ severity, summary, detail });
-    };
-
-    if (loading) return <Loading height="100vh" />;
-    if (error) return <Error message={error} route="/" />;
-
-
-    const handleDelete = async () => {
-        if (doencaToDelete) {
-            const errorMessage = await deleteDoenca(doencaToDelete);
-
-            if (errorMessage) {
-                showToast('error', 'Erro', errorMessage);
-            } else {
-                setTimeout(() => {
-                    showToast('success', 'Sucesso', 'Doença deletada!');
-                }, 100);
-                refreshDoencas();
-            }
+    const getGravidade = (doenca) => {
+        switch (doenca.gravidade) {
+            case 'B':
+                return 'Baixa';
+            case 'M':
+                return 'Média';
+            case 'A':
+                return 'Alta';
+            default:
+                return 'Erro'
         }
-    };
-
-    const confirmDelete = (doencaId) => {
-        setDoencaToDelete(doencaId);
-        setConfirmVisible(true);
-    };
-
-
-    const handleEdit = (doencaId) => {
-        setEditingDoencaId(doencaId);
-        setVisibleEdit(true);
-    };
-
-    const items = [{ label: 'Cuiados Médicos' }, { label: 'Doenças' }];
-    const home = { icon: 'pi pi-home', url: '/dashboard' }
+    }
 
     return (
-        <div>
-            <Navbar />
-            <BreadCrumb model={items} home={home} />
-            <div className="col-10 m-auto">
-                <Toast ref={toast} />
-                <Button label="Cadastrar" severity="success" icon="pi pi-plus" className="my-3" onClick={() => setVisibleCreate(true)} />
-                <h1 className="my-4">Doenças Cadastradas</h1>
-
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
-                    {doencas.map(doenca => (
-                        <div className="m-2 border border-gray-300 p-4 border-1" key={doenca.id}>
-                            <div>
-                                <p>Nome: {doenca.nome}</p>
-                                <p>Gravidade: {doenca.gravidade}</p>
-
-                                <Divider />
-                                <div className="flex flex-row flex-wrap">
-                                    <Button label="Deletar" severity="danger" icon="pi pi-trash" className="m-2" onClick={() => confirmDelete(doenca.id)} />
-                                    <Button label="Editar" severity="info" icon="pi pi-pencil" className="m-2" onClick={() => handleEdit(doenca.id)} />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+        <div className="divMain">
+            <NavbarHeader />
+            <div className="container d-flex">
+                <div className="p-2">
+                    <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
+                        Busque pelo nome
+                    </Form.Label>
+                    <InputGroup className="mb-2 AreaInputSearch">
+                        <InputGroup.Text><i className="bi bi-search"></i></InputGroup.Text>
+                        <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" />
+                    </InputGroup>
                 </div>
 
-                <ConfirmDialog
-                    visible={confirmVisible}
-                    onHide={() => setConfirmVisible(false)}
-                    message="Tem certeza que deseja deletar essa doença?"
-                    header="Deletar !"
-                    icon="pi pi-exclamation-triangle"
-                    acceptLabel="Sim"
-                    rejectLabel="Não"
-                    accept={handleDelete}
-                    acceptClassName="p-button-success"
-                    rejectClassName="p-button-danger"
-                />
-
-                {visibleCreate && (
-                    <CreateDoenca
-                        onClose={() => setVisibleCreate(false)}
-                        onRefresh={refreshDoencas}
-                        onShowToast={showToast}
-                        visibleCreate={visibleCreate}
-                    />
-                )}
-
-                {editingDoencaId && (
-                    <EditDoenca
-                        doencaId={editingDoencaId}
-                        onClose={() => setVisibleEdit(false)}
-                        onRefresh={refreshDoencas}
-                        onShowToast={showToast}
-                        visibleEdit={visibleEdit}
-                    />
-                )}
+                <div className="p-2 ms-auto">
+                    <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                </div>
 
             </div>
+            <div className="container containerMain mt-4">
+                <Table responsive>
+                    <thead>
+                        <tr className="text-center">
+                            <th>#</th>
+                            <th >Nome</th>
+                            <th>Gravidade</th>
+                            <th >Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {doencas.length === 0 ? (
+                            <p>Nenhuma doença encontrada</p>
+                        ) : (
+                            doencas.map((doenca) => (
+                                <tr key={doenca.id} className="text-center trDoencas">
+                                    <td>{doenca.id}</td>
+                                    <td>{doenca.nome}</td>
+                                    <td>
+                                        {getGravidade(doenca)}
+                                    </td>
+                                    <td>
+                                        <Button variant="danger" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
+                                        <Button variant="success" className='m-1' onClick={() => openModalEdit(doenca)}><i className="bi bi-pencil"></i></Button></td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </Table>
+            </div>
             <Footer />
-        </div>
-    );
+        </div >
+    )
 }
+
+export default Doenca;
