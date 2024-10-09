@@ -14,7 +14,7 @@ import ImgDefaultAnimal from "../../../assets/imgDefault.png";
 import { useFetchAnimalForId } from '../../../hooks/animal/useFetchAnimalForId';
 import { useFetchMedicals } from '../../../hooks/animal/medicals/useFetchMedicals';
 import { ModalCreateDoenca } from '../../../components/animal/cuidadosMedicos/modal/modalCreateDoenca';
-
+import { ModalDeleteDoenca } from '../../../components/animal/cuidadosMedicos/modal/modalDeleteDoenca';
 
 import Loading from '../../../components/loading/loading';
 
@@ -29,6 +29,7 @@ const CuidadoMedico = () => {
     const { animal, error, loading } = useFetchAnimalForId(animalId)
     const { doencas, vacinas, error: errorCuidados, loading: loadingCuidados, refreshMedicals } = useFetchMedicals(animalId);
     const { openModalCreateDoenca } = ModalCreateDoenca(animalId, refreshMedicals)
+    const { openModalDeleteDoenca } = ModalDeleteDoenca(refreshMedicals);
 
 
     if (loading || loadingCuidados) return <Loading />
@@ -157,7 +158,7 @@ const CuidadoMedico = () => {
                                                     </td>
                                                     <td>{doenca.descricao}</td>
                                                     <td>
-                                                        <Button variant="danger" className='m-1'><i className="bi bi-trash"></i></Button>
+                                                        <Button variant="danger" className='m-1' onClick={() => openModalDeleteDoenca(doenca.doenca.nome, doenca.id)}><i className="bi bi-trash"></i></Button>
                                                     </td>
                                                 </tr>
                                             ))
