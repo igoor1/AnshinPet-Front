@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Button, Breadcrumb } from "react-bootstrap";
 import Footer from "../../components/footer/footer"
 import NavbarHeader from "../../components/navbarheader/navbarheader"
 
@@ -8,6 +8,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import DoacaoCard from "../../components/doacao/card/doacaoCard";
 
 import { useFetchDoacoes } from "../../hooks/doacao/useFetchDoacoes";
+import { ModalCreateDinheiro } from "../../components/doacao/modal/modalCreateDinheiro";
+import { ModalCreateRacao } from "../../components/doacao/modal/modalCreateRacao";
 
 import './doacao.scss';
 import Loading from "../../components/loading/loading";
@@ -18,6 +20,8 @@ const Doacao = () => {
     }, []);
 
     const { doacoes, error, loading, refreshDoacoes } = useFetchDoacoes();
+    const { openModalCreateDinheiro } = ModalCreateDinheiro(refreshDoacoes);
+    const { openModalCreateRacao } = ModalCreateRacao(refreshDoacoes);
 
     if (loading) return <Loading />
 
@@ -33,20 +37,18 @@ const Doacao = () => {
     return (
         <div className="divMain">
             <NavbarHeader />
+            <Breadcrumb className='mt-3 px-4'>
+                <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>Doações</Breadcrumb.Item>
+            </Breadcrumb>
             <div className="container containerMain">
                 <div className="container d-flex">
                     <div className="p-2">
-                        <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-                            Busque pelo nome
-                        </Form.Label>
-                        <InputGroup className="mb-2 AreaInputSearch">
-                            <InputGroup.Text><i className="bi bi-search"></i></InputGroup.Text>
-                            <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" />
-                        </InputGroup>
+                        <Button variant="success" onClick={() => openModalCreateDinheiro()}><i className="bi bi-plus"></i>Cadastrar Doação (Dinheiro)</Button>
                     </div>
 
-                    <div className="p-2 ms-auto">
-                        <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                    <div className="p-2">
+                        <Button variant="success" onClick={() => openModalCreateRacao()}><i className="bi bi-plus"></i> Cadastrar Doação (Ração)</Button>
                     </div>
 
                 </div>
