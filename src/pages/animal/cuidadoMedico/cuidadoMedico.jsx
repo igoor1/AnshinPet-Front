@@ -18,6 +18,7 @@ import { ModalCreateDoenca } from '../../../components/animal/cuidadosMedicos/mo
 import { ModalDeleteDoenca } from '../../../components/animal/cuidadosMedicos/modal/modalDeleteDoenca';
 
 import { ModalCreateVacina } from '../../../components/animal/cuidadosMedicos/modal/modalCreateVacina';
+import { ModalDeleteVacina } from '../../../components/animal/cuidadosMedicos/modalDelete';
 
 import Loading from '../../../components/loading/loading';
 
@@ -35,6 +36,7 @@ const CuidadoMedico = () => {
     const { openModalDeleteDoenca } = ModalDeleteDoenca(refreshMedicals);
 
     const { openModalCreateVacina } = ModalCreateVacina(animalId, refreshMedicals)
+    const { openModalDeleteVacina } = ModalDeleteVacina(refreshMedicals);
 
 
     if (loading || loadingCuidados) return <Loading />
@@ -201,7 +203,7 @@ const CuidadoMedico = () => {
                                                     </td>
                                                     <td>{vacina.dataAplicacao}</td>
                                                     <td>
-                                                        <Button variant="danger" className='m-1'><i className="bi bi-trash"></i></Button>
+                                                        <Button variant="danger" className='m-1' onClick={() => openModalDeleteVacina(vacina.vacina.nome, vacina.id)}><i className="bi bi-trash"></i></Button>
                                                     </td>
                                                 </tr>
                                             ))
