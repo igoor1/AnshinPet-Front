@@ -7,6 +7,7 @@ import Loading from "../../components/loading/loading";
 
 import { useFetchVacinas } from "../../hooks/vacina/useFetchVacinas";
 import { ModalCreate } from "../../components/vacina/modal/modalCreate";
+import { ModalDelete } from "../../components/vacina/modal/modalDelete";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
@@ -20,6 +21,7 @@ const Vacina = () => {
 
     const { vacinas, loading, error, refreshVacinas } = useFetchVacinas();
     const { openModalCreate } = ModalCreate(refreshVacinas);
+    const { openModalDelete } = ModalDelete(refreshVacinas);
 
     if (loading) return <Loading />
 
@@ -72,7 +74,7 @@ const Vacina = () => {
                                     <td>{vacina.nome}</td>
                                     <td>{vacina.fabricante}</td>
                                     <td>
-                                        <Button variant="danger" className='m-1' ><i className="bi bi-trash"></i></Button>
+                                        <Button variant="danger" className='m-1' onClick={() => openModalDelete(vacina.id, vacina.nome)}><i className="bi bi-trash"></i></Button>
                                         <Button variant="success" className='m-1'><i className="bi bi-pencil"></i></Button></td>
                                 </tr>
                             ))
