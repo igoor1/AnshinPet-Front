@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useEditAnimal } from "../../../hooks/animal/useEditAnimal";
 
 export const ModalEdit = (refreshAnimals) => {
     const { updateAnimal, loading, error, success } = useEditAnimal();
-
-    const [animalData, setAnimalData] = useState({
-        nome: '',
-        data: '',
-        cor: '',
-        raca: '',
-        sexo: '',
-        porte: '',
-        castrado: '',
-        adocao: '',
-        tipo: '',
-    });
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -195,13 +183,6 @@ export const ModalEdit = (refreshAnimals) => {
             });
         }
     }, [success, error])
-
-    const handleInputChange = (key, value) => {
-        setAnimalData((prevData) => ({
-            ...prevData,
-            [key]: value,
-        }));
-    };
 
     return { openModalEdit }
 }

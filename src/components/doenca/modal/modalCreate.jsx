@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useCreateDoenca } from '../../../hooks/doenca/useCreateDoenca'
 
 export const ModalCreate = (refreshDoencas) => {
     const { createDoenca, loading, error, success } = useCreateDoenca();
-
-    const [doencaData, setDoencaData] = useState({
-        nome: '',
-        gravidade: '',
-    });
 
     const gravidadeList = [
         {
@@ -91,13 +86,6 @@ export const ModalCreate = (refreshDoencas) => {
             });
         }
     }, [success, error])
-
-    const handleInputChange = (key, value) => {
-        setDoençaData((prevData) => ({
-            ...prevData,
-            [key]: value,
-        }));
-    };
 
     return { openModalCreate }
 }

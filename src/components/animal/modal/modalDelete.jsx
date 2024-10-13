@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useDeleteAnimal } from "../../../hooks/animal/useDeleteAnimal";
 
