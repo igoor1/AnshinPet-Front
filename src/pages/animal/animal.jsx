@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Stack, Form, InputGroup, Button } from 'react-bootstrap';
+import { Stack, Form, InputGroup, Button, Breadcrumb } from 'react-bootstrap';
 import './animal.scss';
 
 import Footer from "../../components/footer/footer";
@@ -37,6 +37,10 @@ const Animal = () => {
         <div className='divMain'>
 
             <NavbarHeader />
+            <Breadcrumb className='mt-3 px-4'>
+                <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>Animais</Breadcrumb.Item>
+            </Breadcrumb>
             <div className="container containerMain">
                 <Stack direction="horizontal" gap={3}>
 

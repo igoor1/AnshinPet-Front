@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Table, Button, Form, InputGroup } from "react-bootstrap";
+import { Table, Button, Form, InputGroup, Breadcrumb } from "react-bootstrap";
 
 import Footer from "../../components/footer/footer"
 import NavbarHeader from "../../components/navbarheader/navbarheader"
@@ -39,6 +39,11 @@ const Vacina = () => {
     return (
         <div className="divMain">
             <NavbarHeader />
+            <Breadcrumb className='mt-3 px-4'>
+                <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>Cuidados Médicos</Breadcrumb.Item>
+                <Breadcrumb.Item active>Vacinas</Breadcrumb.Item>
+            </Breadcrumb>
             <div className="container d-flex">
                 <div className="p-2">
                     <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
