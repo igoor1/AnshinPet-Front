@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, Image, Badge, Card } from 'react-bootstrap';
 
-import ImgDefaultAnimal from "../../../assets/imgDefault.png";
-
 import { ModalDelete } from '../modal/modalDelete';
 import { ModalEdit } from '../modal/modalEdit';
 
@@ -68,7 +66,7 @@ const AnimalCard = ({ animal, refreshAnimals }) => {
                 <Card.Header>
                     <div className='headerAnimal'>
                         <div>
-                            <Image src={ImgDefaultAnimal} alt="Imagem padrão (animal)" className='imagemAnimal' />
+                            <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal' />
                             <p style={{ margin: 'auto' }}> {animal.nome} <span className='tipoAnimal'>({getTipo(animal)})</span></p>
                             <Badge bg={getColorAdocao(animal)}>Adoção: {getAdocao(animal)}</Badge>
                         </div>
