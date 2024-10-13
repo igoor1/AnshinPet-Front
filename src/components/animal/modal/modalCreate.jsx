@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useCreateAnimal } from "../../../hooks/animal/useCreateAnimal";
 
 export const ModalCreate = (refreshAnimals) => {
     const { createAnimal, loading, error, success } = useCreateAnimal();
-
-    const [animalData, setAnimalData] = useState({
-        nome: '',
-        data: '',
-        cor: '',
-        raca: '',
-        sexo: '',
-        porte: '',
-        castrado: '',
-        adocao: '',
-        tipo: '',
-    });
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -131,6 +119,8 @@ export const ModalCreate = (refreshAnimals) => {
                 <option disabled selected>Para adoção?</option>
                 ${adocaoList.map(a => `<option value="${a.value}">${a.label}</option>`).join('')}
             </select>
+             <input id="foto" type="file" placeholder="Foto" class="form-control mb-3" accept="image/*"/>
+            
         `,
             focusConfirm: false,
             confirmButtonText: 'Cadastrar',
@@ -148,12 +138,13 @@ export const ModalCreate = (refreshAnimals) => {
                 const porte = document.getElementById('porte').value;
                 const castrado = document.getElementById('castrado').value;
                 const adocao = document.getElementById('adocao').value;
+                const foto = document.getElementById('foto').files[0];
 
                 if (!nome || !raca || !data || !cor || !sexo || !tipo || !porte || !castrado || !adocao) {
                     Swal.showValidationMessage('Por favor, preencha todos os campos');
                 }
 
-                return { nome, raca, data, cor, sexo, tipo, porte, castrado, adocao };
+                return { nome, raca, data, cor, sexo, tipo, porte, castrado, adocao, foto };
             }
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -182,13 +173,6 @@ export const ModalCreate = (refreshAnimals) => {
             });
         }
     }, [success, error])
-
-    const handleInputChange = (key, value) => {
-        setAnimalData((prevData) => ({
-            ...prevData,
-            [key]: value,
-        }));
-    };
 
     return { openModalCreate }
 }
