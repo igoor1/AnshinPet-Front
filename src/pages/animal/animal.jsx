@@ -55,7 +55,7 @@ const Animal = () => {
                     </div>
 
                     <div className="p-2 ms-auto">
-                        <Button variant="success btnCadastrarAnimal" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                        <Button variant="success" className='btnCadastrar' onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                     </div>
 
 
