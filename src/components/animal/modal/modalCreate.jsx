@@ -95,31 +95,50 @@ export const ModalCreate = (refreshAnimals) => {
         Swal.fire({
             title: 'Cadastro de Animal',
             html: `
+            <label for="tipo" class="form-label labelInput">Tipo: </label>
             <select id="tipo" class="form-select mb-3">
-                <option disabled selected>Tipo</option>
+                <option selected disabled value="">Selecione o tipo</option>
                 ${tipoList.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
             </select>
-            <input id="nome" placeholder="Nome" class="form-control mb-3" />
-            <input id="raca" placeholder="Raça" class="form-control mb-3" />
-                <input id="data" type="date" class="form-control mb-3" max="${todayDate}"/>
-            <input id="cor" placeholder="Cor" class="form-control mb-3" />
+
+            <label for="nome" class="form-label labelInput">Nome: </label>
+            <input id="nome" placeholder="Digite o nome" class="form-control mb-3" />
+
+            <label for="raca" class="form-label labelInput">Raça: </label>
+            <input id="raca" placeholder="Digite a raça" class="form-control mb-3" />
+
+            <label for="data" class="form-label labelInput">Data de Nascimento: </label>
+            <input id="data" type="date" class="form-control mb-3" max="${todayDate}"/>
+
+            <label for="cor" class="form-label labelInput">Cor: </label>
+            <input id="cor" placeholder="Digite a cor" class="form-control mb-3" />
+
+            <label for="sexo" class="form-label labelInput">Sexo: </label>
             <select id="sexo" class="form-select mb-3">
-                <option disabled selected>Sexo</option>
+                <option selected disabled value="">Selecione o sexo</option>
                 ${sexoList.map(s => `<option value="${s.value}">${s.label}</option>`).join('')}
             </select>
+
+            <label for="porte" class="form-label labelInput">Porte: </label>
             <select id="porte" class="form-select mb-3">
-                <option disabled selected>Porte</option>
+                <option selected disabled value="">Selecione o porte</option>
                 ${porteList.map(p => `<option value="${p.value}">${p.label}</option>`).join('')}
             </select>
+
+            <label for="castrado" class="form-label labelInput">Castrado: </label>
             <select id="castrado" class="form-select mb-3">
-                <option disabled selected>Castrado?</option>
+                <option selected disabled value="">É castrado?</option>
                 ${castradoList.map(c => `<option value="${c.value}">${c.label}</option>`).join('')}
             </select>
+
+            <label for="adocao" class="form-label labelInput">Adoção: </label>
             <select id="adocao" class="form-select mb-3">
-                <option disabled selected>Para adoção?</option>
+                <option selected disabled value="">É para adoção?</option>
                 ${adocaoList.map(a => `<option value="${a.value}">${a.label}</option>`).join('')}
             </select>
-             <input id="foto" type="file" placeholder="Foto" class="form-control mb-3" accept="image/*"/>
+
+            <label for="foto" class="form-label labelInput">Foto (opcional): </label>
+            <input id="foto" type="file" placeholder="Foto" class="form-control mb-3" accept="image/*"/>
             
         `,
             focusConfirm: false,
