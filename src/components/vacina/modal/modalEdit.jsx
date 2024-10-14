@@ -23,8 +23,11 @@ export const ModalEdit = (refreshVacinas) => {
         Swal.fire({
             title: 'Edição de Doença',
             html: `
-            <input id="nome" placeholder="Nome" class="form-control mb-3" value="${vacina.nome}"/>
-            <input id="fabricante" placeholder="Fabricante" class="form-control mb-3" value="${vacina.fabricante}" />
+            <label for="nome" class="form-label labelInput">Nome: </label>
+            <input id="nome" placeholder="Digite o nome" class="form-control mb-3" value="${vacina.nome}"/>
+
+            <label for="fabricante" class="form-label labelInput">Fabricante: </label>
+            <input id="fabricante" placeholder="Digite o fabricante" class="form-control mb-3" value="${vacina.fabricante}" />
         `,
             focusConfirm: false,
             confirmButtonText: 'Editar',
