@@ -33,9 +33,14 @@ export const ModalEditRacao = (refreshDoacoes) => {
         Swal.fire({
             title: 'Edição de Doação (Ração)',
             html: `
-            <input id="quantidade" min="1" type="number" placeholder="quantidade" class="form-control mb-3" value="${doacao.quantidade}" />
+            <label for="quantidade" class="form-label labelInput">Quantidade: </label>
+            <input id="quantidade" min="1" type="number" placeholder="Digite a quantidade" class="form-control mb-3" value="${doacao.quantidade}" />
+
+            <label for="data" class="form-label labelInput">Data de doação: </label>
             <input id="data" type="date" class="form-control mb-3" max="${todayDate}" value="${doacao.data}" />
-            <input id="descricao" placeholder="Descrição" class="form-control mb-3" value="${doacao.descricao}" />
+
+            <label for="descricao" class="form-label labelInput">Descrição: </label>
+            <input id="descricao" placeholder="Digite a descrição" class="form-control mb-3" value="${doacao.descricao}" />
         `,
             focusConfirm: false,
             confirmButtonText: 'Editar',

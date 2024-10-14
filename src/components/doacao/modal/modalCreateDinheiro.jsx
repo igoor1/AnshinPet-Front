@@ -32,9 +32,14 @@ export const ModalCreateDinheiro = (refreshDoacoes) => {
         Swal.fire({
             title: 'Cadastro de Doação (Dinheiro)',
             html: `
-            <input id="valor" placeholder="valor" class="form-control mb-3" />
+            <label for="valor" class="form-label labelInput">Valor: </label>
+            <input id="valor" placeholder="Digite o valor" class="form-control mb-3" />
+
+            <label for="data" class="form-label labelInput">Data de doação: </label>
             <input id="data" type="date" class="form-control mb-3" max="${todayDate}"/>
-            <input id="descricao" placeholder="Decrição" class="form-control mb-3" />
+
+            <label for="descricao" class="form-label labelInput">Descrição: </label>
+            <input id="descricao" placeholder="Digite a descrição" class="form-control mb-3" />
         `,
             focusConfirm: false,
             confirmButtonText: 'Cadastrar',
