@@ -154,7 +154,7 @@ export const ModalEdit = (refreshAnimals) => {
             focusConfirm: false,
             confirmButtonText: 'Editar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
+            cancelButtonText: 'Cancelar',
             cancelButtonColor: "#dc3545",
 
             preConfirm: () => {

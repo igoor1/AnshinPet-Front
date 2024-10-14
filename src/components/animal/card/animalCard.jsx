@@ -66,7 +66,7 @@ const AnimalCard = ({ animal, refreshAnimals }) => {
                 <Card.Header>
                     <div className='headerAnimal'>
                         <div>
-                            <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal' />
+                            <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal rounded' />
                             <p style={{ margin: 'auto' }}> {animal.nome} <span className='tipoAnimal'>({getTipo(animal)})</span></p>
                             <Badge bg={getColorAdocao(animal)}>Adoção: {getAdocao(animal)}</Badge>
                         </div>
