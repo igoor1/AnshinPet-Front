@@ -38,13 +38,18 @@ export const ModalCreateDoenca = (animalId, refreshMedicals) => {
         Swal.fire({
             title: `Cadastro de Doenças`,
             html: `
+            <label for="doenca" class="form-label labelInput">Doença: </label>
             <select id="doenca" class="form-select mb-3">
-                <option disabled selected>Doenças</option>
+                <option selected disabled value="">Escolha uma doença</option>
                 ${doencas.map(d => `<option value="${d.id}">${d.nome}</option>`).join('')}
             </select>
-            <input id="descricao" placeholder="Descrição" class="form-control mb-3" />
+
+            <label for="descricao" class="form-label labelInput">Descrição: </label>
+            <input id="descricao" placeholder="Digite a descrição" class="form-control mb-3" />
+
+            <label for="status" class="form-label labelInput">Status: </label>
             <select id="status" class="form-select mb-3">
-                <option disabled selected>Status</option>
+                <option selected disabled value="">Escolha um status</option>
                 ${statusList.map(s => `<option value="${s.value}">${s.label}</option>`).join('')}
             </select>
         `,
