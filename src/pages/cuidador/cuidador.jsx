@@ -7,6 +7,7 @@ import Loading from "../../components/loading/loading";
 
 import { useFetchCuidadores } from "../../hooks/cuidador/useFetchCuidadores";
 import { ModalCreate } from "../../components/cuidador/modal/modalCreate";
+import { ModalDelete } from "../../components/cuidador/modal/modalDelete";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
@@ -19,6 +20,7 @@ const Cuidador = () => {
 
     const { cuidadores, loading, error, refreshCuidadores } = useFetchCuidadores();
     const { openModalCreate } = ModalCreate();
+    const { openModalDelete } = ModalDelete(refreshCuidadores);
 
     if (loading) return <Loading />
 
@@ -68,7 +70,7 @@ const Cuidador = () => {
                                         <td>{cuidador.celular}</td>
                                         <td>{cuidador.sexo}</td>
                                         <td>
-                                            <Button variant="danger" className='m-1' ><i className="bi bi-trash"></i></Button>
+                                            <Button variant="danger" className='m-1' onClick={() => openModalDelete(cuidador.id, cuidador.nome)}><i className="bi bi-trash"></i></Button>
                                             <Button variant="success" className='m-1'><i className="bi bi-pencil"></i></Button></td>
                                     </tr>
                                 ))
