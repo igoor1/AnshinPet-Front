@@ -6,6 +6,7 @@ import Vacina from "./pages/vacina/vacina";
 import CuidadoMedico from "./pages/animal/cuidadoMedico/cuidadoMedico";
 import Doacao from "./pages/doacao/doacao";
 import Login from "./pages/login/login";
+import Cuidador from "./pages/cuidador/cuidador";
 
 import NotFound from "./pages/notFound/notFound";
 
@@ -25,7 +26,7 @@ export default function App() {
         <Route path="/doencas" element={<ProtectedRoute><Doenca /></ProtectedRoute>} />
         <Route path="/vacinas" element={<ProtectedRoute><Vacina /></ProtectedRoute>} />
         <Route path="/doacoes" element={<ProtectedRoute><Doacao /></ProtectedRoute>} />
-
+        <Route path="/cuidadores" element={<ProtectedRoute><Cuidador /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
