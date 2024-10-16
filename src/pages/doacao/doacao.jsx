@@ -42,13 +42,13 @@ const Doacao = () => {
                 <Breadcrumb.Item active>Doações</Breadcrumb.Item>
             </Breadcrumb>
             <div className="container containerMain">
-                <div className="container d-flex">
+                <div className="container d-flex justify-content-center">
                     <div className="p-2">
-                        <Button variant="success" onClick={() => openModalCreateDinheiro()}><i className="bi bi-plus"></i>Cadastrar Doação (Dinheiro)</Button>
+                        <Button variant="success" className="btnCadastrar" onClick={() => openModalCreateDinheiro()}><i className="bi bi-plus"></i>Cadastrar Doação (Dinheiro)</Button>
                     </div>
 
                     <div className="p-2">
-                        <Button variant="success" onClick={() => openModalCreateRacao()}><i className="bi bi-plus"></i> Cadastrar Doação (Ração)</Button>
+                        <Button variant="success" className="btnCadastrar" onClick={() => openModalCreateRacao()}><i className="bi bi-plus"></i> Cadastrar Doação (Ração)</Button>
                     </div>
 
                 </div>

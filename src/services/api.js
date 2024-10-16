@@ -7,4 +7,16 @@ export const api = axios.create({
     },
 });
 
+export const setAuthToken = () => {
+    const token = JSON.parse(localStorage.getItem('token'))
+
+    if (token) {
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+        delete api.defaults.headers.common['Authorization'];
+    }
+};
+
+setAuthToken();
+
 export default api;

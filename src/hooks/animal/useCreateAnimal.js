@@ -12,7 +12,24 @@ export const useCreateAnimal = () => {
         setSuccess(false);
 
         try {
-            await api.post('/animais', newAnimal);
+            const response = await api.post('/animais', newAnimal);
+
+            if (newAnimal.foto) {
+                const animalId = response.data.id;
+                const animalName = response.data.nome;
+                const fotoName = `Foto: ${animalName}`
+
+                const formData = new FormData();
+                formData.append('arquivo', newAnimal.foto);
+                formData.append('descricao', fotoName);
+
+                await api.put(`/animais/${animalId}/foto`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+            }
+
             setSuccess(true);
         } catch (err) {
             setError('Erro ao cadastrar animal');

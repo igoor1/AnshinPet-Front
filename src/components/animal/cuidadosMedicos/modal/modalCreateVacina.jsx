@@ -25,11 +25,16 @@ export const ModalCreateVacina = (animalId, refreshMedicals) => {
         Swal.fire({
             title: `Cadastro de Vacinas`,
             html: `
+            <label for="vacina" class="form-label labelInput">Vacina: </label>
             <select id="vacina" class="form-select mb-3">
-                <option disabled selected>Doenças</option>
+                <option selected disabled value="">Doenças</option>
                 ${vacinas.map(v => `<option value="${v.id}">${v.nome}</option>`).join('')}
             </select>
-            <input id="lote" placeholder="lote" class="form-control mb-3" />
+
+            <label for="lote" class="form-label labelInput">Lote: </label>
+            <input id="lote" placeholder="Digite o lote" class="form-control mb-3" />
+
+            <label for="dataAplicacao" class="form-label labelInput">Data de aplicação: </label>
             <input id="dataAplicacao" type="date" class="form-control mb-3"/>
         `,
             focusConfirm: false,

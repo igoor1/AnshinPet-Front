@@ -1,9 +1,13 @@
 import { Container, Nav, Navbar, NavDropdown, Dropdown, DropdownButton, Image } from 'react-bootstrap';
 import './navbarheader.scss'
 
+import useLogoutUser from '../../hooks/login/useLogoutUser';
+
 import Logo from '../../assets/logoWhite.svg';
 
 const NavbarHeader = () => {
+    const { logout } = useLogoutUser();
+
     return (
         <Navbar collapseOnSelect expand="lg" bg='primary' className='my-navbar-theme p-2' data-bs-theme="dark">
             <Container fluid>
@@ -30,7 +34,7 @@ const NavbarHeader = () => {
                         >
                             <Dropdown.Item href="/configuracoes"><i className="bi bi-gear"></i> Configurações</Dropdown.Item>
                             <NavDropdown.Divider />
-                            <Dropdown.Item href="/login"><i className="bi bi-arrow-left-square"></i> Logout</Dropdown.Item>
+                            <Dropdown.Item onClick={logout}><i className="bi bi-arrow-left-square"></i> Logout</Dropdown.Item>
                         </DropdownButton>
                     </Nav>
                 </Navbar.Collapse>

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import { useDeleteAnimal } from "../../../hooks/animal/useDeleteAnimal";
 
-export const ModalDelete = (refreshAnimals) => {
-    const { deleteAnimal, loading, error, success } = useDeleteAnimal();
+import { useDeleteCuidador } from "../../../hooks/cuidador/useDeleteCuidador";
+
+export const ModalDelete = (refreshCuidadores) => {
+    const { deleteCuidador, loading, error, success } = useDeleteCuidador();
 
     const Toast = Swal.mixin({
         toast: true,
@@ -17,21 +18,21 @@ export const ModalDelete = (refreshAnimals) => {
         }
     });
 
-    const openModalDelete = (animalId, animalNome) => {
+    const openModalDelete = (cuidadorId, cuidadorNome) => {
 
         Swal.fire({
-            title: 'Deletar Animal',
-            html: ` Você deseja deletar o animal chamado: ${animalNome} ?
+            title: 'Deletar Cuidador',
+            html: ` Você deseja deletar o cuidador chamado/a: ${cuidadorNome} ?
         `,
             focusConfirm: false,
             confirmButtonText: 'Deletar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: 'Fechar',
             cancelButtonColor: "#dc3545",
 
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await deleteAnimal(animalId);
+                await deleteCuidador(cuidadorId);
             }
         });
     };
@@ -41,16 +42,16 @@ export const ModalDelete = (refreshAnimals) => {
 
             Toast.fire({
                 icon: "success",
-                title: "Animal Deletado"
+                title: "Cuidador Deletado"
             });
 
-            refreshAnimals()
+            refreshCuidadores()
         }
 
         if (error) {
             Toast.fire({
                 icon: "error",
-                title: "Erro ao Deletar Animal"
+                title: "Erro ao Deletar Cuidador"
             });
         }
     }, [success, error])

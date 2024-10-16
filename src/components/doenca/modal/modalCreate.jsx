@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useCreateDoenca } from '../../../hooks/doenca/useCreateDoenca'
 
 export const ModalCreate = (refreshDoencas) => {
     const { createDoenca, loading, error, success } = useCreateDoenca();
-
-    const [doencaData, setDoencaData] = useState({
-        nome: '',
-        gravidade: '',
-    });
 
     const gravidadeList = [
         {
@@ -42,9 +37,12 @@ export const ModalCreate = (refreshDoencas) => {
         Swal.fire({
             title: 'Cadastro de Doença',
             html: `
-            <input id="nome" placeholder="Nome" class="form-control mb-3" />
+            <label for="nome" class="form-label labelInput">Nome: </label>
+            <input id="nome" placeholder="Digite o nome" class="form-control mb-3" />
+
+            <label for="gravidade" class="form-label labelInput">Gravidade: </label>
             <select id="gravidade" class="form-select mb-3">
-                <option disabled selected>Gravidade</option>
+                <option selected disabled value="">Selecione a gravidade</option>
                 ${gravidadeList.map(g => `<option value="${g.value}">${g.label}</option>`).join('')}
             </select>
         `,
@@ -91,13 +89,6 @@ export const ModalCreate = (refreshDoencas) => {
             });
         }
     }, [success, error])
-
-    const handleInputChange = (key, value) => {
-        setDoençaData((prevData) => ({
-            ...prevData,
-            [key]: value,
-        }));
-    };
 
     return { openModalCreate }
 }

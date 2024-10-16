@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useCreateVacina } from "../../../hooks/vacina/useCreateVacina";
 
@@ -22,8 +22,11 @@ export const ModalCreate = (refreshVacinas) => {
         Swal.fire({
             title: 'Cadastro de Vacina',
             html: `
-            <input id="nome" placeholder="Nome" class="form-control mb-3" />
-            <input id="fabricante" placeholder="Fabricante" class="form-control mb-3" />
+            <label for="nome" class="form-label labelInput">Nome: </label>
+            <input id="nome" placeholder="Digite o nome" class="form-control mb-3" />
+
+            <label for="fabricante" class="form-label labelInput">Fabricante: </label>
+            <input id="fabricante" placeholder="Digite o fabricante" class="form-control mb-3" />
         `,
             focusConfirm: false,
             confirmButtonText: 'Cadastrar',
