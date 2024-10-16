@@ -7,11 +7,11 @@ export const ModalCreate = () => {
 
     const sexoList = [
         {
-            label: 'Macho',
+            label: 'Masculino',
             value: 'M'
         },
         {
-            label: 'Fêmea',
+            label: 'Feminino',
             value: 'F'
         }
     ];

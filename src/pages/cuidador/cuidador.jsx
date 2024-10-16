@@ -33,6 +33,17 @@ const Cuidador = () => {
         })
     }
 
+    const getSexo = (cuidador) => {
+        switch (cuidador.sexo) {
+            case 'M':
+                return 'Masculino';
+            case 'F':
+                return 'Feminino';
+            default:
+                return 'Erro'
+        }
+    }
+
     return (
         <div className="divMain">
             <NavbarHeader />
@@ -44,7 +55,7 @@ const Cuidador = () => {
                 <div className="p-2 ms-auto">
                     <Button variant="success" className='btnCadastrar' onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
 
-                    <Table responsive>
+                    <Table responsive className="mt-3">
                         <thead>
                             <tr className="text-center">
                                 <th>#</th>
@@ -68,7 +79,7 @@ const Cuidador = () => {
                                         <td>{cuidador.cpf}</td>
                                         <td>{cuidador.email}</td>
                                         <td>{cuidador.celular}</td>
-                                        <td>{cuidador.sexo}</td>
+                                        <td>{getSexo(cuidador)}</td>
                                         <td>
                                             <Button variant="danger" className='m-1' onClick={() => openModalDelete(cuidador.id, cuidador.nome)}><i className="bi bi-trash"></i></Button>
                                             <Button variant="success" className='m-1'><i className="bi bi-pencil"></i></Button></td>
