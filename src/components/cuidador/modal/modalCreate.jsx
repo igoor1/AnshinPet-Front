@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useCreateCuidador } from "../../../hooks/cuidador/useCreateCuidador";
 
-export const ModalCreate = () => {
+export const ModalCreate = (refreshCuidadores) => {
     const { createCuidador, error, loading, success } = useCreateCuidador();
 
     const sexoList = [
@@ -114,6 +114,8 @@ export const ModalCreate = () => {
                 icon: "success",
                 title: "Cuidador Cadastrado"
             });
+
+            refreshCuidadores();
 
         }
 

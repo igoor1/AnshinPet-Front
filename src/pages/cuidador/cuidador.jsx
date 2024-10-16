@@ -19,7 +19,7 @@ const Cuidador = () => {
     }, []);
 
     const { cuidadores, loading, error, refreshCuidadores } = useFetchCuidadores();
-    const { openModalCreate } = ModalCreate();
+    const { openModalCreate } = ModalCreate(refreshCuidadores);
     const { openModalDelete } = ModalDelete(refreshCuidadores);
 
     if (loading) return <Loading />
