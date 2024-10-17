@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Table, Button, Breadcrumb } from "react-bootstrap";
+import { Table, Button, Breadcrumb, Container } from "react-bootstrap";
 
 import Footer from "../../components/footer/footer";
 import NavbarHeader from "../../components/navbarheader/navbarheader";
@@ -55,41 +55,43 @@ const Cuidador = () => {
             </Breadcrumb>
             <div className="containerMain">
                 <div className="p-2 ms-auto">
-                    <Button variant="success" className='btnCadastrar' onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                    <Container>
+                        <Button variant="success" className='btnCadastrar' onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
 
-                    <Table responsive className="mt-3">
-                        <thead>
-                            <tr className="text-center">
-                                <th>#</th>
-                                <th >Nome</th>
-                                <th >Cpf</th>
-                                <th >Email</th>
-                                <th >Celular</th>
-                                <th >Sexo</th>
-                                <th >Opções</th>
+                        <Table responsive className="mt-3">
+                            <thead>
+                                <tr className="text-center">
+                                    <th>#</th>
+                                    <th >Nome</th>
+                                    <th >Cpf</th>
+                                    <th >Email</th>
+                                    <th >Celular</th>
+                                    <th >Sexo</th>
+                                    <th >Opções</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cuidadores.length === 0 ? (
-                                <p>Nenhum cuidador encontrado</p>
-                            ) : (
-                                cuidadores.map((cuidador) => (
-                                    <tr key={cuidador.id} className="text-center trCuidadores">
-                                        <td>{cuidador.id}</td>
-                                        <td>{cuidador.nome}</td>
-                                        <td>{cuidador.cpf}</td>
-                                        <td>{cuidador.email}</td>
-                                        <td>{cuidador.celular}</td>
-                                        <td>{getSexo(cuidador)}</td>
-                                        <td>
-                                            <Button variant="danger" className='m-1' onClick={() => openModalDelete(cuidador.id, cuidador.nome)}><i className="bi bi-trash"></i></Button>
-                                            <Button variant="success" className='m-1' onClick={() => openModalEdit(cuidador)}><i className="bi bi-pencil"></i></Button></td>
-                                    </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </Table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cuidadores.length === 0 ? (
+                                    <p>Nenhum cuidador encontrado</p>
+                                ) : (
+                                    cuidadores.map((cuidador) => (
+                                        <tr key={cuidador.id} className="text-center trCuidadores">
+                                            <td>{cuidador.id}</td>
+                                            <td>{cuidador.nome}</td>
+                                            <td>{cuidador.cpf}</td>
+                                            <td>{cuidador.email}</td>
+                                            <td>{cuidador.celular}</td>
+                                            <td>{getSexo(cuidador)}</td>
+                                            <td>
+                                                <Button variant="danger" className='m-1' onClick={() => openModalDelete(cuidador.id, cuidador.nome)}><i className="bi bi-trash"></i></Button>
+                                                <Button variant="success" className='m-1' onClick={() => openModalEdit(cuidador)}><i className="bi bi-pencil"></i></Button></td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </Table>
+                    </Container>
                 </div>
             </div>
 

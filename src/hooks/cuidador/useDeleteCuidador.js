@@ -13,7 +13,7 @@ export const useDeleteCuidador = () => {
         setSuccess(false);
 
         try {
-            await api.delete(`/api/usuarios/${cuidadorId}`);
+            await api.delete(`/usuarios/${cuidadorId}`);
             setSuccess(true);
         } catch (err) {
             const errorMensagem = err.response?.data?.title || 'Erro ao deletar cuidador';
