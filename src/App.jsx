@@ -7,6 +7,7 @@ import CuidadoMedico from "./pages/animal/cuidadoMedico/cuidadoMedico";
 import Doacao from "./pages/doacao/doacao";
 import Login from "./pages/login/login";
 import Cuidador from "./pages/cuidador/cuidador";
+import Dashboard from "./pages/dashboard/dashboard";
 
 import NotFound from "./pages/notFound/notFound";
 
@@ -14,7 +15,7 @@ import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 
 import './scss/styles.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'sweetalert2/src/sweetalert2.scss'
+import 'sweetalert2/src/sweetalert2.scss';
 
 export default function App() {
 
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/doacoes" element={<ProtectedRoute><Doacao /></ProtectedRoute>} />
         <Route path="/cuidadores" element={<ProtectedRoute><Cuidador /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
