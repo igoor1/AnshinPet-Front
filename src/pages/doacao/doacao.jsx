@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Button, Breadcrumb } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Breadcrumb, Nav } from "react-bootstrap";
 import Footer from "../../components/footer/footer"
 import NavbarHeader from "../../components/navbarheader/navbarheader"
 
@@ -8,6 +8,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import DoacaoCard from "../../components/doacao/card/doacaoCard";
 
 import { useFetchDoacoes } from "../../hooks/doacao/useFetchDoacoes";
+import { useFetchDoacaoForType } from "../../hooks/doacao/useFetchDoacaoForType";
 import { ModalCreateDinheiro } from "../../components/doacao/modal/modalCreateDinheiro";
 import { ModalCreateRacao } from "../../components/doacao/modal/modalCreateRacao";
 
@@ -20,8 +21,19 @@ const Doacao = () => {
     }, []);
 
     const { doacoes, error, loading, refreshDoacoes } = useFetchDoacoes();
+    const { filteredDoacoes, handleSearch, searchTerm } = useFetchDoacaoForType(doacoes);
     const { openModalCreateDinheiro } = ModalCreateDinheiro(refreshDoacoes);
     const { openModalCreateRacao } = ModalCreateRacao(refreshDoacoes);
+    const [tipoFiltro, setTipoFiltro] = useState(null);
+
+    const handleFilterChange = (e) => {
+        const value = e.value;
+        setTipoFiltro(value);
+    }
+
+    useEffect(() => {
+        handleSearch(tipoFiltro)
+    }, [tipoFiltro])
 
     if (loading) return <Loading />
 
@@ -41,6 +53,24 @@ const Doacao = () => {
                 <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
                 <Breadcrumb.Item active>Doações</Breadcrumb.Item>
             </Breadcrumb>
+
+            <div className="container">
+                <p className="mb-2">Filtrar por:</p>
+                <Nav variant="pills" defaultActiveKey="tipo-1">
+                    <Nav.Item>
+                        <Nav.Link eventKey="tipo-1" onClick={() => handleFilterChange({ value: "" })}>Todos</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="tipo-2" onClick={() => handleFilterChange({ value: "D" })}>Dinheiro</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="tipo-3" onClick={() => handleFilterChange({ value: "R" })}>
+                            Ração
+                        </Nav.Link>
+                    </Nav.Item>
+                </Nav>
+            </div>
+
             <div className="container containerMain">
                 <div className="container d-flex justify-content-center">
                     <div className="p-2">
@@ -54,12 +84,11 @@ const Doacao = () => {
                 </div>
                 <div className="container containerMain mt-4">
 
-
                     <div className='areaDoacao'>
-                        {doacoes.length === 0 ? (
+                        {filteredDoacoes.length === 0 ? (
                             <p>Nenhuma doação encontrada.</p>
                         ) : (
-                            doacoes.map((doacao) => (
+                            filteredDoacoes.map((doacao) => (
                                 <DoacaoCard doacao={doacao} key={doacao.id} refreshDoacoes={refreshDoacoes} />
                             ))
                         )}
