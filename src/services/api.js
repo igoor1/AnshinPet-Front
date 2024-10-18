@@ -17,6 +17,19 @@ export const setAuthToken = () => {
     }
 };
 
+api.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        if (error.response && error.response.status === 403) {
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
+
 setAuthToken();
 
 export default api;
