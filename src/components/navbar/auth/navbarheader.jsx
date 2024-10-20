@@ -1,9 +1,9 @@
 import { Container, Nav, Navbar, NavDropdown, Dropdown, DropdownButton, Image } from 'react-bootstrap';
 import './navbarheader.scss'
 
-import useLogoutUser from '../../hooks/login/useLogoutUser';
+import useLogoutUser from '../../../hooks/login/useLogoutUser';
 
-import Logo from '../../assets/logoWhite.svg';
+import Logo from '../../../assets/logoWhite.svg';
 
 const NavbarHeader = () => {
     const { logout } = useLogoutUser();

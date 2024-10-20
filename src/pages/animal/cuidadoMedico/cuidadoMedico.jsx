@@ -5,7 +5,7 @@ import { Image, Card, Breadcrumb, Accordion, Table, Button, InputGroup } from 'r
 import "./cuidadosMedico.scss"
 
 import Footer from "../../../components/footer/footer"
-import NavbarHeader from "../../../components/navbarheader/navbarheader"
+import NavbarHeader from "../../../components/navbar/auth/navbarheader";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 

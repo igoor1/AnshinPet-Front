@@ -1,5 +1,5 @@
-import { Spinner, Container } from "react-bootstrap";
-import NavbarHeader from "../navbarheader/navbarheader";
+import { Spinner } from "react-bootstrap";
+import NavbarHeader from "../navbar/auth/navbarheader";
 import Footer from "../footer/footer";
 import './loading.scss'
 

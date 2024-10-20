@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Table, Button, Breadcrumb, Container } from "react-bootstrap";
 
 import Footer from "../../components/footer/footer";
-import NavbarHeader from "../../components/navbarheader/navbarheader";
+import NavbarHeader from "../../components/navbar/auth/navbarheader";
 import Loading from "../../components/loading/loading";
 
 import { useFetchCuidadores } from "../../hooks/cuidador/useFetchCuidadores";

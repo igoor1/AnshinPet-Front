@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Table, Button, Form, InputGroup, Breadcrumb } from "react-bootstrap";
 
 import Footer from "../../components/footer/footer";
-import NavbarHeader from "../../components/navbarheader/navbarheader";
+import NavbarHeader from "../../components/navbar/auth/navbarheader";
 import Loading from "../../components/loading/loading";
 
 import { useFetchDoencas } from "../../hooks/doenca/useFetchDoencas";

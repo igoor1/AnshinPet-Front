@@ -2,7 +2,7 @@ import { Card, Col, Row, Container } from "react-bootstrap";
 
 import "./dashboard.scss"
 
-import NavbarHeader from "../../components/navbarheader/navbarheader";
+import NavbarHeader from "../../components/navbar/auth/navbarheader";
 import Footer from "../../components/footer/footer";
 
 import Loading from "../../components/loading/loading";

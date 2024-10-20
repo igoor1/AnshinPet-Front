@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Breadcrumb, Nav } from "react-bootstrap";
 import Footer from "../../components/footer/footer"
-import NavbarHeader from "../../components/navbarheader/navbarheader"
+import NavbarHeader from "../../components/navbar/auth/navbarheader";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 

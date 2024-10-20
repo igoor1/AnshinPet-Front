@@ -3,7 +3,7 @@ import { Stack, Form, InputGroup, Button, Breadcrumb } from 'react-bootstrap';
 import './animal.scss';
 
 import Footer from "../../components/footer/footer";
-import NavbarHeader from "../../components/navbarheader/navbarheader";
+import NavbarHeader from "../../components/navbar/auth/navbarheader";
 import AnimalCard from '../../components/animal/card/animalCard';
 import { ModalCreate } from '../../components/animal/modal/modalCreate';
 
