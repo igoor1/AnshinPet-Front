@@ -1,0 +1,30 @@
+.containerInfoHome {
+    p {
+        text-align: justify;
+    }
+
+    h4 {
+        color: var(--primaryColor);
+    }
+
+    h5 {
+        color: var(--primaryColor);
+    }
+
+    .card-body {
+        background-color: rgb(251, 251, 251);
+        border-radius: 10px;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .card-text {
+            text-align: justify;
+        }
+    }
+}
+
+.colorPrimary {
+    color: var(--primaryColor);
+}

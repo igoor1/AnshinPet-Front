@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 import './scss/styles.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'sweetalert2/src/sweetalert2.scss';
+import Home from "./pages/home/home";
 
 export default function App() {
 
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/cuidadores" element={<ProtectedRoute><Cuidador /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
