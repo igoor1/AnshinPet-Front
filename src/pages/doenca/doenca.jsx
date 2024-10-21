@@ -6,6 +6,7 @@ import NavbarHeader from "../../components/navbar/auth/navbarheader";
 import Loading from "../../components/loading/loading";
 
 import { useFetchDoencas } from "../../hooks/doenca/useFetchDoencas";
+import { useSearchDoencas } from "../../hooks/doenca/useSearchDoencas";
 import { ModalCreate } from "../../components/doenca/modal/modalCreate";
 import { ModalDelete } from "../../components/doenca/modal/modalDelete";
 import { ModalEdit } from "../../components/doenca/modal/modalEdit";
@@ -20,6 +21,7 @@ const Doenca = () => {
     }, []);
 
     const { doencas, loading, error, refreshDoencas } = useFetchDoencas();
+    const { searchTerm, filteredDoencas, handleSearch } = useSearchDoencas(doencas);
     const { openModalCreate } = ModalCreate(refreshDoencas);
     const { openModalDelete } = ModalDelete(refreshDoencas);
     const { openModalEdit } = ModalEdit(refreshDoencas);
@@ -63,7 +65,7 @@ const Doenca = () => {
                     </Form.Label>
                     <InputGroup className="mb-2 AreaInputSearch">
                         <InputGroup.Text><i className="bi bi-search"></i></InputGroup.Text>
-                        <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" />
+                        <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} />
                     </InputGroup>
                 </div>
 
@@ -83,10 +85,10 @@ const Doenca = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {doencas.length === 0 ? (
+                        {filteredDoencas.length === 0 ? (
                             <p>Nenhuma doença encontrada</p>
                         ) : (
-                            doencas.map((doenca) => (
+                            filteredDoencas.map((doenca) => (
                                 <tr key={doenca.id} className="text-center trDoencas">
                                     <td>{doenca.id}</td>
                                     <td>{doenca.nome}</td>
