@@ -15,7 +15,7 @@ export const useSearchAnimals = (initialAnimals) => {
             const response = await api.get(`/animais/${animalId}/foto`);
 
             if (response.data && response.data.nomeArquivo) {
-                return `http://localhost:8080/animais/${animalId}/foto`;
+                return `http://localhost:8080/api/animais/${animalId}/foto`;
             }
 
             return null;
@@ -28,7 +28,7 @@ export const useSearchAnimals = (initialAnimals) => {
         setSearchTerm(term);
         if (term) {
             try {
-                const response = await api.get(`http://localhost:8080/animais/listar/${term}`);
+                const response = await api.get(`/animais/listar/${term}`);
                 const animalsWithPhotos = await Promise.all(
                     response.data.map(async (animal) => {
                         const photoUrl = await fetchAnimalPhoto(animal.id);

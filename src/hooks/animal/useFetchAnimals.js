@@ -12,7 +12,7 @@ export const useFetchAnimals = () => {
             const response = await api.get(`/animais/${animalId}/foto`);
 
             if (response.data && response.data.nomeArquivo) {
-                return `http://localhost:8080/animais/${animalId}/foto`;
+                return `http://localhost:8080/api/animais/${animalId}/foto`;
             }
 
             return null;
