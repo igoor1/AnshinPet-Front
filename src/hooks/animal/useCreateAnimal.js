@@ -6,38 +6,57 @@ export const useCreateAnimal = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
 
-    const createAnimal = async (newAnimal) => {
+    const createAnimal = async (animal) => {
         setLoading(true);
         setError(null);
         setSuccess(false);
 
         try {
-            const response = await api.post('/animais', newAnimal);
-
-            if (newAnimal.foto) {
-                const animalId = response.data.id;
-                const animalName = response.data.nome;
-                const fotoName = `Foto: ${animalName}`
-
-                const formData = new FormData();
-                formData.append('arquivo', newAnimal.foto);
-                formData.append('descricao', fotoName);
-
-                await api.put(`/animais/${animalId}/foto`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-            }
-
-            setSuccess(true);
+            const response = await api.post('/animais', animal);
+            return response.data.id;
         } catch (err) {
-            setError('Erro ao cadastrar animal');
+            setError(`Erro ao cadastrar animal:  ${err.response?.data?.message || err.message}`);
             console.error(err);
-        } finally {
-            setLoading(false);
+            throw err;
         }
     };
 
-    return { createAnimal, loading, error, success };
+    const createAnimalFoto = async (animalId, file, descricao) => {
+        const formData = new FormData();
+        formData.append('arquivo', file);
+        formData.append('descricao', descricao);
+
+        try {
+            await api.put(`/animais/${animalId}/foto`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        } catch (err) {
+            setError(`Erro ao cadastrar foto:  ${err.response?.data?.message || err.message}`);
+            console.error(err);
+            throw err;
+        }
+    }
+
+    const createAnimalWithFoto = async (newAnimal) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const animalId = await createAnimal(newAnimal);
+            if (!animalId) throw new Error('Id do animal não encontrado')
+
+            if (newAnimal.foto) {
+                await createAnimalFoto(animalId, newAnimal.foto, newAnimal.nome)
+            }
+            setSuccess(true);
+        } catch (err) {
+            setError('Erro ao cadastrar animal: ' + err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return { createAnimalWithFoto, loading, error, success };
 };

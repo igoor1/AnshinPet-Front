@@ -7,36 +7,34 @@ export const useFetchAnimals = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchAnimalPhoto = async (animalId) => {
-        try {
-            const response = await api.get(`/animais/${animalId}/foto`);
-
-            if (response.data && response.data.nomeArquivo) {
-                return `http://localhost:8080/api/animais/${animalId}/foto`;
-            }
-
-            return null;
-        } catch (err) {
-            return null;
-        }
-    };
-
     const fetchAnimals = async () => {
         setLoading(true);
         setError(null);
         try {
             const response = await api.get('/animais');
-            const animalsWithPhotos = await Promise.all(
-                response.data.map(async (animal) => {
-                    const photoUrl = await fetchAnimalPhoto(animal.id);
+            const animals = response.data;
+
+            const animalsFotoPromise = animals.map(async (animal) => {
+                try {
+                    const response = await api.get(`/animais/${animal.id}/foto`);
+
+                    const fotoUrl = `http://localhost:8080/api/animais/${animal.id}/foto`;
                     return {
                         ...animal,
-                        foto: photoUrl || imgDefault,
-                    };
-                })
-            );
+                        foto: fotoUrl
+                    }
+                } catch (err) {
+                    console.warn(`(${animal.nome}) - Foto não encontrada, usando a imagem padrão.`);
+                    return {
+                        ...animal,
+                        foto: imgDefault
+                    }
+                }
+            });
 
-            setAnimals(animalsWithPhotos);
+            const animaisFoto = await Promise.all(animalsFotoPromise);
+            setAnimals(animaisFoto);
+
         } catch (err) {
             setError('Erro ao buscar animais');
             console.error(err);
