@@ -83,8 +83,8 @@ const Vacina = () => {
                                     <td>{vacina.nome}</td>
                                     <td>{vacina.fabricante}</td>
                                     <td>
-                                        <Button variant="danger" className='m-1' onClick={() => openModalDelete(vacina.id, vacina.nome)}><i className="bi bi-trash"></i></Button>
-                                        <Button variant="success" className='m-1' onClick={() => openModalEdit(vacina)}><i className="bi bi-pencil"></i></Button></td>
+                                        <Button variant="primary" className='m-1' onClick={() => openModalDelete(vacina.id, vacina.nome)}><i className="bi bi-trash"></i></Button>
+                                        <Button variant="secondary" className='m-1' onClick={() => openModalEdit(vacina)}><i className="bi bi-pencil"></i></Button></td>
                                 </tr>
                             ))
                         )}

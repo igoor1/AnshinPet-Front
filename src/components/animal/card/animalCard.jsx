@@ -20,7 +20,7 @@ const AnimalCard = ({ animal, refreshAnimals }) => {
             case 'S':
                 return 'success';
             case 'N':
-                return 'danger';
+                return 'secondary';
             default:
                 return 'warning'
         }
@@ -89,9 +89,9 @@ const AnimalCard = ({ animal, refreshAnimals }) => {
                     </div>
                 </Card.Header>
                 <Card.Footer className="text-muted">
-                    <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/cuidadosMedicos/${animal.id}`)} ><i className="bi bi-heart"></i></Button>
-                    <Button variant="danger" className='m-1' onClick={() => openModalDelete(animal.id, animal.nome)}><i className="bi bi-trash"></i></Button>
-                    <Button variant="success" className='m-1' onClick={() => openModalEdit(animal)}><i className="bi bi-pencil"></i></Button>
+                    <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/cuidadosMedicos/${animal.id}`)}><i className="bi bi-heart"></i></Button>
+                    <Button variant="primary" className='m-1' onClick={() => openModalDelete(animal.id, animal.nome)}><i className="bi bi-trash"></i></Button>
+                    <Button variant="primary" className='m-1' onClick={() => openModalEdit(animal)}><i className="bi bi-pencil"></i></Button>
                 </Card.Footer>
             </Card>
         </div>

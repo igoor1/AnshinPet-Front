@@ -58,11 +58,6 @@ const Animal = () => {
                         <Button variant="success" className='btnCadastrar' onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                     </div>
 
-
-                    <div className="floating">
-                        <Button variant="success" onClick={() => openModalCreate()}><i className="bi bi-plus"></i></Button>
-                    </div>
-
                 </Stack>
 
                 <div className='areaAnimal'>

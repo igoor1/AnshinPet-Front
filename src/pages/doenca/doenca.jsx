@@ -96,8 +96,8 @@ const Doenca = () => {
                                         {getGravidade(doenca)}
                                     </td>
                                     <td>
-                                        <Button variant="danger" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
-                                        <Button variant="success" className='m-1' onClick={() => openModalEdit(doenca)}><i className="bi bi-pencil"></i></Button></td>
+                                        <Button variant="primary" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
+                                        <Button variant="secondary" className='m-1' onClick={() => openModalEdit(doenca)}><i className="bi bi-pencil"></i></Button></td>
                                 </tr>
                             ))
                         )}

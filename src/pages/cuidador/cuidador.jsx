@@ -84,8 +84,8 @@ const Cuidador = () => {
                                             <td>{cuidador.celular}</td>
                                             <td>{getSexo(cuidador)}</td>
                                             <td>
-                                                <Button variant="danger" className='m-1' onClick={() => openModalDelete(cuidador.id, cuidador.nome)}><i className="bi bi-trash"></i></Button>
-                                                <Button variant="success" className='m-1' onClick={() => openModalEdit(cuidador)}><i className="bi bi-pencil"></i></Button></td>
+                                                <Button variant="primary" className='m-1' onClick={() => openModalDelete(cuidador.id, cuidador.nome)}><i className="bi bi-trash"></i></Button>
+                                                <Button variant="secondary" className='m-1' onClick={() => openModalEdit(cuidador)}><i className="bi bi-pencil"></i></Button></td>
                                         </tr>
                                     ))
                                 )}

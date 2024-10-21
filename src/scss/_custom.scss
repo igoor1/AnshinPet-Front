@@ -1,17 +1,32 @@
 $primary: #5e2cd3;
-$secondary: #ffd951;
-$success: #22C55E;
+$secondary: #f2ce01;
+$success: #32CD32;
 
 $font-family-base: Arial, Helvetica, sans-serif;
 
 :root {
     --primaryColor: #5e2cd3;
-    --secondaryColor: #32CD32;
-    --tertiaryColor: #FFD700;
+    --secondaryColor: #f2ce01;
+    --tertiaryColor: #32CD32;
 }
 
 .btn-success {
     color: white !important;
+}
+
+.btn-secondary {
+    color: white !important;
+}
+
+.btn-outline-primary {
+    &:hover {
+        color: white !important;
+        background-color: var(--primaryColor) !important;
+    }
+
+    color: var(--primaryColor) !important;
+    background-color: transparent !important;
+    border-color: #5e2cd3 !important;
 }
 
 a {

@@ -176,7 +176,7 @@ const CuidadoMedico = () => {
                                                     </td>
                                                     <td>{doenca.descricao}</td>
                                                     <td>
-                                                        <Button variant="danger" className='m-1' onClick={() => openModalDeleteDoenca(doenca.doenca.nome, doenca.id)}><i className="bi bi-trash"></i></Button>
+                                                        <Button variant="primary" className='m-1' onClick={() => openModalDeleteDoenca(doenca.doenca.nome, doenca.id)}><i className="bi bi-trash"></i></Button>
                                                     </td>
                                                 </tr>
                                             ))
@@ -214,7 +214,7 @@ const CuidadoMedico = () => {
                                                     </td>
                                                     <td>{vacina.dataAplicacao}</td>
                                                     <td>
-                                                        <Button variant="danger" className='m-1' onClick={() => openModalDeleteVacina(vacina.vacina.nome, vacina.id)}><i className="bi bi-trash"></i></Button>
+                                                        <Button variant="primary" className='m-1' onClick={() => openModalDeleteVacina(vacina.vacina.nome, vacina.id)}><i className="bi bi-trash"></i></Button>
                                                     </td>
                                                 </tr>
                                             ))

@@ -68,8 +68,8 @@ const DoacaoCard = ({ refreshDoacoes, doacao }) => {
                     </div>
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                    <Button variant="danger" className='m-1' onClick={() => openModalDelete(doacao.id)}><i className="bi bi-trash"></i></Button>
-                    <Button variant="success" className='m-1' onClick={() => getModalEdit(doacao)}><i className="bi bi-pencil"></i></Button>
+                    <Button variant="primary" className='m-1' onClick={() => openModalDelete(doacao.id)}><i className="bi bi-trash"></i></Button>
+                    <Button variant="secondary" className='m-1' onClick={() => getModalEdit(doacao)}><i className="bi bi-pencil"></i></Button>
                 </Card.Footer>
             </Card>
         </div>
