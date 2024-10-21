@@ -4,12 +4,14 @@ import { Button, Image, Badge, Card } from 'react-bootstrap';
 
 import { ModalDelete } from '../modal/modalDelete';
 import { ModalEdit } from '../modal/modalEdit';
+import { ModalEditFoto } from "../modal/modalEditPhoto";
 
 import './animalCard.scss';
 
 const AnimalCard = ({ animal, refreshAnimals }) => {
     const { openModalDelete } = ModalDelete(refreshAnimals);
     const { openModalEdit } = ModalEdit(refreshAnimals);
+    const { openModalEditFoto } = ModalEditFoto(refreshAnimals);
 
     const navigate = useNavigate();
 
@@ -66,7 +68,9 @@ const AnimalCard = ({ animal, refreshAnimals }) => {
                 <Card.Header>
                     <div className='headerAnimal'>
                         <div>
-                            <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal rounded' />
+                            <a onClick={() => openModalEditFoto(animal)} >
+                                <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal rounded' />
+                            </a>
                             <p style={{ margin: 'auto' }}> {animal.nome} <span className='tipoAnimal'>({getTipo(animal)})</span></p>
                             <Badge bg={getColorAdocao(animal)}>Adoção: {getAdocao(animal)}</Badge>
                         </div>
