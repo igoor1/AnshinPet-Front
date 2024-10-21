@@ -96,12 +96,13 @@ export const ModalEdit = (refreshCuidadores) => {
                 const celular = document.getElementById('celular').value;
                 const cpf = document.getElementById('cpf').value;
                 const email = document.getElementById('email').value;
+                const senha = "1";
 
                 if (!nome || !celular || !cpf || !sexo || !role || !email) {
                     Swal.showValidationMessage('Por favor, preencha todos os campos');
                 }
 
-                return { id, nome, sexo, role, celular, cpf, email };
+                return { id, nome, sexo, role, celular, cpf, email, senha };
             }
         }).then(async (result) => {
             if (result.isConfirmed) {
