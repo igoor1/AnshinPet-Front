@@ -106,8 +106,8 @@ const CuidadoMedico = () => {
             <NavbarHeader />
             <div className="containerMain">
                 <Breadcrumb className='mt-3 px-4'>
-                    <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item href="/animais">
+                    <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/admin/animais">
                         Animais
                     </Breadcrumb.Item>
                     <Breadcrumb.Item active>Cuidados Médicos - {animal.nome}</Breadcrumb.Item>

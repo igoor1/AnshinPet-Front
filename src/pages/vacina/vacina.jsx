@@ -40,7 +40,7 @@ const Vacina = () => {
         <div className="divMain">
             <NavbarHeader />
             <Breadcrumb className='mt-3 px-4'>
-                <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
                 <Breadcrumb.Item active>Cuidados Médicos</Breadcrumb.Item>
                 <Breadcrumb.Item active>Vacinas</Breadcrumb.Item>
             </Breadcrumb>

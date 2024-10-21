@@ -23,14 +23,14 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/animais" element={<ProtectedRoute><Animal /></ProtectedRoute>} />
-        <Route path="/animal/cuidadosMedicos/:animalId" element={<ProtectedRoute><CuidadoMedico /></ProtectedRoute>} />
-        <Route path="/doencas" element={<ProtectedRoute><Doenca /></ProtectedRoute>} />
-        <Route path="/vacinas" element={<ProtectedRoute><Vacina /></ProtectedRoute>} />
-        <Route path="/doacoes" element={<ProtectedRoute><Doacao /></ProtectedRoute>} />
-        <Route path="/cuidadores" element={<ProtectedRoute><Cuidador /></ProtectedRoute>} />
+        <Route path="/admin/animais" element={<ProtectedRoute><Animal /></ProtectedRoute>} />
+        <Route path="/admin/animais/cuidadosMedicos/:animalId" element={<ProtectedRoute><CuidadoMedico /></ProtectedRoute>} />
+        <Route path="/admin/doencas" element={<ProtectedRoute><Doenca /></ProtectedRoute>} />
+        <Route path="/admin/vacinas" element={<ProtectedRoute><Vacina /></ProtectedRoute>} />
+        <Route path="/admin/doacoes" element={<ProtectedRoute><Doacao /></ProtectedRoute>} />
+        <Route path="/admin/cuidadores" element={<ProtectedRoute><Cuidador /></ProtectedRoute>} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
