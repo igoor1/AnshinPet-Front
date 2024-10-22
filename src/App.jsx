@@ -8,6 +8,7 @@ import Doacao from "./pages/doacao/doacao";
 import Login from "./pages/login/login";
 import Cuidador from "./pages/cuidador/cuidador";
 import Dashboard from "./pages/dashboard/dashboard";
+import Adocao from "./pages/adocao/adocao";
 
 import NotFound from "./pages/notFound/notFound";
 
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="/adocao" element={<Adocao />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

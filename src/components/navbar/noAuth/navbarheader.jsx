@@ -15,7 +15,7 @@ const NavbarHeader = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto gap-2">
                         <Nav.Link href="/"><i className="bi bi-house-door"></i> Home</Nav.Link>
-                        <Nav.Link href="/animais"><i className="bi bi-mailbox"></i> Animais para Adoção</Nav.Link>
+                        <Nav.Link href="/adocao"><i className="bi bi-mailbox"></i> Animais para Adoção</Nav.Link>
                         <Nav.Link href="/doar"><i className="bi bi-box2-heart"></i> Doar</Nav.Link>
                         <Nav.Link href="/sobre"><i className="bi bi-people"></i> Sobre nós</Nav.Link>
                     </Nav>

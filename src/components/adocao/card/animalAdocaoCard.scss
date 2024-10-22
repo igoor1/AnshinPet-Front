@@ -1,0 +1,51 @@
+.areaAnimalAdocao {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+}
+
+.itemAnimalAdocao {
+    border-radius: 20px;
+    padding: 10px;
+    margin: 25px 5px 5px 5px;
+    flex: 0 1 350px;
+}
+
+.cardAnimalAdocao {
+    .headerAnimalAdocao {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .infoAnimalAdocao {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: justify;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .card-header {
+        background-color: rgb(251, 251, 251);
+        ;
+    }
+
+    .card-footer {
+        background-color: rgb(251, 251, 251);
+    }
+
+    .imagemAnimalAdocao {
+        max-width: 85px;
+        max-height: 85px;
+    }
+
+    .tipoAnimalAdocao {
+        color: gray;
+        font-size: 15px;
+        font-style: italic;
+    }
+}
