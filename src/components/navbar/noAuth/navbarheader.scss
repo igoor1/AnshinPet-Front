@@ -1,39 +1,27 @@
 .my-navbar-theme {
-    color: white !important;
+    color: var(--primaryColor) !important;
+    background-color: var(--auxColor1);
 
     a {
-        color: white;
+        color: var(--primaryColor);
         opacity: 90%;
         transition: all 0.4s ease;
-        border-bottom: 2px solid var(--primaryColor);
+        border-bottom: 2px solid var(--auxColor1);
     }
 
     a:hover {
-        color: white;
-        border-bottom: 2px solid white;
+        color: var(--primaryColor);
+        border-bottom: 2px solid var(--primaryColor);
         opacity: 100%;
-    }
-
-    a:active,
-    a:focus {
-        color: white;
     }
 
     .active,
     .show {
-        color: white !important;
+        color: var(--primaryColor) !important;
     }
 
-    .dropdown-menu {
-        background-color: var(--primaryColor) !important;
-    }
-
-    .dropdown-item:hover {
-        background-color: var(--primaryColor);
-    }
-
-    .navbar-toggler-icon {
-        color: white;
+    .navbar-toggler {
+        color: var(--primaryColor);
     }
 
 
