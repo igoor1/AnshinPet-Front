@@ -9,6 +9,7 @@ import Login from "./pages/login/login";
 import Cuidador from "./pages/cuidador/cuidador";
 import Dashboard from "./pages/dashboard/dashboard";
 import Adocao from "./pages/adocao/adocao";
+import AdocaoDetalhes from "./pages/adocao/detalhes/adocaoDetalhes";
 
 import NotFound from "./pages/notFound/notFound";
 
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/adocao" element={<Adocao />} />
+        <Route path="/adocao/detalhes/:animalId" element={<AdocaoDetalhes />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

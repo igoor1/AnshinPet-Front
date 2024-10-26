@@ -1,0 +1,15 @@
+.containerAdocao {
+    display: flex;
+
+    h2 {
+        color: var(--primaryColor);
+    }
+
+    img {
+        width: 300px;
+    }
+
+    p {
+        margin: 4px;
+    }
+}
