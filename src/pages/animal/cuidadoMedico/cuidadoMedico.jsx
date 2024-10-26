@@ -117,7 +117,7 @@ const CuidadoMedico = () => {
                     <Card.Body>
                         <div className='headerAnimal'>
                             <div>
-                                <Image src={ImgDefaultAnimal} alt="Imagem padrão (animal)" className='imagemAnimal' />
+                                <Image src={animal.foto} className='imagemAnimal' />
                                 <p style={{ margin: 'auto' }}> {animal.nome}</p>
                             </div>
                             <div className='infoAnimal'>
