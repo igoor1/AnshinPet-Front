@@ -1,5 +1,14 @@
 .AreaInputSearch {
     span {
-        background-color: transparent;
+        background-color: var(--auxColor1);
+        border: 1px solid var(--auxColor2);
+
     }
+
+    input {
+        border: 1px solid var(--auxColor2);
+    }
+
+    margin: 10px;
+    padding: 10px;
 }

@@ -3,13 +3,13 @@ import './navbarheader.scss'
 
 import useLogoutUser from '../../../hooks/login/useLogoutUser';
 
-import Logo from '../../../assets/logoWhite.svg';
+import Logo from '../../../assets/logoMinimal.svg';
 
 const NavbarHeader = () => {
     const { logout } = useLogoutUser();
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg='primary' className='my-navbar-theme p-2' data-bs-theme="dark">
+        <Navbar collapseOnSelect expand="lg" className='my-navbar-theme p-2' data-bs-theme="primary">
             <Container fluid>
                 <Navbar.Brand>
                     <Image src={Logo} alt="Logo" roundedCircle className='logo' />

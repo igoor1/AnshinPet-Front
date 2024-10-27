@@ -1,37 +1,42 @@
 import { useNavigate } from "react-router-dom";
 
-import { Button, Image, Badge, Card } from 'react-bootstrap';
-
-import { ModalDelete } from '../modal/modalDelete';
-import { ModalEdit } from '../modal/modalEdit';
-import { ModalEditFoto } from "../modal/modalEditPhoto";
+import { Button, Image } from 'react-bootstrap';
 
 import './animalCard.scss';
 
-const AnimalCard = ({ animal, refreshAnimals }) => {
-    const { openModalDelete } = ModalDelete(refreshAnimals);
-    const { openModalEdit } = ModalEdit(refreshAnimals);
-    const { openModalEditFoto } = ModalEditFoto(refreshAnimals);
+const AnimalCard = ({ animal }) => {
 
     const navigate = useNavigate();
 
     const getColorAdocao = (animal) => {
         switch (animal.adocao) {
             case 'S':
-                return 'success';
+                return 'badgeYes';
             case 'N':
-                return 'secondary';
+                return 'badgeNo';
             default:
                 return 'warning'
         }
     }
 
+    const getColorCastrado = (animal) => {
+        switch (animal.castrado) {
+            case 'S':
+                return 'badgeYes';
+            case 'N':
+                return 'badgeNo';
+            default:
+                return
+        }
+    }
+
+
     const getAdocao = (animal) => {
         switch (animal.adocao) {
             case 'S':
-                return 'Sim';
+                return 'Adoção';
             case 'N':
-                return 'Não'
+                return 'Não Adoção'
             default:
                 return 'erro';
         }
@@ -53,47 +58,45 @@ const AnimalCard = ({ animal, refreshAnimals }) => {
     const getCastrado = (animal) => {
         switch (animal.castrado) {
             case 'S':
-                return 'Sim';
+                return 'Castrado';
             case 'N':
-                return 'Não';
+                return 'Não Castrado';
             default:
                 return 'Erro';
         }
     }
 
     return (
-        <div className='itemAnimal'>
+        <div className="areaAnimal">
 
-            <Card className="text-center cardAnimal">
-                <Card.Header>
-                    <div className='headerAnimal'>
-                        <div>
-                            <a onClick={() => openModalEditFoto(animal)} >
-                                <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal rounded' />
-                            </a>
-                            <p style={{ margin: 'auto' }}> {animal.nome} <span className='tipoAnimal'>({getTipo(animal)})</span></p>
-                            <Badge bg={getColorAdocao(animal)}>Adoção: {getAdocao(animal)}</Badge>
-                        </div>
-                        <div className='infoAnimal'>
-                            <p >
-                                Raça: {animal.raca}
-                            </p>
-                            <p >
-                                Castrado: {getCastrado(animal)}
-                            </p>
-                            <p >
-                                Cor: {animal.cor}
-                            </p>
+            <div className='cardAnimal'>
+                <div className="nameTop">
+                    {animal.nome}
+                </div>
 
-                        </div>
+                <div className='header'>
+                    <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal rounded' />
+                </div>
+
+                <div className='body'>
+                    <div className="badgeContainer">
+                        <span className={getColorAdocao(animal)}>{getAdocao(animal)}</span>
+                        <span className={getColorCastrado(animal)}>{getCastrado(animal)}</span>
                     </div>
-                </Card.Header>
-                <Card.Footer className="text-muted">
-                    <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/cuidadosMedicos/${animal.id}`)}><i className="bi bi-heart"></i></Button>
-                    <Button variant="primary" className='m-1' onClick={() => openModalDelete(animal.id, animal.nome)}><i className="bi bi-trash"></i></Button>
-                    <Button variant="primary" className='m-1' onClick={() => openModalEdit(animal)}><i className="bi bi-pencil"></i></Button>
-                </Card.Footer>
-            </Card>
+                    <div className="infoAnimalContainer">
+                        <p>{getTipo(animal)}</p>
+                        <p> {animal.raca}</p>
+                    </div>
+
+                </div>
+
+                <div className="footer">
+                    <div className="btnContainer">
+                        <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/cuidadosMedicos/${animal.id}`)}><i class="bi bi-postcard-heart"></i> Ver detalhes</Button>
+                    </div>
+                </div>
+
+            </div >
         </div>
     )
 }

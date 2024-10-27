@@ -5,47 +5,90 @@
 
 }
 
-.itemAnimal {
+.cardAnimal {
     border-radius: 20px;
     padding: 10px;
     margin: 5px;
     flex: 0 1 350px;
-}
+    min-width: 250px;
 
-.cardAnimal {
-    .headerAnimal {
-        display: flex;
-        justify-content: space-around;
+    .nameTop {
+        display: inline-block;
+        background-color: var(--auxColor1);
+        padding: 10px 20px;
+        border-radius: 10px 10px 0 0;
+        font-weight: bold;
     }
 
-    .infoAnimal {
+    .header {
+        background-color: var(--auxColor1);
         display: flex;
-        flex-direction: column;
         justify-content: center;
-        text-align: justify;
+        border-radius: 0px 10px 0px 0px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        padding-top: 10px;
 
-        p {
-            margin: 0;
+        img {
+            width: 200px;
+            margin: 10px;
+            border-radius: 10px;
         }
     }
 
-    .card-header {
-        background-color: rgb(251, 251, 251);
-        ;
+    .body {
+        background-color: var(--auxColor1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+
+        .badgeContainer {
+            margin: 0 5px;
+            padding-bottom: 10px;
+        }
+
+        .infoAnimalContainer {
+            background-color: var(--auxColor1);
+
+            p {
+                font-weight: bold;
+                margin: 0 10px;
+                padding: 2px 0;
+            }
+        }
     }
 
-    .card-footer {
-        background-color: rgb(251, 251, 251);
-    }
+    .footer {
+        background-color: var(--auxColor1);
+        display: flex;
+        padding-bottom: 5px;
+        border-radius: 0px 0px 10px 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 
-    .imagemAnimal {
-        max-width: 85px;
-        max-height: 85px;
-    }
+        .btnContainer {
+            margin: 0 5px;
+            width: 90%;
 
-    .tipoAnimal {
-        color: gray;
-        font-size: 15px;
-        font-style: italic;
+            button {
+                width: 100%;
+            }
+        }
     }
+}
+
+.badgeYes {
+    background-color: var(--primaryColor);
+    color: var(--auxColor1);
+    padding: 5px;
+    margin: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.badgeNo {
+    background-color: var(--auxColor4);
+    color: var(--primaryColor);
+    padding: 5px;
+    margin: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    font-weight: 500;
 }
