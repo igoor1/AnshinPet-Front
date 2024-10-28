@@ -41,5 +41,5 @@ export const useFetchAnimalForId = (animalId) => {
         fetchAnimalForId();
     }, [animalId]);
 
-    return { animal, loading, error };
+    return { animal, loading, error, refreshAnimal: fetchAnimalForId };
 };

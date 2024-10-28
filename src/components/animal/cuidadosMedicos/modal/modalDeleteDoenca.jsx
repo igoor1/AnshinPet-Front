@@ -26,7 +26,7 @@ export const ModalDeleteDoenca = (refreshMedicals) => {
             focusConfirm: false,
             confirmButtonText: 'Deletar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
+            cancelButtonText: 'Cancelar',
             cancelButtonColor: "#dc3545",
 
         }).then(async (result) => {

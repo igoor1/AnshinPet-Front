@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import { useDeleteVacina } from "../../../hooks/animal/medicals/useDeleteVacina";
+import { useDeleteVacina } from "../../../../hooks/animal/medicals/useDeleteVacina";
 
 export const ModalDeleteVacina = (refreshMedicals) => {
     const { deleteVacina, loading, error, success } = useDeleteVacina();
@@ -26,7 +26,7 @@ export const ModalDeleteVacina = (refreshMedicals) => {
             focusConfirm: false,
             confirmButtonText: 'Deletar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
+            cancelButtonText: 'Cancelar',
             cancelButtonColor: "#dc3545",
 
         }).then(async (result) => {

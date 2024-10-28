@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useDeleteAnimal } from "../../../hooks/animal/useDeleteAnimal";
 
-export const ModalDelete = (refreshAnimals) => {
+export const ModalDelete = () => {
     const { deleteAnimal, loading, error, success } = useDeleteAnimal();
 
     const Toast = Swal.mixin({
@@ -44,7 +44,7 @@ export const ModalDelete = (refreshAnimals) => {
                 title: "Animal Deletado"
             });
 
-            refreshAnimals()
+            window.location.href = "/admin/animais"
         }
 
         if (error) {

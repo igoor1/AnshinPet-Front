@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Animal from './pages/animal/animal'
 import Doenca from "./pages/doenca/doenca";
 import Vacina from "./pages/vacina/vacina";
-import CuidadoMedico from "./pages/animal/cuidadoMedico/cuidadoMedico";
+import Detalhes from "./pages/animal/detalhes/detalhes";
 import Doacao from "./pages/doacao/doacao";
 import Login from "./pages/login/login";
 import Cuidador from "./pages/cuidador/cuidador";
@@ -26,7 +26,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/admin/animais" element={<ProtectedRoute><Animal /></ProtectedRoute>} />
-        <Route path="/admin/animais/cuidadosMedicos/:animalId" element={<ProtectedRoute><CuidadoMedico /></ProtectedRoute>} />
+        <Route path="/admin/animais/detalhes/:animalId" element={<ProtectedRoute><Detalhes /></ProtectedRoute>} />
         <Route path="/admin/doencas" element={<ProtectedRoute><Doenca /></ProtectedRoute>} />
         <Route path="/admin/vacinas" element={<ProtectedRoute><Vacina /></ProtectedRoute>} />
         <Route path="/admin/doacoes" element={<ProtectedRoute><Doacao /></ProtectedRoute>} />

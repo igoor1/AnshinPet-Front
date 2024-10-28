@@ -1,0 +1,189 @@
+.areaDetalhesAnimal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.animalDetalhes {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--auxColor1);
+    padding: 20px;
+    border-radius: 10px;
+
+    @media (max-width: 650px) {
+        display: block;
+    }
+
+    .areaAnimalFoto {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .iconeFoto {
+        position: absolute;
+        color: var(--tertiaryColor);
+        opacity: 70%;
+        font-size: 2rem;
+        transition: all 0.4s ease;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 100%;
+        }
+    }
+
+    img {
+        width: 250px;
+        display: block;
+        border-radius: 10px;
+    }
+
+    .animalDetalhesInfo {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        margin-left: 30px;
+
+        p {
+            margin: 0;
+        }
+
+        .item {
+            margin: 3px 0;
+        }
+
+        .title {
+            font-weight: bold;
+            line-height: 15px;
+            font-size: 150%;
+
+            @media (max-width: 650px) {
+                margin-top: 20px;
+            }
+        }
+
+        .subTitle {
+            color: var(--auxColor5);
+            font-weight: bold;
+            opacity: 60%;
+            font-family: 110%;
+        }
+    }
+}
+
+.animalDetalhesAcoes {
+    .titulo {
+        background-color: var(--auxColor1);
+        border-radius: 10px;
+        padding: 5px 0;
+        margin-bottom: 5px;
+
+        h4 {
+            text-align: center;
+            font-weight: bold;
+        }
+    }
+
+    padding: 0 20px 20px 20px;
+
+    @media (max-width: 916px) {
+        padding-top: 20px;
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    .btnAcoes {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            width: 162px;
+            height: 40px;
+            margin: 5px 0;
+            font-size: 13px;
+        }
+    }
+
+    button {
+        width: 330px;
+        height: 40px;
+        margin: 5px 0;
+    }
+}
+
+.badgeContainerDetalhes {
+    margin: 5px 0;
+
+    .badgeYesDetalhes {
+        background-color: var(--primaryColor);
+        color: var(--auxColor1);
+        padding: 5px;
+        margin-right: 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        font-weight: 500;
+    }
+
+    .badgeNoDetalhes {
+        background-color: var(--auxColor4);
+        color: var(--primaryColor);
+        padding: 5px;
+        margin-right: 5px;
+        font-size: 14px;
+        border-radius: 5px;
+        font-weight: 500;
+    }
+}
+
+
+.areaDoencaVacinas {
+    .card-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .card-body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        .cardDoencaVacinas {
+            margin-top: 10px;
+
+            display: flex;
+            flex-direction: column;
+            background-color: var(--auxColor3);
+            width: 200px;
+            padding: 20px;
+            border-radius: 20px;
+
+            p {
+                word-wrap: break-word;
+                white-space: pre-line;
+            }
+
+            h4 {
+                color: var(--primaryColor);
+                font-size: 20px;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            .subTitle {
+                color: var(--auxColor5);
+                opacity: 90%;
+            }
+
+            .areaBtn {
+                button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
