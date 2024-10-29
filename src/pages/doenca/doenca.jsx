@@ -69,7 +69,7 @@ const Doenca = () => {
                     </InputGroup>
                 </div>
 
-                <div className="p-2 ms-auto">
+                <div className="p-2 ms-auto align-content-center">
                     <Button variant="primary" className="btnCadastrar" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                 </div>
 
