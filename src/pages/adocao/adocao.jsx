@@ -4,6 +4,7 @@ import Footer from "../../components/footer/footer";
 import Loading from "../../components/loading/loading";
 
 import { useFetchAnimals } from "../../hooks/animal/useFetchAnimals";
+import { useFetchAdocoes } from "../../hooks/adocao/useFetchAdocoes";
 
 import AnimalAdocaoCard from "../../components/adocao/card/animalAdocaoCard";
 
@@ -14,7 +15,7 @@ const Adocao = () => {
         document.title = 'Adoção | Anshin Pet';
     }, []);
 
-    const { animals, error, loading } = useFetchAnimals();
+    const { animals, error, loading } = useFetchAdocoes();
 
     if (loading) return <Loading />
 
@@ -31,14 +32,16 @@ const Adocao = () => {
         <div className="divMain">
             <NavbarHeader />
 
-            <div className='areaAnimal'>
-                {animals.length === 0 ? (
-                    <p>Nenhum animal encontrado.</p>
-                ) : (
-                    animals.map((animal) => (
-                        <AnimalAdocaoCard animal={animal} key={animal.id} />
-                    ))
-                )}
+            <div className="containerMain">
+                <div className='areaAnimal'>
+                    {animals.length === 0 ? (
+                        <p>Nenhum animal encontrado.</p>
+                    ) : (
+                        animals.map((animal) => (
+                            <AnimalAdocaoCard animal={animal} key={animal.id} />
+                        ))
+                    )}
+                </div>
             </div>
             <Footer />
         </div>
