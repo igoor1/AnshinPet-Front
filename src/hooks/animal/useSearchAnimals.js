@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api'
 import imgDefault from "../../assets/imgDefault.png"
+import photoURL from '../../services/photoURL';
 
 export const useSearchAnimals = (initialAnimals) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredAnimals, setFilteredAnimals] = useState(initialAnimals);
+    const { usePhoto } = photoURL();
 
     useEffect(() => {
         setFilteredAnimals(initialAnimals);
@@ -15,7 +17,8 @@ export const useSearchAnimals = (initialAnimals) => {
             const response = await api.get(`/animais/${animalId}/foto`);
 
             if (response.data && response.data.nomeArquivo) {
-                return `http://localhost:8080/api/animais/${animalId}/foto`;
+                const fotoUrl = await usePhoto(animalId);
+                return fotoUrl;
             }
 
             return null;

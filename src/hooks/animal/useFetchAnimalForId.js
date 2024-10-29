@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import imgDefault from "../../assets/imgDefault.png";
+import photoURL from '../../services/photoURL';
 
 
 export const useFetchAnimalForId = (animalId) => {
     const [animal, setAnimal] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { usePhoto } = photoURL();
 
     const fetchAnimalForId = async () => {
         setLoading(true);
@@ -19,7 +21,7 @@ export const useFetchAnimalForId = (animalId) => {
 
             try {
                 const fotoResponse = await api.get(`/animais/${animalData.id}/foto`);
-                const fotoUrl = `http://localhost:8080/api/animais/${animalData.id}/foto`;
+                const fotoUrl = await usePhoto(animalData.id);
 
                 setAnimal({ ...animalData, foto: fotoUrl });
             } catch {
