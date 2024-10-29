@@ -26,8 +26,8 @@ export const ModalDelete = (refreshDoencas) => {
             focusConfirm: false,
             confirmButtonText: 'Deletar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: "#FF7979",
 
         }).then(async (result) => {
             if (result.isConfirmed) {

@@ -70,12 +70,12 @@ const Doenca = () => {
                 </div>
 
                 <div className="p-2 ms-auto">
-                    <Button variant="success" className="btnCadastrar" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                    <Button variant="primary" className="btnCadastrar" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                 </div>
 
             </div>
             <div className="container containerMain mt-4">
-                <Table responsive>
+                <Table responsive className="tablePrimary">
                     <thead>
                         <tr className="text-center">
                             <th>#</th>
@@ -96,8 +96,8 @@ const Doenca = () => {
                                         {getGravidade(doenca)}
                                     </td>
                                     <td>
-                                        <Button variant="primary" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
-                                        <Button variant="secondary" className='m-1' onClick={() => openModalEdit(doenca)}><i className="bi bi-pencil"></i></Button></td>
+                                        <Button variant="secondary" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
+                                        <Button variant="success" className='m-1' onClick={() => openModalEdit(doenca)}><i className="bi bi-pencil"></i></Button></td>
                                 </tr>
                             ))
                         )}
