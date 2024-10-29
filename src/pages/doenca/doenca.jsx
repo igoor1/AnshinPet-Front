@@ -78,7 +78,6 @@ const Doenca = () => {
                 <Table responsive className="tablePrimary">
                     <thead>
                         <tr className="text-center">
-                            <th>#</th>
                             <th >Nome</th>
                             <th>Gravidade</th>
                             <th >Opções</th>
@@ -86,11 +85,12 @@ const Doenca = () => {
                     </thead>
                     <tbody>
                         {filteredDoencas.length === 0 ? (
-                            <p>Nenhuma doença encontrada</p>
+                            <tr>
+                                <td colSpan={3} className="text-center">Nenhuma doença encontrada</td>
+                            </tr>
                         ) : (
                             filteredDoencas.map((doenca) => (
                                 <tr key={doenca.id} className="text-center trDoencas">
-                                    <td>{doenca.id}</td>
                                     <td>{doenca.nome}</td>
                                     <td>
                                         {getGravidade(doenca)}
