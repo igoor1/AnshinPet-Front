@@ -79,3 +79,13 @@ a {
     display: flex;
     font-size: 14px;
 }
+
+.tablePrimary {
+    border-radius: 10px !important;
+
+    th {
+        background-color: var(--primaryColor) !important;
+        color: var(--auxColor1) !important;
+    }
+
+}

@@ -58,16 +58,15 @@ const Vacina = () => {
                 </div>
 
                 <div className="p-2 ms-auto">
-                    <Button variant="success" className="btnCadastrar" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                    <Button variant="primary" className="btnCadastrar" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                 </div>
 
             </div>
 
             <div className="container containerMain mt-4">
-                <Table responsive>
+                <Table responsive className="tablePrimary">
                     <thead>
                         <tr className="text-center">
-                            <th>#</th>
                             <th >Nome</th>
                             <th>Fabricante</th>
                             <th >Opções</th>
@@ -75,16 +74,17 @@ const Vacina = () => {
                     </thead>
                     <tbody>
                         {filteredVacinas.length === 0 ? (
-                            <p>Nenhuma vacina encontrada</p>
+                            <tr>
+                                <td colSpan={3} className="text-center">Nenhuma vacina encontrada</td>
+                            </tr>
                         ) : (
                             filteredVacinas.map((vacina) => (
                                 <tr key={vacina.id} className="text-center trVacinas">
-                                    <td>{vacina.id}</td>
                                     <td>{vacina.nome}</td>
                                     <td>{vacina.fabricante}</td>
                                     <td>
-                                        <Button variant="primary" className='m-1' onClick={() => openModalDelete(vacina.id, vacina.nome)}><i className="bi bi-trash"></i></Button>
-                                        <Button variant="secondary" className='m-1' onClick={() => openModalEdit(vacina)}><i className="bi bi-pencil"></i></Button></td>
+                                        <Button variant="secondary" className='m-1' onClick={() => openModalDelete(vacina.id, vacina.nome)}><i className="bi bi-trash"></i></Button>
+                                        <Button variant="success" className='m-1' onClick={() => openModalEdit(vacina)}><i className="bi bi-pencil"></i></Button></td>
                                 </tr>
                             ))
                         )}
