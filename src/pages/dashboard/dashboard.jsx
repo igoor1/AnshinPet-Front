@@ -36,10 +36,22 @@ const Dashboard = () => {
         labels: labelsAnimals,
         datasets: [
             {
-                label: "Animais",
-                backgroundColor: "#FFD700",
+                label: ["Cachorros"],
+                backgroundColor: "#7C54D9",
                 borderColor: '#000000',
-                data: [dogs, cats, birds],
+                data: [dogs, 0, 0],
+            },
+            {
+                label: ["Gatos"],
+                backgroundColor: "#FF7979",
+                borderColor: '#000000',
+                data: [0, cats, 0],
+            },
+            {
+                label: ["Aves"],
+                backgroundColor: "#49A971",
+                borderColor: '#000000',
+                data: [0, 0, birds],
             },
         ],
     };
@@ -52,9 +64,10 @@ const Dashboard = () => {
             {
                 label: "Animais",
                 backgroundColor: [
-                    '#5e2cd3',
-                    '#FFD700',
+                    '#7C54D9',
+                    '#FF7979',
                 ],
+                borderColor: ['#FF7979', '#7C54D9'],
 
 
                 data: [adoptions, noAdoptions],
