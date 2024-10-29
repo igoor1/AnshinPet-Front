@@ -4,6 +4,11 @@ $success: #49A971;
 
 $font-family-base: Arial, Helvetica, sans-serif;
 
+html {
+    background-color: var(--auxColor3);
+}
+
+
 #root {
     background-color: var(--auxColor3);
 }
