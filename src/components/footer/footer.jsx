@@ -1,11 +1,10 @@
-import { Container, Image, Stack } from 'react-bootstrap';
+import { Image, Stack } from 'react-bootstrap';
 
 import Logo from '../../assets/logoFull.svg';
 
 const Footer = () => {
     return (
         <div className='position-relative' style={{ backgroundColor: 'var(--auxColor1)' }}>
-            <hr />
             <Stack direction="horizontal" gap={3}>
                 <div className="p-2"> <Image src={Logo} alt="Logo" style={{ width: '100px', height: '100px' }} />
                 </div>
