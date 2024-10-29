@@ -29,7 +29,7 @@ export const ModalEditFoto = (refreshAnimals) => {
             confirmButtonText: 'Editar',
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const id = animal.id;

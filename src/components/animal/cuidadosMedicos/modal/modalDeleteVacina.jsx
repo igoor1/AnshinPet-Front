@@ -27,7 +27,7 @@ export const ModalDeleteVacina = (refreshMedicals) => {
             confirmButtonText: 'Deletar',
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonColor: "#FF7979",
 
         }).then(async (result) => {
             if (result.isConfirmed) {

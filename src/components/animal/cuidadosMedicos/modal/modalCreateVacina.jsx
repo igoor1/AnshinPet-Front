@@ -40,8 +40,8 @@ export const ModalCreateVacina = (animalId, refreshMedicals) => {
             focusConfirm: false,
             confirmButtonText: 'Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const lote = document.getElementById('lote').value;

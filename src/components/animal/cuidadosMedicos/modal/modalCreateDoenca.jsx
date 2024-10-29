@@ -56,8 +56,8 @@ export const ModalCreateDoenca = (animalId, refreshMedicals) => {
             focusConfirm: false,
             confirmButtonText: 'Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const descricao = document.getElementById('descricao').value;

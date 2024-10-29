@@ -145,7 +145,7 @@ export const ModalCreate = (refreshAnimals) => {
             confirmButtonText: 'Cadastrar',
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const nome = document.getElementById('nome').value;
