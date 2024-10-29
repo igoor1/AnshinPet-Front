@@ -54,34 +54,38 @@ const Doacao = () => {
                 <Breadcrumb.Item active>Doações</Breadcrumb.Item>
             </Breadcrumb>
 
-            <div className="container">
-                <p className="mb-2">Filtrar por:</p>
-                <Nav variant="pills" defaultActiveKey="tipo-1">
-                    <Nav.Item>
-                        <Nav.Link eventKey="tipo-1" onClick={() => handleFilterChange({ value: "" })}>Todos</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="tipo-2" onClick={() => handleFilterChange({ value: "D" })}>Dinheiro</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="tipo-3" onClick={() => handleFilterChange({ value: "R" })}>
-                            Ração
-                        </Nav.Link>
-                    </Nav.Item>
-                </Nav>
+            <div className="container areaFiltrosBtn">
+                <div className="containerFiltros">
+                    <h3>Filtrar por:</h3>
+                    <Nav variant="pills" defaultActiveKey="tipo-1">
+                        <Nav.Item>
+                            <Nav.Link eventKey="tipo-1" onClick={() => handleFilterChange({ value: "" })}>Todos</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="tipo-2" onClick={() => handleFilterChange({ value: "D" })}>Dinheiro</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="tipo-3" onClick={() => handleFilterChange({ value: "R" })}>
+                                Ração
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </div>
+                <div className="containerBtn">
+                    <div className="title">
+                        <h3>Cadastros</h3>
+                    </div>
+                    <div className="btns">
+                        <Button variant="primary" onClick={() => openModalCreateDinheiro()}><i class="bi bi-piggy-bank"></i> Dinheiro</Button>
+
+                        <Button variant="primary" onClick={() => openModalCreateRacao()}><i class="bi bi-box2-heart"></i> Ração</Button>
+                    </div>
+                </div>
+
             </div>
 
             <div className="container containerMain">
-                <div className="container d-flex justify-content-center">
-                    <div className="p-2">
-                        <Button variant="success" className="btnCadastrar" onClick={() => openModalCreateDinheiro()}><i className="bi bi-plus"></i>Cadastrar Doação (Dinheiro)</Button>
-                    </div>
 
-                    <div className="p-2">
-                        <Button variant="success" className="btnCadastrar" onClick={() => openModalCreateRacao()}><i className="bi bi-plus"></i> Cadastrar Doação (Ração)</Button>
-                    </div>
-
-                </div>
                 <div className="container containerMain mt-4">
 
                     <div className='areaDoacao'>

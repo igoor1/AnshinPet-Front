@@ -47,31 +47,32 @@ const DoacaoCard = ({ refreshDoacoes, doacao }) => {
 
 
     return (
-        <div className='itemDoacao'>
+        <div className='areaDoacao'>
 
-            <Card className="text-center cardDoacao">
+            <div className="cardDoacao">
+                <div className="nameTop">
+                    {getTipo(doacao)}
+                </div>
 
-                <Card.Header>
-                    <div className='headerDoacao'>
-                        <div>
-                            <p style={{ margin: 'auto' }}> {getTipo(doacao)}</p>
-                        </div>
-                    </div>
-                </Card.Header>
-
-                <Card.Body>
-                    <div className='infoDoacao'>
-                        {
-                            getBodyType(doacao)
-                        }
+                <div className='body'>
+                    <div className="infoDoacaoContainer">
+                        <p>{getBodyType(doacao)}</p>
                         <p>Descrição: {doacao.descricao}</p>
                     </div>
-                </Card.Body>
-                <Card.Footer className="text-muted">
-                    <Button variant="primary" className='m-1' onClick={() => openModalDelete(doacao.id)}><i className="bi bi-trash"></i></Button>
-                    <Button variant="secondary" className='m-1' onClick={() => getModalEdit(doacao)}><i className="bi bi-pencil"></i></Button>
-                </Card.Footer>
-            </Card>
+                </div>
+
+                <div className='containerHr'>
+                    <hr />
+                </div>
+
+
+                <div className="footer">
+                    <div className="btnContainer">
+                        <Button variant="success" className='m-1' onClick={() => getModalEdit(doacao)}><i className="bi bi-pencil"></i> Editar</Button>
+                        <Button variant="outline-secondary" className='m-1' onClick={() => openModalDelete(doacao.id)}><i className="bi bi-trash"></i> Deletar</Button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 

@@ -45,8 +45,8 @@ export const ModalEditDinheiro = (refreshDoacoes) => {
             focusConfirm: false,
             confirmButtonText: 'Editar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const id = doacao.id

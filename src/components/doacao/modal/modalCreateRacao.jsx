@@ -44,8 +44,8 @@ export const ModalCreateRacao = (refreshDoacoes) => {
             focusConfirm: false,
             confirmButtonText: 'Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const quantidade = document.getElementById('quantidade').value;
