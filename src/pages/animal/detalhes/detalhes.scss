@@ -150,10 +150,23 @@
     .card-body {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: start;
+        gap: 10px;
+
+        @media (max-width: 1399px) {
+            justify-content: space-between;
+        }
+
+        @media (max-width: 496px) {
+            justify-content: space-around;
+        }
+
+        &::after {
+            content: "";
+            flex-basis: 100%;
+        }
 
         .cardDoencaVacinas {
-            margin-top: 10px;
 
             display: flex;
             flex-direction: column;
@@ -180,6 +193,8 @@
             }
 
             .areaBtn {
+                margin-top: auto;
+
                 button {
                     width: 100%;
                 }

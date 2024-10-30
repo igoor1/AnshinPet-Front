@@ -1,13 +1,13 @@
-.areaDoacao {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
 .areaFiltrosBtn {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    @media (max-width: 767px) {
+        justify-content: center;
+        gap: 10px;
+    }
+
 
     .containerFiltros {
         h3 {
@@ -38,12 +38,33 @@
             width: 350px;
             display: flex;
             justify-content: space-between;
+            gap: 10px;
 
             button {
-                margin: 5px;
                 padding: 10px;
                 width: 50%;
             }
         }
+    }
+}
+
+.areaDoacao {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 10px;
+
+    @media(max-width: 992px) {
+        justify-content: space-between;
+    }
+
+    @media(max-width: 500px) {
+        justify-content: center;
+    }
+
+
+    &::after {
+        content: "";
+        flex-basis: 100%;
     }
 }

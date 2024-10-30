@@ -67,37 +67,35 @@ const AnimalCard = ({ animal }) => {
     }
 
     return (
-        <div className="areaAnimal">
 
-            <div className='cardAnimal'>
-                <div className="nameTop">
-                    {animal.nome}
+        <div className='cardAnimal'>
+            <div className="nameTop">
+                {animal.nome}
+            </div>
+
+            <div className='header'>
+                <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal rounded' />
+            </div>
+
+            <div className='body'>
+                <div className="badgeContainer">
+                    <span className={getColorAdocao(animal)}>{getAdocao(animal)}</span>
+                    <span className={getColorCastrado(animal)}>{getCastrado(animal)}</span>
+                </div>
+                <div className="infoAnimalContainer">
+                    <p>{getTipo(animal)}</p>
+                    <p> {animal.raca}</p>
                 </div>
 
-                <div className='header'>
-                    <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimal rounded' />
+            </div>
+
+            <div className="footer">
+                <div className="btnContainer">
+                    <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/detalhes/${animal.id}`)}><i class="bi bi-postcard-heart"></i> Ver detalhes</Button>
                 </div>
+            </div>
 
-                <div className='body'>
-                    <div className="badgeContainer">
-                        <span className={getColorAdocao(animal)}>{getAdocao(animal)}</span>
-                        <span className={getColorCastrado(animal)}>{getCastrado(animal)}</span>
-                    </div>
-                    <div className="infoAnimalContainer">
-                        <p>{getTipo(animal)}</p>
-                        <p> {animal.raca}</p>
-                    </div>
-
-                </div>
-
-                <div className="footer">
-                    <div className="btnContainer">
-                        <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/detalhes/${animal.id}`)}><i class="bi bi-postcard-heart"></i> Ver detalhes</Button>
-                    </div>
-                </div>
-
-            </div >
-        </div>
+        </div >
     )
 }
 

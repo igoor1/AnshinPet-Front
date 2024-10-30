@@ -47,33 +47,32 @@ const DoacaoCard = ({ refreshDoacoes, doacao }) => {
 
 
     return (
-        <div className='areaDoacao'>
 
-            <div className="cardDoacao">
-                <div className="nameTop">
-                    {getTipo(doacao)}
+        <div className="cardDoacao">
+            <div className="nameTop">
+                {getTipo(doacao)}
+            </div>
+
+            <div className='body'>
+                <div className="infoDoacaoContainer">
+                    <p>{getBodyType(doacao)}</p>
+                    <p>Descrição: {doacao.descricao}</p>
                 </div>
+            </div>
 
-                <div className='body'>
-                    <div className="infoDoacaoContainer">
-                        <p>{getBodyType(doacao)}</p>
-                        <p>Descrição: {doacao.descricao}</p>
-                    </div>
-                </div>
-
-                <div className='containerHr'>
-                    <hr />
-                </div>
+            <div className='containerHr'>
+                <hr />
+            </div>
 
 
-                <div className="footer">
-                    <div className="btnContainer">
-                        <Button variant="success" className='m-1' onClick={() => getModalEdit(doacao)}><i className="bi bi-pencil"></i> Editar</Button>
-                        <Button variant="outline-secondary" className='m-1' onClick={() => openModalDelete(doacao.id)}><i className="bi bi-trash"></i> Deletar</Button>
-                    </div>
+            <div className="footer">
+                <div className="btnContainer">
+                    <Button variant="success" className='m-1' onClick={() => getModalEdit(doacao)}><i className="bi bi-pencil"></i> Editar</Button>
+                    <Button variant="outline-secondary" className='m-1' onClick={() => openModalDelete(doacao.id)}><i className="bi bi-trash"></i> Deletar</Button>
                 </div>
             </div>
         </div>
+
     )
 
 }

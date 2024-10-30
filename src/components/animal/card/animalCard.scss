@@ -1,16 +1,29 @@
 .areaAnimal {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: start;
+    gap: 10px;
 
+    @media(max-width: 992px) {
+        justify-content: space-between;
+    }
+
+    @media(max-width: 500px) {
+        justify-content: center;
+    }
+
+
+    &::after {
+        content: "";
+        flex-basis: 100%;
+    }
 }
 
 .cardAnimal {
     border-radius: 20px;
     padding: 10px;
-    margin: 5px;
-    flex: 0 1 350px;
-    min-width: 250px;
+    flex: 1 1 250px;
+    max-width: 270px;
 
     .nameTop {
         display: inline-block;
