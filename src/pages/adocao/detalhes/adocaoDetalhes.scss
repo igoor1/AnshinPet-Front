@@ -1,15 +1,101 @@
-.containerAdocao {
+.cardAnimalAdocaoDetalhes {
     display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: space-around;
 
-    h2 {
+    .header {
+        display: flex;
+
+        img {
+            width: 250px;
+            margin: auto;
+        }
+    }
+
+    .body {
+        font-size: 14px;
+        margin-top: 15px;
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-weight: bold;
+            margin-bottom: 2px;
+            font-size: 28px;
+        }
+
+        .subTitle {
+            color: var(--auxColor5);
+            font-weight: bold;
+            font-size: 15px;
+            opacity: 60%;
+        }
+    }
+}
+
+.mensagemAdocaoDetalhes {
+    background-color: var(--auxColor1);
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .areaTitle {
+        padding: 5px;
+        border-radius: 10px 10px 0px 0px;
+        text-align: center;
+        border-bottom: 1px solid var(--primaryColor);
+        margin: 0 10px;
+
+        h4 {
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--primaryColor);
+            margin: 10px;
+        }
+    }
+
+    .areaSubtitle {
+        padding: 5px;
+
+        p {
+            margin: 0;
+            padding: 5px;
+        }
+    }
+
+}
+
+.areaBtnInteresseAdocao {
+    margin-top: 10px;
+
+    button {
+        width: 100%;
+        font-weight: bold;
+    }
+}
+
+
+.badgeContainerDetalhes {
+    margin: 10px 0;
+
+    .badgeYesDetalhes {
+        background-color: var(--primaryColor);
+        color: var(--auxColor1);
+        padding: 5px;
+        font-size: 13px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .badgeNoDetalhes {
+        background-color: var(--auxColor4);
         color: var(--primaryColor);
-    }
-
-    img {
-        width: 300px;
-    }
-
-    p {
-        margin: 4px;
+        padding: 5px;
+        font-size: 13px;
+        border-radius: 5px;
+        font-weight: bold;
     }
 }
