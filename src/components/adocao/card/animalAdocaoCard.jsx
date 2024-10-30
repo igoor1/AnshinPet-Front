@@ -1,12 +1,22 @@
 import { useNavigate } from "react-router-dom";
-import { Button, Image, Card } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 
 import './animalAdocaoCard.scss';
-
 
 const AnimalAdocaoCard = ({ animal }) => {
 
     const navigate = useNavigate();
+
+    const getColorCastrado = (animal) => {
+        switch (animal.castrado) {
+            case 'S':
+                return 'badgeYes';
+            case 'N':
+                return 'badgeNo';
+            default:
+                return
+        }
+    }
 
     const getTipo = (animal) => {
         switch (animal.tipo) {
@@ -24,9 +34,9 @@ const AnimalAdocaoCard = ({ animal }) => {
     const getCastrado = (animal) => {
         switch (animal.castrado) {
             case 'S':
-                return 'Sim';
+                return 'Castrado';
             case 'N':
-                return 'Não';
+                return 'Não Castrado';
             default:
                 return 'Erro';
         }
@@ -34,33 +44,34 @@ const AnimalAdocaoCard = ({ animal }) => {
 
 
     return (
-        <div className='itemAnimalAdocao'>
+        <div className="cardAnimalAdocao">
+            <div className="nameTop">
+                {animal.nome}
+            </div>
 
-            <Card className="text-center cardAnimalAdocao">
-                <Card.Header>
-                    <div className='headerAnimalAdocao'>
-                        <div>
-                            <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimalAdocao rounded' />
-                            <p style={{ margin: 'auto' }}> {animal.nome} <span className='tipoAnimalAdocao'>({getTipo(animal)})</span></p>
-                        </div>
-                        <div className='infoAnimalAdocao'>
-                            <p >
-                                Raça: {animal.raca}
-                            </p>
-                            <p >
-                                Castrado: {getCastrado(animal)}
-                            </p>
-                            <p >
-                                Cor: {animal.cor}
-                            </p>
-                        </div>
 
+            <div className='header'>
+                <Image src={animal.foto} alt="Imagem padrão" className='imagemAnimalAdocao rounded' />
+            </div>
+
+
+            <div className='body'>
+                <div className="badgeContainer">
+                    <span className={getColorCastrado(animal)}>{getCastrado(animal)}</span>
+
+                </div>
+
+                <div className="infoAnimalContainer">
+                    <p>{getTipo(animal)}</p>
+                    <p>{animal.raca}</p>
+                </div>
+
+                <div className="footer">
+                    <div className="btnContainer">
+                        <Button variant="primary" className='m-1' onClick={() => navigate(`/adocao/detalhes/${animal.id}`)}>Ver detalhes</Button>
                     </div>
-                </Card.Header>
-                <Card.Footer className="text-muted">
-                    <Button variant="primary" className='m-1' onClick={() => navigate(`/adocao/detalhes/${animal.id}`)}>Ver detalhes</Button>
-                </Card.Footer>
-            </Card>
+                </div>
+            </div>
         </div>
     )
 }
