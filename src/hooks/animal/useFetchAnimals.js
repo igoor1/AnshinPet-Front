@@ -3,20 +3,27 @@ import api from '../../services/api';
 import imgDefault from "../../assets/imgDefault.png";
 import photoURL from '../../services/photoURL';
 
-export const useFetchAnimals = () => {
+export const useFetchAnimals = (page = 0, size = 12) => {
     const [animals, setAnimals] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [pagination, setPagination] = useState({
+        totalItens: 0,
+        totalPaginas: 0,
+        paginaAtual: page,
+    })
     const { usePhoto } = photoURL();
 
-    const fetchAnimals = async () => {
+    const fetchAnimals = async (pageNumber = 0, pageSize = 12) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await api.get('/animais');
-            const animals = response.data;
+            const response = await api.get('/animais', {
+                params: { size: pageSize, page: pageNumber }
+            });
+            const data = response.data;
 
-            const animalsFotoPromise = animals.map(async (animal) => {
+            const animalsFotoPromise = data.conteudo.map(async (animal) => {
                 try {
                     const response = await api.get(`/animais/${animal.id}/foto`);
 
@@ -37,6 +44,11 @@ export const useFetchAnimals = () => {
 
             const animaisFoto = await Promise.all(animalsFotoPromise);
             setAnimals(animaisFoto);
+            setPagination({
+                totalItens: data.totalItens,
+                totalPaginas: data.totalPaginas,
+                paginaAtual: data.paginaAtual
+            })
 
         } catch (err) {
             setError('Erro ao buscar animais');
@@ -47,8 +59,8 @@ export const useFetchAnimals = () => {
     };
 
     useEffect(() => {
-        fetchAnimals();
-    }, []);
+        fetchAnimals(page, size);
+    }, [page, size]);
 
-    return { animals, loading, error, refreshAnimals: fetchAnimals };
+    return { animals, loading, error, pagination, refreshAnimals: fetchAnimals };
 };
