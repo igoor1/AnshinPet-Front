@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { parseISO, format, differenceInYears, differenceInMonths, differenceInDays } from 'date-fns';
+import { differenceInYears, differenceInMonths, differenceInDays } from 'date-fns';
 
 import Loading from "../../../components/loading/loading";
 
 import { useFetchAnimalForId } from "../../../hooks/animal/useFetchAnimalForId";
+import { ModalCreate } from "../../../components/adocao/modal/modalCreate";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import NavbarHeader from "../../../components/navbar/noAuth/navbarheader";
@@ -21,6 +22,7 @@ const AdocaoDetalhes = () => {
 
     const { animalId } = useParams();
     const { animal, error, loading } = useFetchAnimalForId(animalId)
+    const { openModalCreate } = ModalCreate(animal);
 
     if (loading) return <Loading />
 
@@ -31,17 +33,6 @@ const AdocaoDetalhes = () => {
             icon: 'error',
             confirmButtonText: 'fechar'
         })
-    }
-
-    const getAdocao = (animal) => {
-        switch (animal.adocao) {
-            case 'S':
-                return 'Sim';
-            case 'N':
-                return 'Não'
-            default:
-                return 'erro';
-        }
     }
 
     const getTipo = (animal) => {
@@ -169,11 +160,10 @@ const AdocaoDetalhes = () => {
                             </div>
 
                             <div className="areaBtnInteresseAdocao">
-                                <Button variant="primary">Cadastrar Interesse</Button>
+                                <Button variant="primary" onClick={() => openModalCreate(animal)}>Cadastrar Interesse</Button>
                             </div>
                         </div>
                     </div>
-                    <hr></hr>
                 </div>
 
             </div>
