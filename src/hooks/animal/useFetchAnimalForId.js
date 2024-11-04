@@ -7,6 +7,7 @@ import photoURL from '../../services/photoURL';
 export const useFetchAnimalForId = (animalId) => {
     const [animal, setAnimal] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [loadingImg, setLoadingImg] = useState(true);
     const [error, setError] = useState(null);
     const { usePhoto } = photoURL();
 
@@ -22,12 +23,13 @@ export const useFetchAnimalForId = (animalId) => {
             try {
                 const fotoResponse = await api.get(`/animais/${animalData.id}/foto`);
                 const fotoUrl = await usePhoto(animalData.id);
-
                 setAnimal({ ...animalData, foto: fotoUrl });
             } catch {
                 console.warn(`(${animalData.nome}) - Foto não encontrada, usando a imagem padrão.`);
                 setAnimal({ ...animalData, foto: imgDefault });
             }
+
+            setLoadingImg(false);
 
 
         } catch (err) {
@@ -43,5 +45,5 @@ export const useFetchAnimalForId = (animalId) => {
         fetchAnimalForId();
     }, [animalId]);
 
-    return { animal, loading, error, refreshAnimal: fetchAnimalForId };
+    return { animal, loading, loadingImg, error, refreshAnimal: fetchAnimalForId };
 };

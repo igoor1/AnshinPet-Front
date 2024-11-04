@@ -6,6 +6,7 @@ import photoURL from '../../services/photoURL';
 export const useFetchAnimals = (page = 0, size = 12) => {
     const [animals, setAnimals] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [loadingImg, setLoadingImg] = useState(true);
     const [error, setError] = useState(null);
     const [pagination, setPagination] = useState({
         totalItens: 0,
@@ -16,6 +17,7 @@ export const useFetchAnimals = (page = 0, size = 12) => {
 
     const fetchAnimals = async (pageNumber = 0, pageSize = 12) => {
         setLoading(true);
+        setLoadingImg(true);
         setError(null);
         try {
             const response = await api.get('/animais', {
@@ -49,6 +51,7 @@ export const useFetchAnimals = (page = 0, size = 12) => {
                 totalPaginas: data.totalPaginas,
                 paginaAtual: data.paginaAtual
             })
+            setLoadingImg(false);
 
         } catch (err) {
             setError('Erro ao buscar animais');
@@ -62,5 +65,5 @@ export const useFetchAnimals = (page = 0, size = 12) => {
         fetchAnimals(page, size);
     }, [page, size]);
 
-    return { animals, loading, error, pagination, refreshAnimals: fetchAnimals };
+    return { animals, loading, loadingImg, error, pagination, refreshAnimals: fetchAnimals };
 };

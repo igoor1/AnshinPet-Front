@@ -21,12 +21,11 @@ const Animal = () => {
     const [page, setPage] = useState(0);
 
 
-    const { animals, loading, error, pagination, refreshAnimals } = useFetchAnimals(page);
+    const { animals, loading, loadingImg, error, pagination, refreshAnimals } = useFetchAnimals(page);
     const { searchTerm, filteredAnimals, handleSearch } = useSearchAnimals(animals);
     const { openModalCreate } = ModalCreate(refreshAnimals);
 
-
-    if (loading) return <Loading />
+    if (loading || loadingImg) return <Loading />
 
     if (error) {
         Swal.fire({

@@ -42,11 +42,20 @@ const AnimalAdocaoCard = ({ animal }) => {
         }
     }
 
+    const getNome = (animal) => {
+        let nome = animal.nome;
+        if (nome.length > 15) {
+            return nome.slice(0, 15) + '...';
+        } else {
+            return nome;
+        }
+    }
+
 
     return (
         <div className="cardAnimalAdocao">
             <div className="nameTop">
-                {animal.nome}
+                {getNome(animal)}
             </div>
 
 

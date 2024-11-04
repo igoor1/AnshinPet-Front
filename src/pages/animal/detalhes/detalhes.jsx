@@ -32,7 +32,7 @@ const Detalhes = () => {
 
     const { animalId } = useParams();
 
-    const { animal, error, loading, refreshAnimal } = useFetchAnimalForId(animalId);
+    const { animal, error, loading, loadingImg, refreshAnimal } = useFetchAnimalForId(animalId);
 
     const { openModalDelete } = ModalDelete();
     const { openModalEdit } = ModalEdit(refreshAnimal);
@@ -49,7 +49,7 @@ const Detalhes = () => {
     const [openPanelDoencas, setOpenPanelDoencas] = useState(true);
     const [openPanelVacinas, setOpenPanelVacinas] = useState(true);
 
-    if (loading || loadingCuidados) return <Loading />
+    if (loadingImg || loadingCuidados) return <Loading />
 
     if (error || errorCuidados) {
         Swal.fire({

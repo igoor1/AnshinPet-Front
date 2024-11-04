@@ -66,11 +66,20 @@ const AnimalCard = ({ animal }) => {
         }
     }
 
+    const getNome = (animal) => {
+        let nome = animal.nome;
+        if (nome.length > 15) {
+            return nome.slice(0, 15) + '...';
+        } else {
+            return nome;
+        }
+    }
+
     return (
 
         <div className='cardAnimal'>
             <div className="nameTop">
-                {animal.nome}
+                {getNome(animal)}
             </div>
 
             <div className='header'>
