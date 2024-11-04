@@ -1,0 +1,56 @@
+.my-navbar-theme {
+    color: var(--primaryColor);
+
+    a {
+        color: var(--primaryColor);
+        opacity: 90%;
+        transition: all 0.4s ease;
+        border-bottom: 2px solid red;
+    }
+
+    a:hover {
+        color: var(--auxColor1);
+        border-bottom: 2px solid var(--auxColor1);
+        opacity: 100%;
+    }
+
+    a:active,
+    a:focus {
+        color: var(--primaryColor);
+    }
+
+    .active,
+    .show {
+        color: var(--primaryColor) !important;
+    }
+
+    .dropdown-menu {
+        background-color: var(--auxColor1) !important;
+    }
+
+    .dropdown-toggle {
+        background-color: var(--auxColor1);
+        color: var(--primaryColor);
+        border: 0;
+    }
+
+    .dropdown-item:hover {
+        background-color: var(--primaryColor);
+        color: var(--auxColor1);
+    }
+
+    .navbar-toggler-icon {
+        color: var(--primaryColor);
+    }
+
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+
+    .ImagemUsuario {
+        width: 35px;
+        height: 35px;
+    }
+
+}

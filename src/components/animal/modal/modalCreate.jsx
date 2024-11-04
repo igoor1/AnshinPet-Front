@@ -3,7 +3,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { useCreateAnimal } from "../../../hooks/animal/useCreateAnimal";
 
 export const ModalCreate = (refreshAnimals) => {
-    const { createAnimal, loading, error, success } = useCreateAnimal();
+    const { createAnimalWithFoto, loading, error, success } = useCreateAnimal();
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -145,7 +145,7 @@ export const ModalCreate = (refreshAnimals) => {
             confirmButtonText: 'Cadastrar',
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const nome = document.getElementById('nome').value;
@@ -169,7 +169,7 @@ export const ModalCreate = (refreshAnimals) => {
             if (result.isConfirmed) {
                 const animal = result.value;
 
-                await createAnimal(animal)
+                await createAnimalWithFoto(animal)
             }
         });
     };

@@ -1,15 +1,60 @@
-$primary: #5e2cd3;
-$secondary: #ffd951;
-$success: #22C55E;
+$primary: #7C54D9;
+$secondary: #FF7979;
+$success: #49A971;
 
 $font-family-base: Arial, Helvetica, sans-serif;
 
+html {
+    background-color: var(--auxColor3);
+}
+
+
+#root {
+    background-color: var(--auxColor3);
+}
+
 :root {
-    --primaryColor: #5e2cd3
+    --primaryColor: #7C54D9;
+    --secondaryColor: #FF7979;
+    --tertiaryColor: #49A971;
+    --auxColor1: #ffffff;
+    --auxColor2: #000000;
+    --auxColor3: #EFEFEF;
+    --auxColor4: #D9D9D9;
+    --auxColor5: rgb(126, 124, 124);
 }
 
 .btn-success {
     color: white !important;
+}
+
+.btn-secondary {
+    color: white !important;
+}
+
+.btn-outline-primary {
+    &:hover {
+        color: white !important;
+        background-color: var(--primaryColor) !important;
+    }
+
+    color: var(--primaryColor) !important;
+    background-color: transparent !important;
+    border-color: #7C54D9 !important;
+}
+
+.btn-outline-secondary {
+    &:hover {
+        color: white !important;
+    }
+
+    &:active {
+        color: white !important;
+    }
+
+    &:focus-visible {
+        color: white !important;
+    }
 }
 
 a {
@@ -33,4 +78,14 @@ a {
 .labelInput {
     display: flex;
     font-size: 14px;
+}
+
+.tablePrimary {
+    border-radius: 10px !important;
+
+    th {
+        background-color: var(--primaryColor) !important;
+        color: var(--auxColor1) !important;
+    }
+
 }

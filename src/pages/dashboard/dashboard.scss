@@ -1,0 +1,39 @@
+.cardDashboard {
+    .card-header {
+        color: white;
+        font-weight: bold;
+        background-color: var(--primaryColor);
+        border-bottom: 1px solid var(--primaryColor);
+    }
+
+    .card-body {
+        text-align: center;
+        color: var(--primaryColor);
+        background-color: rgb(251, 251, 251);
+        border-radius: 10px;
+    }
+}
+
+
+.colChartsDashboards {
+
+    .containerBar {
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .containerDoughnut {
+        max-width: 45%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.rowMainDashboard {
+    .col {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+}

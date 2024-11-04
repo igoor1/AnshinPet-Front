@@ -27,7 +27,7 @@ export const ModalCreateVacina = (animalId, refreshMedicals) => {
             html: `
             <label for="vacina" class="form-label labelInput">Vacina: </label>
             <select id="vacina" class="form-select mb-3">
-                <option selected disabled value="">Doenças</option>
+                <option selected disabled value="">Escolha uma vacina</option>
                 ${vacinas.map(v => `<option value="${v.id}">${v.nome}</option>`).join('')}
             </select>
 
@@ -40,8 +40,8 @@ export const ModalCreateVacina = (animalId, refreshMedicals) => {
             focusConfirm: false,
             confirmButtonText: 'Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
-            cancelButtonColor: "#dc3545",
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
                 const lote = document.getElementById('lote').value;

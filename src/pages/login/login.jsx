@@ -39,7 +39,7 @@ const Login = () => {
                 title: "Logado"
             });
 
-            window.location.href = "/dashboard"
+            window.location.href = "/admin/dashboard"
         }
 
         if (error) {

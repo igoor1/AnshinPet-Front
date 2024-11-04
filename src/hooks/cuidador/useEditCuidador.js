@@ -12,7 +12,7 @@ export const useEditCuidador = () => {
         setSuccess(false);
 
         try {
-            await api.put(`/api/usuarios/${cuidadorId}`, updatedCuidador);
+            await api.put(`/usuarios/${cuidadorId}`, updatedCuidador);
             setSuccess(true);
         } catch (err) {
             const errorMensagem = err.response?.data?.title || 'Erro ao editar cuidador';

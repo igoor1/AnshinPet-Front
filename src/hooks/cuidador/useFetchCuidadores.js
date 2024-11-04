@@ -10,7 +10,7 @@ export const useFetchCuidadores = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await api.get('/api/usuarios');
+            const response = await api.get('/usuarios');
             setCuidadores(response.data);
         } catch (err) {
             setError('Erro ao buscar cuidadores');

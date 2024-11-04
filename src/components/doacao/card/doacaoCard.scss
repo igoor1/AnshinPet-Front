@@ -1,32 +1,74 @@
-.itemDoacao {
+.cardDoacao {
     border-radius: 20px;
     padding: 10px;
-    margin: 5px;
-    flex: 0 1 350px;
-}
+    flex: 1 1 250px;
+    max-width: 300px;
+    margin-top: auto;
 
-.cardDoacao {
-    .headerDoacao {
-        display: flex;
-        justify-content: space-around;
+    @media (max-width: 1399px) {
+        max-width: 250px;
     }
 
-    .infoDoacao {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: justify;
+    .nameTop {
+        display: inline-block;
+        background-color: var(--auxColor1);
+        padding: 10px 20px;
+        border-radius: 10px 10px 0 0;
+        font-weight: bold;
+    }
 
-        p {
+    .body {
+        background-color: var(--auxColor1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        padding: 10px 10px 0 10px;
+        border-radius: 0px 10px 0px 0px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+
+        .infoDoacaoContainer {
+            background-color: var(--auxColor1);
+
+            p {
+                font-weight: bold;
+                margin: 0;
+                padding: 2px 0;
+                word-wrap: break-word;
+                white-space: pre-line;
+            }
+        }
+    }
+
+    .containerHr {
+        background-color: var(--auxColor1);
+        padding: 10px 5px;
+
+        hr {
             margin: 0;
         }
     }
 
-    .card-header {
-        background-color: white;
-    }
+    .footer {
+        background-color: var(--auxColor1);
+        display: flex;
+        padding-bottom: 5px;
+        border-radius: 0px 0px 10px 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        justify-content: center;
+        margin: auto;
 
-    .card-footer {
-        background-color: white;
+        .btnContainer {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            button {
+                width: 90%;
+            }
+        }
     }
+}
+
+.areaDoacao::after {
+    content: "";
+    flex: auto;
 }

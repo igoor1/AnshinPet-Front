@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { Table, Button, Form, InputGroup, Breadcrumb } from "react-bootstrap";
 
 import Footer from "../../components/footer/footer";
-import NavbarHeader from "../../components/navbarheader/navbarheader";
+import NavbarHeader from "../../components/navbar/auth/navbarheader";
 import Loading from "../../components/loading/loading";
 
 import { useFetchDoencas } from "../../hooks/doenca/useFetchDoencas";
+import { useSearchDoencas } from "../../hooks/doenca/useSearchDoencas";
 import { ModalCreate } from "../../components/doenca/modal/modalCreate";
 import { ModalDelete } from "../../components/doenca/modal/modalDelete";
 import { ModalEdit } from "../../components/doenca/modal/modalEdit";
@@ -20,6 +21,7 @@ const Doenca = () => {
     }, []);
 
     const { doencas, loading, error, refreshDoencas } = useFetchDoencas();
+    const { searchTerm, filteredDoencas, handleSearch } = useSearchDoencas(doencas);
     const { openModalCreate } = ModalCreate(refreshDoencas);
     const { openModalDelete } = ModalDelete(refreshDoencas);
     const { openModalEdit } = ModalEdit(refreshDoencas);
@@ -52,7 +54,7 @@ const Doenca = () => {
         <div className="divMain">
             <NavbarHeader />
             <Breadcrumb className='mt-3 px-4'>
-                <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
                 <Breadcrumb.Item active>Cuidados Médicos</Breadcrumb.Item>
                 <Breadcrumb.Item active>Doenças</Breadcrumb.Item>
             </Breadcrumb>
@@ -63,38 +65,38 @@ const Doenca = () => {
                     </Form.Label>
                     <InputGroup className="mb-2 AreaInputSearch">
                         <InputGroup.Text><i className="bi bi-search"></i></InputGroup.Text>
-                        <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" />
+                        <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} />
                     </InputGroup>
                 </div>
 
-                <div className="p-2 ms-auto">
-                    <Button variant="success" className="btnCadastrar" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
+                <div className="p-2 ms-auto align-content-center">
+                    <Button variant="primary" className="btnCadastrar" onClick={() => openModalCreate()}><i className="bi bi-plus"></i> Cadastrar</Button>
                 </div>
 
             </div>
             <div className="container containerMain mt-4">
-                <Table responsive>
+                <Table responsive className="tablePrimary">
                     <thead>
                         <tr className="text-center">
-                            <th>#</th>
                             <th >Nome</th>
                             <th>Gravidade</th>
                             <th >Opções</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {doencas.length === 0 ? (
-                            <p>Nenhuma doença encontrada</p>
+                        {filteredDoencas.length === 0 ? (
+                            <tr>
+                                <td colSpan={3} className="text-center">Nenhuma doença encontrada</td>
+                            </tr>
                         ) : (
-                            doencas.map((doenca) => (
+                            filteredDoencas.map((doenca) => (
                                 <tr key={doenca.id} className="text-center trDoencas">
-                                    <td>{doenca.id}</td>
                                     <td>{doenca.nome}</td>
                                     <td>
                                         {getGravidade(doenca)}
                                     </td>
                                     <td>
-                                        <Button variant="danger" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
+                                        <Button variant="secondary" className='m-1' onClick={() => openModalDelete(doenca.id, doenca.nome)}><i className="bi bi-trash"></i></Button>
                                         <Button variant="success" className='m-1' onClick={() => openModalEdit(doenca)}><i className="bi bi-pencil"></i></Button></td>
                                 </tr>
                             ))

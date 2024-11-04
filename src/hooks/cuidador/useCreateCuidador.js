@@ -12,7 +12,7 @@ export const useCreateCuidador = () => {
         setSuccess(false);
 
         try {
-            await api.post('api/auth/register', newCuidador);
+            await api.post('/auth/register', newCuidador);
             setSuccess(true);
         } catch (err) {
             setError('Erro ao criar cuidador');
