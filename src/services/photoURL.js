@@ -1,8 +1,9 @@
 export const photoURL = () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const usePhoto = async (id) => {
         if (id) {
-            let url = `http://localhost:8080/api/animais/${id}/foto`;
+            let url = `${apiUrl}animais/${id}/foto`;
             return url;
         }
     }
