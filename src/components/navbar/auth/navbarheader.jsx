@@ -4,6 +4,7 @@ import './navbarheader.scss'
 import useLogoutUser from '../../../hooks/login/useLogoutUser';
 
 import Logo from '../../../assets/logoMinimal.svg';
+import Perfil from '../../../assets/perfilDefault.svg'
 
 const NavbarHeader = () => {
     const { logout } = useLogoutUser();
@@ -30,7 +31,7 @@ const NavbarHeader = () => {
                         <DropdownButton
                             align={{ lg: 'end' }}
                             id="dropdown-menu-align-responsive-1"
-                            title={<Image src="https://avatars.githubusercontent.com/u/89944667?v=4" alt="Foto do Perfil" className='ImagemUsuario' roundedCircle />}
+                            title={<Image src={Perfil} alt="Foto do Perfil" className='ImagemUsuario' roundedCircle />}
                         >
                             <Dropdown.Item href="/admin/configuracoes"><i className="bi bi-gear"></i> Configurações</Dropdown.Item>
                             <NavDropdown.Divider />
