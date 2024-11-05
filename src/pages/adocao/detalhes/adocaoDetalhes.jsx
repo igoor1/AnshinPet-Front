@@ -6,7 +6,8 @@ import { differenceInYears, differenceInMonths, differenceInDays } from 'date-fn
 
 import Loading from "../../../components/loading/loading";
 
-import { useFetchAnimalForId } from "../../../hooks/animal/useFetchAnimalForId";
+
+import { useFetchAnimalForId } from "../../../hooks/adocao/useFetchAnimalForId";
 import { ModalCreate } from "../../../components/adocao/modal/modalCreate";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
