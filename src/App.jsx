@@ -14,6 +14,7 @@ import AdocaoDetalhes from "./pages/adocao/detalhes/adocaoDetalhes";
 import NotFound from "./pages/notFound/notFound";
 
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
+import Auth from "./components/auth/auth";
 
 import './scss/styles.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -32,7 +33,7 @@ export default function App() {
         <Route path="/admin/doacoes" element={<ProtectedRoute><Doacao /></ProtectedRoute>} />
         <Route path="/admin/cuidadores" element={<ProtectedRoute><Cuidador /></ProtectedRoute>} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Auth><Login /></Auth>} />
         <Route path="/" element={<Home />} />
         <Route path="/adocao" element={<Adocao />} />
         <Route path="/adocao/detalhes/:animalId" element={<AdocaoDetalhes />} />
