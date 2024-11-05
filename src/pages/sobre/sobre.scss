@@ -1,0 +1,38 @@
+.navSobre {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.divSobre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    flex-direction: column;
+    gap: 1rem;
+
+    .row {
+        width: 100%;
+    }
+}
+
+#example-collapse-text0,
+#example-collapse-text1,
+#example-collapse-text2,
+#example-collapse-text3,
+#example-collapse-text4 {
+    height: 100%;
+
+    .card {
+        height: 100%;
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            justify-content: center;
+            text-align: justify;
+        }
+    }
+}

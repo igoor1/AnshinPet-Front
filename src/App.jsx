@@ -10,6 +10,7 @@ import Cuidador from "./pages/cuidador/cuidador";
 import Dashboard from "./pages/dashboard/dashboard";
 import Adocao from "./pages/adocao/adocao";
 import AdocaoDetalhes from "./pages/adocao/detalhes/adocaoDetalhes";
+import Sobre from "./pages/sobre/sobre";
 
 import NotFound from "./pages/notFound/notFound";
 
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/adocao" element={<Adocao />} />
         <Route path="/adocao/detalhes/:animalId" element={<AdocaoDetalhes />} />
+        <Route path="/sobre" element={<Sobre />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
