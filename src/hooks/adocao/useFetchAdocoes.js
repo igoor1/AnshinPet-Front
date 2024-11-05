@@ -35,6 +35,7 @@ export const useFetchAdocoes = (page = 0, size = 12) => {
                     }
                 } catch (err) {
                     console.warn(`(${animal.nome}) - Foto não encontrada, usando a imagem padrão.`);
+                    console.error(err);
                     return {
                         ...animal,
                         foto: imgDefault
