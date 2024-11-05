@@ -12,7 +12,7 @@ const NavbarHeader = () => {
                     <Image src={Logo} alt="Logo" roundedCircle className='logo' />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav">
-                    <i class="bi bi-list"></i>
+                    <i className="bi bi-list"></i>
                 </Navbar.Toggle>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto gap-2">

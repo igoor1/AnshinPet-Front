@@ -100,7 +100,7 @@ const AnimalCard = ({ animal }) => {
 
             <div className="footer">
                 <div className="btnContainer">
-                    <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/detalhes/${animal.id}`)}><i class="bi bi-postcard-heart"></i> Ver detalhes</Button>
+                    <Button variant="primary" className='m-1' onClick={() => navigate(`/admin/animais/detalhes/${animal.id}`)}><i className="bi bi-postcard-heart"></i> Ver detalhes</Button>
                 </div>
             </div>
 

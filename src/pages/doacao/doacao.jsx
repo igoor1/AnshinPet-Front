@@ -76,9 +76,9 @@ const Doacao = () => {
                         <h3>Cadastros</h3>
                     </div>
                     <div className="btns">
-                        <Button variant="primary" onClick={() => openModalCreateDinheiro()}><i class="bi bi-piggy-bank"></i> Dinheiro</Button>
+                        <Button variant="primary" onClick={() => openModalCreateDinheiro()}><i className="bi bi-piggy-bank"></i> Dinheiro</Button>
 
-                        <Button variant="primary" onClick={() => openModalCreateRacao()}><i class="bi bi-box2-heart"></i> Ração</Button>
+                        <Button variant="primary" onClick={() => openModalCreateRacao()}><i className="bi bi-box2-heart"></i> Ração</Button>
                     </div>
                 </div>
 
