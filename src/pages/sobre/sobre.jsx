@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import NavbarHeader from "../../components/navbar/noAuth/navbarheader";
 import Footer from "../../components/footer/footer";
-import { Nav, Breadcrumb, useAccordionButton } from "react-bootstrap";
+import { Nav, Breadcrumb } from "react-bootstrap";
 
 import CardFade from "../../components/sobre/cardFade";
-
 
 import "./sobre.scss";
 
@@ -12,7 +11,6 @@ const Sobre = () => {
     useEffect(() => {
         document.title = 'Sobre nós | Anshin Pet';
     }, []);
-
 
     const [open0, setOpen0] = useState(true);
     const [open1, setOpen1] = useState(false);
@@ -40,22 +38,6 @@ const Sobre = () => {
             case 4: setOpen4(true);
                 break;
         }
-    }
-
-    function CustomToggle({ children, eventKey }) {
-        const decoratedOnClick = useAccordionButton(eventKey, () =>
-            console.log('totally custom!'),
-        );
-
-        return (
-            <button
-                type="button"
-                style={{ backgroundColor: 'pink' }}
-                onClick={decoratedOnClick}
-            >
-                {children}
-            </button>
-        );
     }
 
     return (

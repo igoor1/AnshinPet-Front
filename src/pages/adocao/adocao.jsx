@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Breadcrumb } from "react-bootstrap";
 import NavbarHeader from "../../components/navbar/noAuth/navbarheader";
 import Footer from "../../components/footer/footer";
 import Loading from "../../components/loading/loading";
@@ -50,6 +51,10 @@ const Adocao = () => {
     return (
         <div className="divMain">
             <NavbarHeader />
+            <Breadcrumb className='mt-3 px-4'>
+                <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>Animais para adoção</Breadcrumb.Item>
+            </Breadcrumb>
 
             <div className="containerMain">
                 <div className='areaAnimalAdocao'>
