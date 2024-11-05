@@ -50,7 +50,6 @@ export const ModalCreate = (animalData) => {
                 popup: 'custom-height'
             },
             html: `
-            <div class="modal-1">
             <div class="mb-3">
                 <label for="nome" class="form-label labelInput">Nome: </label>
                 <input id="nome" placeholder="Digite o nome" class="form-control" />
@@ -115,13 +114,11 @@ export const ModalCreate = (animalData) => {
                 <label for="complemento" class="form-label labelInput">Complemento: </label>
                 <input id="complemento" class="form-control"/>
             </div>
-            
-            </div>
         `,
             focusConfirm: false,
-            confirmButtonText: 'Cadastrar',
+            confirmButtonText: '<i class="bi bi-plus"></i> Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-dash"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
 

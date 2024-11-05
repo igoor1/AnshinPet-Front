@@ -43,44 +43,60 @@ export const ModalCreate = (refreshCuidadores) => {
 
         Swal.fire({
             title: 'Cadastro de Cuidador',
+            customClass: {
+                popup: 'custom-height'
+            },
             html: `
+            <div class="mb-3">
+                <label for="role" class="form-label labelInput">Tipo: </label>
+                <select id="role" class="form-select">
+                    <option selected disabled value="">Selecione o tipo</option>
+                    ${roleList.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
+                </select>
+            </div>
 
-            <label for="nome" class="form-label labelInput">Nome: </label>
-            <input id="nome" placeholder="Digite o nome" class="form-control mb-3" />
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="nome" class="form-label labelInput">Nome: </label>
+                    <input id="nome" placeholder="Digite o nome" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label for="sexo" class="form-label labelInput">Sexo: </label>
+                    <select id="sexo" class="form-select">
+                        <option selected disabled value="">Selecione o sexo</option>
+                        ${sexoList.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
 
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="celular" class="form-label labelInput">Celular: </label>
+                    <input id="celular" placeholder="Digite o celular" class="form-control" />
+                </div>
 
-            <label for="role" class="form-label labelInput">Tipo: </label>
-            <select id="role" class="form-select mb-3">
-                <option selected disabled value="">Selecione o tipo</option>
-                ${roleList.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
-            </select>
+                <div class="col-md-6">
+                    <label for="cpf" class="form-label labelInput">Cpf: </label>
+                    <input id="cpf" placeholder="Digite o cpf" class="form-control" />
+                </div>
+            </div>
 
-            <label for="sexo" class="form-label labelInput">Sexo: </label>
-            <select id="sexo" class="form-select mb-3">
-                <option selected disabled value="">Selecione o sexo</option>
-                ${sexoList.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
-            </select>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                       <label for="email" class="form-label labelInput">Email: </label>
+                       <input id="email" placeholder="Digite o email" class="form-control" />
+                 </div>
 
-          
-            <label for="celular" class="form-label labelInput">Celular: </label>
-            <input id="celular" placeholder="Digite o celular" class="form-control mb-3" />
-
-         
-            <label for="cpf" class="form-label labelInput">Cpf: </label>
-            <input id="cpf" placeholder="Digite o cpf" class="form-control mb-3" />
-
-            
-            <label for="email" class="form-label labelInput">Email: </label>
-            <input id="email" placeholder="Digite o email" class="form-control mb-3" />
-            
-            <label for="senha" class="form-label labelInput">Senha: </label>
-            <input id="senha" placeholder="Digite a senha" class="form-control mb-3" />
-            
+                <div class="col-md-6">
+                    <label for="senha" class="form-label labelInput">Senha: </label>
+                    <input id="senha" placeholder="Digite a senha" class="form-control" />
+                </div>
+            </div>    
         `,
             focusConfirm: false,
-            confirmButtonText: 'Cadastrar',
+            confirmButtonText: '<i class="bi bi-plus"></i> Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-dash"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {

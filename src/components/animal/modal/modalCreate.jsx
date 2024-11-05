@@ -90,61 +90,90 @@ export const ModalCreate = (refreshAnimals) => {
         }
     });
 
+
     const openModalCreate = () => {
 
         Swal.fire({
             title: 'Cadastro de Animal',
+            customClass: {
+                popup: 'custom-height'
+            },
             html: `
-            <label for="tipo" class="form-label labelInput">Tipo: </label>
-            <select id="tipo" class="form-select mb-3">
-                <option selected disabled value="">Selecione o tipo</option>
-                ${tipoList.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
-            </select>
+            <div class="mb-3">
+                <label for="tipo" class="form-label labelInput">Tipo: </label>
+                <select id="tipo" class="form-select">
+                    <option selected disabled value="">Selecione o tipo</option>
+                    ${tipoList.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
+                </select>
+            </div>
 
-            <label for="nome" class="form-label labelInput">Nome: </label>
-            <input id="nome" placeholder="Digite o nome" class="form-control mb-3" />
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="nome" class="form-label labelInput">Nome: </label>
+                    <input id="nome" placeholder="Digite o nome" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label for="raca" class="form-label labelInput">Raça: </label>
+                    <input id="raca" placeholder="Digite a raça" class="form-control" />
+                </div>
+            </div>
 
-            <label for="raca" class="form-label labelInput">Raça: </label>
-            <input id="raca" placeholder="Digite a raça" class="form-control mb-3" />
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="data" class="form-label labelInput">Data de Nascimento: </label>
+                    <input id="data" type="date" class="form-control" max="${todayDate}"/>
+                </div>
+                <div class="col-md-6">
+                    <label for="cor" class="form-label labelInput">Cor: </label>
+                    <input id="cor" placeholder="Digite a cor" class="form-control" />
+                </div>
+            </div>
 
-            <label for="data" class="form-label labelInput">Data de Nascimento: </label>
-            <input id="data" type="date" class="form-control mb-3" max="${todayDate}"/>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="sexo" class="form-label labelInput">Sexo: </label>
+                    <select id="sexo" class="form-select">
+                        <option selected disabled value="">Selecione o sexo</option>
+                        ${sexoList.map(s => `<option value="${s.value}">${s.label}</option>`).join('')}
+                    </select>
+                </div>
 
-            <label for="cor" class="form-label labelInput">Cor: </label>
-            <input id="cor" placeholder="Digite a cor" class="form-control mb-3" />
+                <div class="col-md-6">
+                    <label for="porte" class="form-label labelInput">Porte: </label>
+                    <select id="porte" class="form-select">
+                        <option selected disabled value="">Selecione o porte</option>
+                        ${porteList.map(p => `<option value="${p.value}">${p.label}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="castrado" class="form-label labelInput">Castrado: </label>
+                    <select id="castrado" class="form-select">
+                        <option selected disabled value="">É castrado?</option>
+                        ${castradoList.map(c => `<option value="${c.value}">${c.label}</option>`).join('')}
+                    </select>
+                </div>
 
-            <label for="sexo" class="form-label labelInput">Sexo: </label>
-            <select id="sexo" class="form-select mb-3">
-                <option selected disabled value="">Selecione o sexo</option>
-                ${sexoList.map(s => `<option value="${s.value}">${s.label}</option>`).join('')}
-            </select>
-
-            <label for="porte" class="form-label labelInput">Porte: </label>
-            <select id="porte" class="form-select mb-3">
-                <option selected disabled value="">Selecione o porte</option>
-                ${porteList.map(p => `<option value="${p.value}">${p.label}</option>`).join('')}
-            </select>
-
-            <label for="castrado" class="form-label labelInput">Castrado: </label>
-            <select id="castrado" class="form-select mb-3">
-                <option selected disabled value="">É castrado?</option>
-                ${castradoList.map(c => `<option value="${c.value}">${c.label}</option>`).join('')}
-            </select>
-
-            <label for="adocao" class="form-label labelInput">Adoção: </label>
-            <select id="adocao" class="form-select mb-3">
-                <option selected disabled value="">É para adoção?</option>
-                ${adocaoList.map(a => `<option value="${a.value}">${a.label}</option>`).join('')}
-            </select>
-
-            <label for="foto" class="form-label labelInput">Foto (opcional): </label>
-            <input id="foto" type="file" placeholder="Foto" class="form-control mb-3" accept="image/*"/>
+                <div class="col-md-6">
+                    <label for="adocao" class="form-label labelInput">Adoção: </label>
+                    <select id="adocao" class="form-select">
+                        <option selected disabled value="">É para adoção?</option>
+                        ${adocaoList.map(a => `<option value="${a.value}">${a.label}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label labelInput">Foto (opcional): </label>
+                <input id="foto" type="file" placeholder="Foto" class="form-control" accept="image/*"/>
+            </div>
             
         `,
             focusConfirm: false,
-            confirmButtonText: 'Cadastrar',
+            confirmButtonText: '<i class="bi bi-plus"></i> Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-dash"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
