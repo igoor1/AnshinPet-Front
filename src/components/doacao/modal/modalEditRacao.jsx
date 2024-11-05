@@ -43,9 +43,9 @@ export const ModalEditRacao = (refreshDoacoes) => {
             <input id="descricao" placeholder="Digite a descrição" class="form-control mb-3" value="${doacao.descricao}" />
         `,
             focusConfirm: false,
-            confirmButtonText: 'Editar',
+            confirmButtonText: '<i class="bi bi-pencil"></i> Editar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {

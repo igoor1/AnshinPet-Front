@@ -29,9 +29,9 @@ export const ModalCreate = (refreshVacinas) => {
             <input id="fabricante" placeholder="Digite o fabricante" class="form-control mb-3" />
         `,
             focusConfirm: false,
-            confirmButtonText: 'Cadastrar',
+            confirmButtonText: '<i class="bi bi-check2"></i> Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
+            cancelButtonText: '<i class="bi bi-x"></i> Fechar',
             cancelButtonColor: "#dc3545",
 
             preConfirm: () => {

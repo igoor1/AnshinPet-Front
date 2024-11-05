@@ -38,9 +38,9 @@ export const ModalCreateVacina = (animalId, refreshMedicals) => {
             <input id="dataAplicacao" type="date" class="form-control mb-3"/>
         `,
             focusConfirm: false,
-            confirmButtonText: 'Cadastrar',
+            confirmButtonText: '<i class="bi bi-check2"></i> Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {

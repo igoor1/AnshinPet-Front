@@ -83,9 +83,9 @@ export const ModalEdit = (refreshCuidadores) => {
             
         `,
             focusConfirm: false,
-            confirmButtonText: 'Editar',
+            confirmButtonText: '<i class="bi bi-pencil"></i> Editar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {

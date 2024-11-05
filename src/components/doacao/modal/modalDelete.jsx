@@ -24,9 +24,9 @@ export const ModalDelete = (refreshDoacoes) => {
             html: ` Você deseja deletar essa doação?
         `,
             focusConfirm: false,
-            confirmButtonText: 'Deletar',
+            confirmButtonText: '<i class="bi bi-trash"></i> Deletar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
         }).then(async (result) => {

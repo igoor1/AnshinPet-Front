@@ -94,9 +94,9 @@ export const ModalCreate = (refreshCuidadores) => {
             </div>    
         `,
             focusConfirm: false,
-            confirmButtonText: '<i class="bi bi-plus"></i> Cadastrar',
+            confirmButtonText: '<i class="bi bi-check2"></i> Cadastrar',
             showCancelButton: true,
-            cancelButtonText: '<i class="bi bi-dash"></i> Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {

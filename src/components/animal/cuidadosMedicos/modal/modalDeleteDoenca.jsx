@@ -24,9 +24,9 @@ export const ModalDeleteDoenca = (refreshMedicals) => {
             html: ` Você deseja deletar do animal a doença chamada: ${doencaNome} ?
         `,
             focusConfirm: false,
-            confirmButtonText: 'Deletar',
+            confirmButtonText: '<i class="bi bi-trash"></i> Deletar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
         }).then(async (result) => {

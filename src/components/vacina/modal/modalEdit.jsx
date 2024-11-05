@@ -30,9 +30,9 @@ export const ModalEdit = (refreshVacinas) => {
             <input id="fabricante" placeholder="Digite o fabricante" class="form-control mb-3" value="${vacina.fabricante}" />
         `,
             focusConfirm: false,
-            confirmButtonText: 'Editar',
+            confirmButtonText: '<i class="bi bi-pencil"></i> Editar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
+            cancelButtonText: '<i class="bi bi-x"></i> Fechar',
             cancelButtonColor: "#dc3545",
 
             preConfirm: () => {

@@ -24,9 +24,9 @@ export const ModalDelete = (refreshVacinas) => {
             html: ` Você deseja deletar a vacina chamada: ${vacinaNome} ?
         `,
             focusConfirm: false,
-            confirmButtonText: 'Deletar',
+            confirmButtonText: '<i class="bi bi-trash"></i> Deletar',
             showCancelButton: true,
-            cancelButtonText: 'Fechar',
+            cancelButtonText: '<i class="bi bi-x"></i> Fechar',
             cancelButtonColor: "#dc3545",
 
         }).then(async (result) => {

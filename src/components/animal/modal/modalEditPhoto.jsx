@@ -26,9 +26,9 @@ export const ModalEditFoto = (refreshAnimals) => {
             <label for="foto" class="form-label labelInput">Foto: </label>
             <input id="foto" type="file" placeholder="Foto" class="form-control mb-3" accept="image/*"/>`,
             focusConfirm: false,
-            confirmButtonText: 'Editar',
+            confirmButtonText: '<i class="bi bi-pencil"></i> Editar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {

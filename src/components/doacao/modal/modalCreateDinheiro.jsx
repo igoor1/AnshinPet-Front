@@ -42,9 +42,9 @@ export const ModalCreateDinheiro = (refreshDoacoes) => {
             <input id="descricao" placeholder="Digite a descrição" class="form-control mb-3" />
         `,
             focusConfirm: false,
-            confirmButtonText: 'Cadastrar',
+            confirmButtonText: '<i class="bi bi-check2"></i> Cadastrar',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            cancelButtonText: '<i class="bi bi-x"></i> Cancelar',
             cancelButtonColor: "#FF7979",
 
             preConfirm: () => {
