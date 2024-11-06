@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Image, Card, Breadcrumb, Button, Collapse } from 'react-bootstrap';
-import { parseISO, format, differenceInYears, differenceInMonths, differenceInDays } from 'date-fns';
+import { parseISO, format } from 'date-fns';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 import Footer from "../../../components/footer/footer"
@@ -19,6 +19,8 @@ import { ModalDeleteDoenca } from '../../../components/animal/cuidadosMedicos/mo
 
 import { ModalCreateVacina } from '../../../components/animal/cuidadosMedicos/modal/modalCreateVacina';
 import { ModalDeleteVacina } from '../../../components/animal/cuidadosMedicos/modal/modalDeleteVacina';
+
+import CalcularIdade from '../../../utils/dataFomat.utils';
 
 import Loading from '../../../components/loading/loading';
 
@@ -152,18 +154,6 @@ const Detalhes = () => {
         }
     }
 
-
-    const calcularIdade = (dataNascimento) => {
-        const nascimento = new Date(dataNascimento);
-        const hoje = new Date();
-
-        const anos = differenceInYears(hoje, nascimento);
-        const meses = differenceInMonths(hoje, nascimento) % 12;
-        const dias = differenceInDays(hoje, new Date(hoje.getFullYear(), hoje.getMonth(), nascimento.getDate())) % 30;
-
-        return `${anos} anos, ${meses} meses e ${dias} dias`;
-    }
-
     const converterData = (data) => {
         const dataOriginal = data;
         const dataFormatada = format(parseISO(dataOriginal), 'dd/MM/yyyy')
@@ -210,7 +200,7 @@ const Detalhes = () => {
                                 Sexo: {getSexo(animal)}
                             </p>
                             <p className='item'>
-                                Idade: {calcularIdade(animal.data)}
+                                Idade: {CalcularIdade(animal.data)}
                             </p>
                             <p className='item'>
                                 Cor: {animal.cor}

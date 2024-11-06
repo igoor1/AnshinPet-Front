@@ -2,13 +2,11 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Button, Breadcrumb } from "react-bootstrap";
 
-import { differenceInYears, differenceInMonths, differenceInDays } from 'date-fns';
-
 import Loading from "../../../components/loading/loading";
-
 
 import { useFetchAnimalForId } from "../../../hooks/adocao/useFetchAnimalForId";
 import { ModalCreate } from "../../../components/adocao/modal/modalCreate";
+import CalcularIdade from "../../../utils/dataFomat.utils";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import NavbarHeader from "../../../components/navbar/noAuth/navbarheader";
@@ -113,17 +111,6 @@ const AdocaoDetalhes = () => {
         }
     }
 
-    const calcularIdade = (dataNascimento) => {
-        const nascimento = new Date(dataNascimento);
-        const hoje = new Date();
-
-        const anos = differenceInYears(hoje, nascimento);
-        const meses = differenceInMonths(hoje, nascimento) % 12;
-        const dias = differenceInDays(hoje, new Date(hoje.getFullYear(), hoje.getMonth(), nascimento.getDate())) % 30;
-
-        return `${anos} anos, ${meses} meses e ${dias} dias`;
-    }
-
     return (
         <div className="divMain">
             <NavbarHeader />
@@ -149,7 +136,7 @@ const AdocaoDetalhes = () => {
                                     </div>
                                     <p>Raça: {animal.raca}</p>
                                     <p>Sexo: {getSexo(animal)}</p>
-                                    <p>Idade: {calcularIdade(animal.data)}</p>
+                                    <p>Idade: {CalcularIdade(animal.data)}</p>
                                     <p>Cor: {animal.cor}</p>
                                     <p>Porte: {getPorte(animal)}</p>
                                 </div>
