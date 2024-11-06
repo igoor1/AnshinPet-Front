@@ -15,7 +15,7 @@ export const useFetchAnimalForId = (animalId) => {
         setError(null);
 
         try {
-            const response = await api.get(`/disponiveis/listar/${animalId}`);
+            const response = await api.get(`/disponiveis/${animalId}`);
             const animalData = response.data;
 
 
