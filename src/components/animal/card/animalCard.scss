@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    gap: 10px;
+    gap: 20px;
 
     @media(max-width: 992px) {
         justify-content: space-between;
@@ -19,11 +19,15 @@
     }
 }
 
+.linkAnimal {
+    text-decoration: none;
+    color: var(--auxColor2);
+}
+
 .cardAnimal {
     border-radius: 20px;
-    padding: 10px;
     flex: 1 1 250px;
-    max-width: 270px;
+    width: 260px;
 
     .nameTop {
         display: inline-block;

@@ -55,6 +55,16 @@ const Doacao = () => {
             </Breadcrumb>
 
             <div className="container areaFiltrosBtn">
+                <div className="containerBtn">
+                    <div className="title">
+                        <h3>Tipos de Cadastro</h3>
+                    </div>
+                    <div className="btns">
+                        <Button variant="primary" onClick={() => openModalCreateDinheiro()}><i className="bi bi-cash-coin"></i> Cadastrar Dinheiro</Button>
+
+                        <Button variant="primary" onClick={() => openModalCreateRacao()}><i className="bi bi-box2-heart"></i> Cadastrar Ração</Button>
+                    </div>
+                </div>
                 <div className="containerFiltros">
                     <h3>Filtrar por:</h3>
                     <Nav variant="pills" defaultActiveKey="tipo-1">
@@ -70,16 +80,6 @@ const Doacao = () => {
                             </Nav.Link>
                         </Nav.Item>
                     </Nav>
-                </div>
-                <div className="containerBtn">
-                    <div className="title">
-                        <h3>Cadastros</h3>
-                    </div>
-                    <div className="btns">
-                        <Button variant="primary" onClick={() => openModalCreateDinheiro()}><i className="bi bi-piggy-bank"></i> Dinheiro</Button>
-
-                        <Button variant="primary" onClick={() => openModalCreateRacao()}><i className="bi bi-box2-heart"></i> Ração</Button>
-                    </div>
                 </div>
 
             </div>
