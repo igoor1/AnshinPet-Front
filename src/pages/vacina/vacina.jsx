@@ -53,7 +53,7 @@ const Vacina = () => {
                     </Form.Label>
                     <InputGroup className="mb-2 AreaInputSearch">
                         <InputGroup.Text><i className="bi bi-search"></i></InputGroup.Text>
-                        <Form.Control id="inlineFormInputGroup" placeholder="Busque pelo nome" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} />
+                        <Form.Control id="inlineFormInputGroup" className="inputSearchBase" placeholder="Busque pelo nome" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} />
                     </InputGroup>
                 </div>
 

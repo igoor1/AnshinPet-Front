@@ -99,3 +99,18 @@ a {
     color: var(--auxColor2);
     font-weight: bold;
 }
+
+.form-control,
+.form-select {
+    background-color: var(--auxColor3) !important;
+    transition: 0.4s ease-in;
+
+    &:focus {
+        background-color: var(--auxColor1) !important;
+    }
+}
+
+.inputSearchBase {
+    background-color: var(--auxColor1) !important;
+
+}

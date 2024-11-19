@@ -62,7 +62,7 @@ const Doacao = () => {
                     <div className="btns">
                         <Button variant="primary" onClick={() => openModalCreateDinheiro()}><i className="bi bi-cash-coin"></i> Cadastrar Dinheiro</Button>
 
-                        <Button variant="primary" onClick={() => openModalCreateRacao()}><i className="bi bi-box2-heart"></i> Cadastrar Ração</Button>
+                        <Button variant="outline-primary" onClick={() => openModalCreateRacao()}><i className="bi bi-box2-heart"></i> Cadastrar Ração</Button>
                     </div>
                 </div>
                 <div className="containerFiltros">
